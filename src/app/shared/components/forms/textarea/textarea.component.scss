@@ -1,0 +1,101 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+
+.form {
+  position: relative;
+  width: 100%;
+
+  textarea {
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    min-height: 94px;
+    max-height: 300px;
+    width: 100%;
+    border: 1px solid var(--CSO_Neutral_40);
+    border-radius: 6px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    outline: none;
+    resize: vertical !important;
+    @include CSO_Body_1_Bold;
+    color: var(--CSO_Neutral_100);
+
+    &::placeholder {
+      @include CSO_Body_1;
+    }
+
+    &:focus,
+    &.focus {
+      border: 2px solid var(--CSO_Neutral_100);
+      padding: 6px 16px 8px 14px;
+
+      &::placeholder {
+        @include CSO_Body_1_Bold;
+        color: var(--CSO_Neutral_100);
+        opacity: 1;
+      }
+    }
+
+    &.filled {
+      border: 2px solid var(--CSO_Neutral_100);
+      padding: 6px 16px 8px 14px;
+      @include CSO_Body_1_Bold;
+    }
+    &.invalid {
+      border: 1px solid var(--CSO_Danger_100);
+    }
+  }
+
+  .textarea-tools {
+    position: absolute;
+    z-index: 2;
+    right: 4px;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 16px;
+    width: auto;
+    border-radius: 6px;
+    padding: 9px 4px;
+    background-color: var(--CSO_White);
+    pointer-events: none;
+
+    span {
+      @include CSO_Overline;
+      color: var(--CSO_Neutral_70);
+    }
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background: var(--CSO_White);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 4px solid rgba(0, 0, 0, 0);
+  border-radius: 16px;
+  background-clip: padding-box;
+  background-color: var(--CSO_Neutral_30);
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-resizer {
+  display: none;
+}

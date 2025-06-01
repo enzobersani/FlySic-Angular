@@ -1,0 +1,14 @@
+<div class="alert-content" *ngIf="showEvent | async" [ngClass]="getNgClassObjectByType(type)">
+    <section *ngIf="showIcon" class="icon-content">
+        <span *ngIf="type == 'info'" class="material-icons icon">info</span>
+        <span *ngIf="type == 'info-secondary'" class="material-icons icon">info</span>
+        <span *ngIf="type == 'neutral'" class="material-icons icon">info</span>
+        <span *ngIf="type == 'success'" class="material-icons icon">check_circle</span>
+        <span *ngIf="type == 'error'" class="material-icons icon">warning</span>
+        <span *ngIf="type == 'warn'" class="material-icons icon">warning</span>
+    </section>
+    <span class="alert-text">
+        <ng-content></ng-content>
+    </span>
+    <span *ngIf="showCloseButton" (click)="close()" class="material-icons alert-close">close</span>
+</div>

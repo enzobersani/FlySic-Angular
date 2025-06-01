@@ -1,0 +1,101 @@
+@import "../../../../../assets/styles/typography";
+
+.container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.tabs-header {
+  display: flex;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  cursor: pointer;
+  gap: 25px 25px;
+}
+
+.tab-label {
+  @include CSO_Headline_1;
+  color: var(--CSO_Neutral_60);
+  position: relative;
+  display: flex;
+  gap: 6px;
+  width: auto;
+  padding-right: 0;
+  padding-left: 0;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+}
+
+.tab-label:hover {
+  color: var(--CSO_Primary_100);
+  border-bottom-color: var(--CSO_Primary_100);
+  padding-bottom: 10px;
+  margin-bottom: -13px;
+
+  .tab-quantity {
+    color: var(--CSO_Primary_100);
+  }
+}
+
+.tab-quantity {
+  color: var(--CSO_Neutral_60);
+}
+
+.tab-supLabel {
+  position: absolute;
+  right: -21px;
+  top: -13px;
+  color: var(--CSO_Secondary_100);
+  font-family: "DINPro-Regular", "sans-serif";
+  font-size: 0.41em;
+  font-weight: 600;
+  line-height: 1.5rem;
+  text-transform: capitalize;
+}
+
+.active {
+  color: var(--CSO_Primary_100);
+
+  .tab-quantity {
+    color: var(--CSO_Secondary_100)
+  }
+}
+
+.none {
+  text-transform: none;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.background-color-cs-primary-100 {
+  background-color: var(--CSO_Primary_100);
+
+  .tab-label:hover {
+    color: var(--CSO_White);
+    border-bottom-color: var(--CSO_White);
+
+    .tab-quantity {
+      color: var(--CSO_White);
+    }
+  }
+
+  .active {
+    color: var(--CSO_White);
+
+    .tab-quantity {
+      color: var(--CSO_Secondary_100)
+    }
+  }
+}

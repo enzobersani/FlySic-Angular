@@ -1,0 +1,207 @@
+// Variáveis de cor
+:host {
+  --cso-warning-100: #f47920;
+  --cso-warning-90: #f58839;
+  --cso-warning-80: #f69752;
+  --cso-warning-70: #f8a66a;
+  
+  --cso-neutral-170: #343434;
+  --cso-neutral-100: #666666;
+  --cso-neutral-90: #777777;
+  --cso-neutral-80: #888888;
+  --cso-neutral-70: #999999;
+  
+  --cso-background: #f6f9fa;
+  --cso-white: #ffffff;
+  
+  --gradient-bg: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  
+  // Espaçamentos responsivos
+  --desktop-padding: 5%;
+  --tablet-padding: 3%;
+  --mobile-padding: 2%;
+  --small-mobile-padding: 15px;
+}
+
+nav {
+  background: var(--gradient-bg);
+  color: var(--cso-white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 var(--desktop-padding);
+  
+  // Tablet (768px - 1024px)
+  @media (max-width: 1024px) {
+    padding: 0 var(--tablet-padding);
+  }
+  
+  // Mobile (480px - 767px)
+  @media (max-width: 767px) {
+    padding: 0 var(--mobile-padding);
+    height: 55px;
+  }
+  
+  // Mobile pequeno (até 479px)
+  @media (max-width: 479px) {
+    padding: 0 var(--small-mobile-padding);
+  }
+}
+
+.menu-brand {
+  display: flex;
+  align-items: center;
+  
+  a {
+    color: var(--cso-white);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Din Pro';
+    
+    // Ajuste para mobile
+    @media (max-width: 767px) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.menu-items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  li {
+    margin-left: 20px;
+    
+    @media (max-width: 1024px) {
+      margin-left: 15px;
+    }
+    
+    a {
+      color: var(--cso-white);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-family: 'Din Pro';
+      font-weight: bold;
+      
+      &:hover {
+        color: var(--cso-warning-80);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      // Ajuste para tablet
+      @media (max-width: 1024px) {
+        padding: 6px 10px;
+      }
+    }
+  }
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: 20px;
+  
+  span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--cso-white);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+  }
+  
+  @media (max-width: 767px) {
+    margin-left: 15px;
+  }
+}
+
+// Estilos para mobile (até 767px)
+@media (max-width: 767px) {
+  .mobile-toggle {
+    display: block;
+  }
+  
+  .menu-items {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: var(--gradient-bg);
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    
+    li {
+      margin: 8px 0;
+      width: 90%;
+      
+      a {
+        display: block;
+        padding: 12px;
+        text-align: center;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+      }
+    }
+  }
+  
+  .menu-open .menu-items {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .menu-open .mobile-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  .menu-open .mobile-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-open .mobile-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+// Ajuste extra para telas muito pequenas
+@media (max-width: 479px) {
+  .menu-items {
+    top: 55px;
+    padding: 10px 0;
+    
+    li a {
+      padding: 10px;
+      font-size: 1rem;
+    }
+  }
+}

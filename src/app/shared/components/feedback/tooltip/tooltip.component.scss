@@ -1,0 +1,104 @@
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/typography';
+
+.cso-tooltip {
+  position: relative;
+  display: inline-block;
+  padding: 2px 4px;
+  background-color: var(--CSO_Neutral_100);
+  color: var(--CSO_White);
+  border-radius: 3px;
+  transition: all .3s ease-in;
+  
+  &__content {
+    position: relative;
+    display: block;
+    max-width: 240px;
+    margin: 0;
+    @include CSO_Overline;
+    z-index: 2;
+  }
+
+  // Arrow
+  &::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--CSO_Neutral_100);
+    border-radius: 1px;
+    z-index: 1;
+  }
+
+  &--left-top::before {
+    top: 8px;
+    left: -3px;
+    transform: translateY(0) rotate(45deg);
+  }
+
+  &--left-bottom::before {
+    bottom: 8px;
+    left: -3px;
+    transform: translateY(0) rotate(45deg);
+  }
+
+  &--left-center::before {
+    top: 50%;
+    left: -3px;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  &--right-top::before {
+    top: 8px;
+    right: -3px;
+    transform: translateY(0) rotate(45deg);
+  }
+
+  &--right-bottom::before {
+    bottom: 8px;
+    right: -3px;
+    transform: translateY(0) rotate(45deg);
+  }
+
+  &--right-center::before {
+    top: 50%;
+    right: -3px;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  &--top-center::before {
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  &--top-left::before {
+    top: -3px;
+    left: 8px;
+    transform: translateX(0) rotate(45deg);
+  }
+
+  &--top-right::before {
+    top: -3px;
+    right: 8px;
+    transform: translateX(0) rotate(45deg);
+  }
+
+  &--bottom-center::before {
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  &--bottom-left::before {
+    bottom: -3px;
+    left: 8px;
+    transform: translateX(0) rotate(45deg);
+  }
+
+  &--bottom-right::before {
+    bottom: -3px;
+    right: 8px;
+    transform: translateX(0) rotate(45deg);
+  }
+}

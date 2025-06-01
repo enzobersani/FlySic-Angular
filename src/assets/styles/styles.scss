@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$RBS-Angular-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+:root {
+  @include mat.all-component-themes($RBS-Angular-theme);
+}
+
+@import './colors';
+@import './elevation';
+@import './fonts';
+@import './typography';
+
+html, body {
+  font-family: 'DIN Pro', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DIN Pro', sans-serif;
+}

@@ -1,0 +1,19 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+
+.image img {
+  margin-top: -30px;
+  width: auto;
+  height: 220px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message {
+  @include CSO_Headline_3;
+  font-weight: 600;
+  margin-top: -40px;
+  color: var(--CSO_Primary_100);
+  text-align: center;
+}

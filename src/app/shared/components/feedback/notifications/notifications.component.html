@@ -1,0 +1,12 @@
+<div *ngIf="isVisible" class="notification" [ngClass]="notificationType">
+  <div class="notification__icon">
+    <!-- <i class="material-icons">{{ icon }}</i> -->
+  </div>
+  <div class="notification__message">
+    <span>{{ message }}</span>
+  </div>
+  <button class="notification__close" (click)="closeNotification()">
+    &times;
+  </button>
+</div>
+  

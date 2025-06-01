@@ -1,0 +1,76 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+
+:host {
+    display: contents;
+}
+
+.cso-input-text {
+    display: block;
+    height: 48px;
+    width: 100%;
+
+    .cso-input-text__field {
+        height: 48px;
+        width: 100%;
+        left: 0px;
+        top: 23px;
+        border: 1px solid var(--CSO_Neutral_40);
+        box-sizing: border-box;
+        border-radius: 6px;
+        padding: 8px 16px 8px 16px;
+        @include CSO_Body_1_Bold;
+        color: var(--CSO_Neutral_100);
+        outline: none;
+
+        &:focus,
+        &--focus {
+            border: 2px solid var(--CSO_Neutral_100);
+
+            &::placeholder {
+                @include CSO_Body_1_Bold;
+                color: var(--CSO_Neutral_100);
+                opacity: 1;
+            }
+        }
+
+        &:focus {
+            + img.img-main {
+                display: none;
+            }
+
+            + img + img.img-focus {
+                display: inline-block;
+            }
+        }
+
+        &--filled {
+            border: 2px solid var(--CSO_Neutral_100);
+        }
+
+        &--invalid {
+            border: 1px solid var(--CSO_Danger_100);
+        }
+
+        &--disabled {
+            background-color: var(--CSO_Neutral_20);
+            border: 2px solid var(--CSO_Neutral_100);
+            pointer-events: none;
+            cursor: default;
+        }
+    }
+
+    .cso-input-text__img {
+        position: absolute;
+        margin-left: -35px;
+        margin-top: 14px;
+
+        &.img-main {
+            display: inline-block;
+        }
+
+        &.img-focus {
+            display: none;
+        }
+    }
+}

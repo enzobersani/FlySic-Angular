@@ -1,0 +1,10 @@
+<div class="option" [ngClass]="{ disabled: isDisabled }">
+    <span class="label">{{ label }}</span>
+    <img class="btn-close" (click)="removeItem($event)" src='assets/images/components/form/select/close-multi-select-option.svg'>
+</div>
+<app-tooltip
+*ngIf="label && showTooltip"
+class="option__tooltip"
+[text]="label"
+[position]="tooltipPosition">
+</app-tooltip>

@@ -1,0 +1,179 @@
+@mixin CSO_Base_Headline {
+  font-family: 'DIN Pro', sans-serif;
+  font-weight: normal;
+  line-height: 120%;
+}
+
+@mixin CSO_Headline_1 {
+  @include CSO_Base_Headline;
+  font-size: 28px;
+}
+
+@mixin CSO_Headline_2 {
+  @include CSO_Base_Headline;
+  font-size: 24px;
+  letter-spacing: 0.18px;
+}
+
+@mixin CSO_Headline_3 {
+  @include CSO_Base_Headline;
+  font-size: 22px;
+}
+
+@mixin CSO_Headline_4 {
+  @include CSO_Base_Headline;
+  font-size: 20px;
+  letter-spacing: 0.18px;
+}
+
+@mixin CSO_Headline_5 {
+  @include CSO_Base_Headline;
+  font-size: 16px;
+  letter-spacing: 0.18px;
+}
+
+@mixin CSO_Subtitle_1 {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+}
+
+@mixin CSO_Subtitle_2 {
+  font-family: "DIN Pro";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+@mixin CSO_Subtitle_3 {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+@mixin CSO_Body_1 {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.25px;
+}
+
+@mixin CSO_Body_1_Bold {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.25px;
+}
+
+@mixin CSO_Body_2 {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: 0.25px;
+}
+
+@mixin CSO_Body_2_Bold {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0.25px;
+}
+
+@mixin CSO_Body_3 {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  line-height: 120%;
+  letter-spacing: 0.25px;
+}
+
+@mixin CSO_Body_3_Bold {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0.25px;
+}
+
+@mixin CSO_Caption {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: 0.4px;
+}
+
+@mixin CSO_Caption_Bold {
+  font-family: "DIN Pro";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.4px;
+}
+
+@mixin CSO_Button {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@mixin D_ButtonCS {
+  font-family: "DIN Pro";
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
+@mixin CSO_Overline {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 10px;
+  line-height: 150%;
+}
+
+@mixin CSO_Link {
+  font-family: "DIN Pro";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 13px;
+  line-height: 125%;
+  letter-spacing: 0.25px;
+  text-decoration-line: underline;
+}
+
+@mixin CSO_Link_2 {
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  line-height: 100%;
+  text-decoration-line: underline;
+}
+
+@mixin CSO_Mini_1 {
+  font-family: "DIN Pro";
+  font-size: 6px;
+  line-height: 150%;
+  letter-spacing: 0.25px;
+}
+
+@mixin M_Button {
+  font-family: "DINPro-Bold";
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

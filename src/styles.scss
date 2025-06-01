@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DIN Pro';
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--cso-background);
+    color: var(--cso-neutral-170);
+}
+  
+main {
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
+    padding: 80px 20px 20px;
+    box-sizing: border-box;
+}

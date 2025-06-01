@@ -1,0 +1,65 @@
+@import "../../../../../assets/styles/typography";
+
+:host,
+.cso-input-checkbox {
+  display: contents;
+}
+
+.cso-input-checkbox {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+
+  &__label {
+    @include CSO_Subtitle_2;
+    color: var(--CSO_Neutral_80);
+    padding-left: 6px;
+    line-height: 18px;
+    vertical-align: middle;
+    display: inline-block;
+    user-select: none;
+
+    a {
+      color: var(--CSO_Warning_70);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    a:hover {
+      color: var(--CSO_Warning_80);
+    }
+  }
+
+  &__field[type="checkbox"]:checked + label {
+    @include CSO_Subtitle_2;
+    // color: var(--CSO_Neutral_100);
+    line-height: 16px;
+  }
+
+  [type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    appearance: none;
+    vertical-align: middle;
+  }
+
+  [type="checkbox"]::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    display: block;
+    background-image: url("/assets/images/components/form/input-checkbox/checkbox-unchecked.svg");
+  }
+
+  [type="checkbox"]::before {
+    background-image: url("/assets/images/components/form/input-checkbox/checkbox-checked.svg");
+  }
+
+  [type="checkbox"]:hover:after {
+    background-image: url("/assets/images/components/form/input-checkbox/checkbox-unchecked-hover.svg");
+  }
+
+  [type="checkbox"]:checked::after {
+    background-image: url("/assets/images/components/form/input-checkbox/checkbox-checked.svg");
+  }
+}

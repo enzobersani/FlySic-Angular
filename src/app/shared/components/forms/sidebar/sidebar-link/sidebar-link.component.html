@@ -1,0 +1,46 @@
+<a
+  *ngIf="true"
+  class="cso-sidebar-link"
+  [ngClass]="{
+    'cso-sidebar-link--collapsed': isCollapsed,
+    'cso-sidebar-link--extended': !isCollapsed,
+    'cso-sidebar-link--active': link.isActiveRoute
+  }"
+  [routerLink]="[link.path]"
+  role="link"
+  (click)="handleClick()"
+>
+  <i class="cso-sidebar-link__icon material-icons-outlined">
+    {{ link.icon }}
+  </i>
+  <div class="cso-sidebar-link__name">
+    <span class="cso-sidebar-link__label">{{ link.label }}</span>
+    <span *ngIf="link.isNew" class="cso-sidebar-link__new">
+      {{ labelNew }}
+    </span>
+  </div>
+</a>
+<span
+  *ngIf="link.isEnable && link.hasSubmenu"
+  class="cso-sidebar-link"
+  [ngClass]="{
+    'cso-sidebar-link--collapsed': isCollapsed,
+    'cso-sidebar-link--extended': !isCollapsed,
+    'cso-sidebar-link--active': link.isActiveRoute
+  }"
+  (click)="handleClick()"
+>
+  <i class="cso-sidebar-link__icon material-icons-outlined">
+    {{ link.icon }}
+  </i>
+  <div class="cso-sidebar-link__name">
+    <span class="cso-sidebar-link__label">{{ link.label }}</span>
+    <span *ngIf="link.isNew" class="cso-sidebar-link__new">
+      {{ labelNew }}
+    </span>
+  </div>
+  <i
+    *ngIf="!isCollapsed"
+    class="cso-sidebar-link__icon material-icons"
+  >{{ isOpen ? 'expand_less' : 'expand_more' }}</i>
+</span>

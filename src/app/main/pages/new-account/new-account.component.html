@@ -1,0 +1,106 @@
+<div class="register">
+  <form [formGroup]="registerForm">
+    <h1 class="register__title">Crie sua conta na FlySic</h1>
+
+    <div class="register__row">
+      <div class="register__field">
+        <h3>Nome completo</h3>
+        <app-input-text [form]="registerForm" name="name" placeholder="Informe seu nome..."></app-input-text>
+      </div>
+      <div class="register__field">
+        <h3>Data de nascimento</h3>
+        <app-input-text [form]="registerForm" name="birthYear" [mask]="'00/00/0000'" placeholder="Informe sua data de nascimento..."></app-input-text>
+      </div>
+    </div>
+
+    <div class="register__row">
+      <div class="register__field">
+        <h3>CPF</h3>
+        <app-input-text [form]="registerForm" name="cpf" [mask]="'000.000.000-00'" placeholder="Informe seu cpf..."></app-input-text>
+      </div>
+      <div class="register__field">
+        <h3>Email</h3>
+        <app-input-text [form]="registerForm" name="email" placeholder="Informe seu email..."></app-input-text>
+      </div>
+    </div>
+
+    <div class="register__row">
+      <div class="register__field">
+        <h3>Número celular</h3>
+        <app-input-text [form]="registerForm" name="phone" [mask]="'(00)0 0000-0000'" placeholder="Informe seu numero de celular..."></app-input-text>
+      </div>
+      <div class="register__field">
+      </div>
+    </div>
+
+    <div class="register__row">
+      <div class="register__field">
+        <h3>Informe seu documento ANAC (Agência Nacional de Aviação Civil)</h3>
+        <app-input-file
+          [form]="registerForm"
+          name="documentPicture"
+          [maxLength]="1"
+          [allowedTypes]="fileTypes"
+          (onChanges)="inputFileChange($event)"
+        ></app-input-file>
+      </div>
+    </div>
+
+    <div class="register__row" style="margin-bottom: -20px;">
+      <app-input-checkbox
+        [form]="registerForm"
+        name="checkboxTermos"
+        [labelPrefix]="'Estou de acordo com os'"
+        [linkText]="'Termos de Aceite.'"
+        [onLinkClick]="abrirModal.bind(this)"
+      ></app-input-checkbox>
+    </div> 
+    
+    <div class="register__row" style="margin-bottom: -20px;">
+      <app-input-checkbox
+        [form]="registerForm"
+        [labelPrefix]="'Estou em busca de horas.'"
+        name="checkboxBuscandoHoras"
+      ></app-input-checkbox>
+    </div>
+
+    <div class="register__row">
+      <app-input-checkbox
+        [form]="registerForm"
+        [labelPrefix]="'Estou em busca de doar horas.'"
+        name="checkboxDoandoHoras"
+      ></app-input-checkbox>
+    </div>
+
+    <div class="register__actions">
+      <app-button-primary
+        label="Criar Conta"
+        [customWidth]="'100%'"
+        [isDisabled]="!registerForm.valid"
+        (clickEvent)="createNewAccount()"
+      ></app-button-primary>
+    </div>
+  </form>
+</div>
+
+<app-modal #modalTermos [closeButton]="true" [clickableOutside]="true" width="40%">
+  <app-terms></app-terms>
+</app-modal>
+
+<app-modal #modalResponse>
+  @if (loading) {
+    <div class="carregando">
+      <app-loading
+      message="Enviando seus dados, aguarde..."
+      [overlay]="false"
+      [size]="'large'"
+      ></app-loading>
+    </div>
+  }
+  @else {
+    <app-feedback [type]="feedbackTypes[0]" [hasAction]="true" actionLabel="Entendi." (clickEvent)="modalResponse.close()">
+      Seu cadastro foi enviado com sucesso! Será realizada uma analise diante de seu perfil e documento. 
+      Caso ocorra tudo certo, em breve receberá um email com seu acesso inicial e poderá acessar sua conta.
+    </app-feedback>
+  }
+</app-modal>

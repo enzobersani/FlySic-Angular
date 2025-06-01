@@ -1,0 +1,81 @@
+@import "../assets/styles/colors";
+
+.content-wrapper {
+  // Estilo base (sem menu visível)
+  padding: 0;
+  // background-color: var(--CSO_Background);
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  transition: padding 0.3s ease;
+  min-height: 100vh; // Alterado para min-height
+  box-sizing: border-box; // Fundamental para incluir padding no cálculo da altura
+
+  // Quando o menu está visível
+  &.menu-visible {
+    padding-top: 80px; // Altura do menu + margem
+    transition: padding 0.3s ease;
+    
+    // Espaçamento lateral responsivo
+    padding-left: 20%;
+    padding-right: 20%;
+
+    // Ajuste para o conteúdo dentro do router-outlet
+    router-outlet + * {
+      display: block;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      min-height: calc(100vh - 80px); // Subtrai a altura do menu
+    }
+
+    // Breakpoints para telas grandes
+    @media (max-width: 1600px) {
+      padding-left: 15%;
+      padding-right: 15%;
+    }
+
+    @media (max-width: 1200px) {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+
+    // Tablet
+    @media (max-width: 1024px) {
+      padding-top: 70px;
+      padding-left: 8%;
+      padding-right: 8%;
+      
+      router-outlet + * {
+        min-height: calc(100vh - 70px);
+      }
+    }
+
+    // Tablet pequeno
+    @media (max-width: 900px) {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
+    // Mobile
+    @media (max-width: 767px) {
+      padding-top: 60px;
+      padding-left: 20px;
+      padding-right: 20px;
+      
+      router-outlet + * {
+        max-width: 100%;
+        min-height: calc(100vh - 60px);
+      }
+    }
+
+    // Mobile pequeno
+    @media (max-width: 479px) {
+      padding-top: 55px;
+      padding-left: 15px;
+      padding-right: 15px;
+      
+      router-outlet + * {
+        min-height: calc(100vh - 55px);
+      }
+    }
+  }
+}

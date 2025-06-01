@@ -1,0 +1,140 @@
+@import "../../../../assets/styles/colors";
+
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.login {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  // Lado institucional
+  &__info-container {
+    flex: 1;
+    background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+
+    @media (max-width: 768px) {
+      display: flex;
+      order: -1; // Move o bloco para cima do formulário
+      padding: 24px;
+      text-align: center;
+    }
+  }
+
+  &__info-content {
+    max-width: 400px;
+    text-align: center;
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+
+      @media (max-width: 768px) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ddd;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  // Formulário de login
+  &__form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    background-color: #fff;
+
+    @media (max-width: 768px) {
+      height: 100%;
+      padding: 32px;
+    }
+
+    form {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  &__usuario,
+  &__senha {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  &__login {
+    margin-top: 20px;
+  }
+
+  &__forgot {
+    text-align: right;
+    margin-top: 8px;
+    margin-bottom: 16px;
+
+    a {
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'DIN Pro';
+      color: var(--CSO_Links_100);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__signup {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 14px;
+
+    span {
+      margin-right: 4px;
+      color: #555;
+      font-family: 'DIN Pro';
+      font-weight: 700;
+    }
+
+    a {
+      font-family: 'DIN Pro';
+      font-weight: 700;
+      color: var(--CSO_Links_100);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

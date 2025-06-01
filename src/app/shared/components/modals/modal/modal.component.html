@@ -1,0 +1,20 @@
+<div
+  class="background"
+  *ngIf="isOpen | async"
+  [ngClass]="{ 'fade-in': true }"
+  [hidden]="isHidden"
+  (click)="backgroundClick($event)"
+></div>
+<div
+  class="content"
+  *ngIf="isOpen | async"
+  [ngClass]="{ 'fade-in': true }"
+  [ngStyle]="{ 'width': isLargeScreen ? width : '75%' }"
+  [hidden]="isHidden"
+  (click)="modalClick($event)"
+>
+  <header *ngIf="closeButton">
+    <span class="material-icons" (click)="onCloseEvent()">close</span>
+  </header>
+  <ng-content></ng-content>
+</div>

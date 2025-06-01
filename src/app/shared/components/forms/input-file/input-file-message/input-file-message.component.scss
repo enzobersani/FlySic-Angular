@@ -1,0 +1,16 @@
+@import '../../../../../../assets/styles/colors';
+@import '../../../../../../assets/styles/typography';
+
+.message {
+  display: flex;
+  align-items: center;
+  .message-label {
+    @include CSO_Body_1;
+    color: var(--CSO_Danger_100);
+    margin: 10px;
+
+    &.success {
+      color: var(--CSO_Success_100);
+    }
+  }
+}

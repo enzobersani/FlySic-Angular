@@ -1,0 +1,18 @@
+<!-- not-found.component.html -->
+<div class="not-found-container" [class.compact]="compact">
+    <div class="not-found-content">
+      <div class="not-found-icon">
+        <span class="material-icons">{{ icon }}</span>
+      </div>
+      
+      <h2 class="not-found-title">{{ title }}</h2>
+      
+      <p class="not-found-message">{{ message }}</p>
+      
+      @if (showAction) {
+        <a class="not-found-action" [routerLink]="actionLink">
+          {{ actionText }}
+        </a>
+      }
+    </div>
+</div>

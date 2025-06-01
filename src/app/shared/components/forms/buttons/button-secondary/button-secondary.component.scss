@@ -1,0 +1,60 @@
+@import "../../../../../../assets/styles/colors";
+
+.cso-button {
+  background-color: transparent;
+	color: var(--CSO_Secondary_100);
+	border-color: var(--CSO_Secondary_100);
+
+	// THEMES
+	&--theme-white {
+		&.cso-button {
+			&:not(.cso-button--loading):not(:active):hover {
+				background-color: var(--CSO_Secondary_20);
+				color: var(--CSO_Secondary_160);
+				border-color: var(--CSO_Secondary_160);
+			}
+
+      &:active,
+      &--loading {
+				background-color: var(--CSO_Secondary_40);
+				color: var(--CSO_Secondary_170);
+				border-color: var(--CSO_Secondary_170);
+			}
+
+			&--disabled {
+				color: var(--CSO_Neutral_40);
+				border-color: var(--CSO_Neutral_40);
+			}
+
+      &--loading svg path {
+        color: var(--CSO_Secondary_100);
+      }
+		}
+	}
+
+	&--theme-pink {
+		&.cso-button {
+			&:not(.cso-button--loading):not(:active):hover {
+				background-color: var(--CSO_Primary_80);
+				color: var(--CSO_Secondary_100);
+				border-color: var(--CSO_Secondary_100);
+			}
+
+      &:active,
+      &--loading {
+				background-color: var(--CSO_Primary_50);
+				color: var(--CSO_Primary_100);
+				border-color: var(--CSO_White);
+			}
+
+			&--disabled {
+				color: var(--CSO_Primary_80);
+				border-color: var(--CSO_Primary_80);
+			}
+
+      &--loading svg path {
+        color: var(--CSO_Primary_70);
+      }
+		}
+	}
+}

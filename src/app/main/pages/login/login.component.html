@@ -1,0 +1,44 @@
+<div class="login">
+  <div class="login__container">
+    <!-- Lado institucional -->
+    <div class="login__info-container">
+      <div class="login__info-content">
+        <h1>Bem-vindo ao Fly SIC</h1>
+        <p>
+          O seu aplicativo para adquirir mais experiência e horas de voo com pilotos atuando no mercado de trabalho.
+        </p>
+      </div>
+    </div>
+
+    <!-- Lado do formulário -->
+    <div class="login__form-container">
+      <form [formGroup]="loginForm">
+        <h3 class="login__usuario">Usuário</h3>
+        <app-input-text [form]="loginForm" name="userName"></app-input-text>
+
+        <h3 class="login__senha">Senha</h3>
+        <app-input-text [form]="loginForm" name="password" type="password"></app-input-text>
+
+        <div class="login__forgot">
+          <a href="#">Esqueceu a senha?</a>
+        </div>
+
+        <div class="login__login">
+          <app-button-primary
+            label="Entrar"
+            [customWidth]="'100%'"
+            (clickEvent)="onSubmit()"
+            [isLoading]="isLoading"
+          ></app-button-primary>
+        </div>
+
+        <div class="login__signup">
+          <span>Não possui uma conta?</span>
+          <a [routerLink]="'/new-account'">Criar conta</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-toast-list></app-toast-list>

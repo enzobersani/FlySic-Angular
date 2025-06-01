@@ -1,0 +1,59 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-size: 14px;
+    animation: slide-in 0.3s ease-out;
+    z-index: 9999;
+  
+    &__icon {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+  
+    &__message {
+      flex: 1;
+    }
+  
+    &__close {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  
+    &.success {
+      background-color: #4caf50;
+    }
+  
+    &.error {
+      background-color: #f44336;
+    }
+  
+    &.warning {
+      background-color: #ff9800;
+    }
+  
+    &.info {
+      background-color: #2196f3;
+    }
+  }
+  
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

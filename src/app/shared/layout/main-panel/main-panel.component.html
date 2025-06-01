@@ -1,0 +1,36 @@
+<div class="panel panel-default" [ngClass]="{ 'is-disable' : isDisable }">
+    <img *ngIf="!isDisable" class="main-icon" [src]="icon">
+    <img *ngIf="isDisable" class="main-icon" [src]="disableIcon">
+    <div class="panel-heading panel-background" [style]="isAccordion ? { } : { cursor: 'default' }"
+        (click)="backgroundTopClickEvent($event)">
+        <div [ngClass]="{'description-row': description, 'row': !description}" class="panel-background">
+            <div
+                *ngIf="isOpen && showFullText; else showTextCut"
+                class="panel-background panel-background--full-text"
+                [ngClass]="{ 'title-disable': isDisable }"
+            >{{ leftText }}<div class="description" *ngIf="description">{{description}}</div>
+            </div>
+            <ng-template #showTextCut>
+                <div 
+                    class="panel-background"
+                    [ngClass]="{ 'title-disable': isDisable }"
+                    [style]="getLeftSize(percentLeftSize)"
+                >{{ leftText }}<div class="description" *ngIf="description">{{description}}</div>
+                </div>
+            </ng-template>
+            <div class="panel-background" [style]="getRightSize(percentLeftSize)">
+                <ng-content select="[header-right]"></ng-content>
+            </div>
+            <div class="arrow-container">
+                <app-main-panel-arrow [isDisable]="isDisable" *ngIf="isAccordion" [isOpen]="isOpen && !isBlocked"
+                    [isBlocked]="isBlocked" (arrowUpClick)="arrowUpClickEvent()" (arrowDownClick)="arrowDownClickEvent()" 
+                    [tolltipUpArrowText]="tolltipUpArrowText" [tolltipDownArrowText]="tolltipDownArrowText">
+                </app-main-panel-arrow>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" [id]="accordionService.id"
+        [style]="isAccordion ? (accordionService.panelBodyStyle | async) : { paddingBottom : '25px' }">
+        <ng-content select="[body]"></ng-content>
+    </div>
+</div>

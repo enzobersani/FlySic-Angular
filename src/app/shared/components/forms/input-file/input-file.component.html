@@ -1,0 +1,57 @@
+<label class="title">
+  {{ texts?.labels?.title }}
+  <span class="is-required" *ngIf="isRequired">*</span>
+</label>
+
+<div [formGroup]="internalForm" class="content">
+  <input
+    id="file-input"
+    type="file"
+    multiple
+    name="file"
+    (change)="onFileChange($event)"
+    (dragenter)="setDragover(true)"
+    (dragleave)="setDragover(false)"
+    (drop)="setDragover(false)"
+    [ngStyle]="{width: _isDragover || _files.length === 0 ? '405px' : (35 + _files.length * 37)+'px'}"
+    [ngClass]="{ 'is-dragover': _isDragover }"
+    title=" "
+    #form
+    [formControlName]="name"
+    class="hidden-input"
+  />
+
+  <label class="button-content">
+    <cso-input-file-button
+      [label]="texts?.labels?.searchFile!"
+      (clickEvent)="form.click()"
+    ></cso-input-file-button>
+  </label>
+
+  <div class="file-content">
+    <div class="files no-select" *ngIf="!_isDragover && _files.length !== 0">
+      <cso-input-file-attachment
+        [@show-hide]
+        *ngFor="let file of _files"
+        class="file"
+        [file]="file"
+        (onRemove)="removeFile($event)"
+      ></cso-input-file-attachment>
+    </div>
+
+    <span
+      [@dragover]="_isDragover ? 'over' : 'out'"
+      class="drag-and-drop-content no-select"
+      *ngIf="_isDragover || _files.length === 0"
+      [ngClass]="{ 'is-dragover': _isDragover }"
+    >
+      {{ texts?.labels?.dragAndDrop }}
+    </span>
+
+    <span class="length-count no-select">
+      {{ _files.length + '/' + maxLength }}
+    </span>
+  </div>
+</div>
+
+<cso-input-file-message #message></cso-input-file-message>

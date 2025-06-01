@@ -1,0 +1,21 @@
+<div class="welcome-container">
+    <div class="welcome-container__title">
+        <h2>Seja bem-vindo(a)!</h2>
+    </div>
+  
+    <div class="welcome-container__body">
+        <p>Obrigado por utilizar nosso aplicativo! Estamos muito felizes em tê-lo(a) conosco.</p>
+        
+        <p>Você está acessando o aplicativo com uma senha temporária gerada automaticamente. Para sua segurança e comodidade, recomendamos que altere esta senha para uma de sua preferência.</p>
+        
+        <p>Para ir para a tela de troca de senha, basta clicar no botão abaixo:</p>
+        
+        <div class="welcome-container__button">
+            <app-button-primary
+                label="Trocar senha"
+                [customWidth]="'100%'"
+                (clickEvent)="goToChangePassword()"
+            ></app-button-primary>
+        </div>
+    </div>
+</div>

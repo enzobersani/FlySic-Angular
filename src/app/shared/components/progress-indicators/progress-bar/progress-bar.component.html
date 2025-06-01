@@ -1,0 +1,10 @@
+<div class="cso-progress-bar" [ngClass]="'cso-progress-bar--' + theme">
+    <span class="cso-progress-bar__fill" [style.width.%]="width"></span>
+    <app-tooltip
+      class="cso-progress-bar__tooltip"
+      [ngClass]="'cso-progress-bar__tooltip--' + tooltipPosition"
+      [text]="value + '%'"
+      [position]="tooltipPosition"
+      [style]="style"
+    ></app-tooltip>
+  </div>

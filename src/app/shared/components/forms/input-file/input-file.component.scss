@@ -1,0 +1,142 @@
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/typography';
+
+.title {
+  @include CSO_Body_1;
+  color: var(--CSO_Neutral_100);
+  margin-bottom: 10px;
+
+  .is-required {
+    color: var(--CSO_Warning_70);
+  }
+}
+
+.content {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+
+  .hidden-input {
+    opacity: 0;
+    position: absolute;
+    height: 100%;
+    left: 254px;
+    z-index: 1;
+
+    &.is-dragover {
+      z-index: 3;
+    }
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+
+  .button-content {
+    display: flex;
+    width: 254px;
+  }
+
+  .file-content {
+    position: absolute;
+    top: 0;
+    left: 254px;
+    height: 76px;
+    border: 2px dashed var(--CSO_Neutral_60);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+
+    .files,
+    .drag-and-drop-content {
+      position: relative;
+      left: 0;
+      padding: 0 15px 0 18px;
+      height: 100%;
+      // width: 100%;
+      border-radius: 0 6px 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include CSO_Body_1;
+      color: var(--CSO_Neutral_100);
+      text-wrap: nowrap;
+
+      .file {
+        z-index: 2;
+      }
+
+      &:not(.files) {
+        width: 405px;
+      }
+    }
+
+    .length-count {
+      position: absolute;
+      bottom: 2px;
+      right: 5px;
+      @include CSO_Overline;
+      color: var(--CSO_Neutral_70);
+    }
+  }
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// MOBILE RESPONSIVE ADJUSTMENTS
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: stretch;
+
+    .hidden-input {
+      position: static;
+      width: 100%;
+      height: auto;
+    }
+
+    .button-content {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .file-content {
+      position: static;
+      width: 100%;
+      height: auto;
+      border-left: 2px dashed var(--CSO_Neutral_60);
+      border-radius: 6px;
+      padding: 10px;
+      box-sizing: border-box;
+
+      .files,
+      .drag-and-drop-content {
+        flex-direction: column;
+        text-wrap: wrap;
+        height: auto;
+        padding: 10px;
+        width: 100%;
+
+        &:not(.files) {
+          width: 100%;
+        }
+      }
+
+      .length-count {
+        position: static;
+        margin-top: 6px;
+        text-align: right;
+        width: 100%;
+      }
+    }
+  }
+}

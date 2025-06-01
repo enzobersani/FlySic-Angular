@@ -1,0 +1,22 @@
+<div class="card-container" id="card-container" *ngIf="hasCardInformationToShow()">
+  <div (click)="openOrCloseCard()" id="card-top-header" class="header">
+    <!-- Ícone dentro de uma "bola azul" (só exibe se houver ícone) -->
+    <div *ngIf="icon || disableIcon" class="icon-container">
+      <img *ngIf="icon && !isDisable" class="panel-icon" [src]="icon" />
+      <img *ngIf="isDisable && disableIcon" class="panel-icon" [src]="disableIcon" />
+    </div>
+
+    <!-- Título -->
+    <div class="card-title" id="card-title">
+      {{ cardTitle }}
+    </div>
+
+    <!-- Seta para abrir/fechar -->
+    <div class="arrow" id="open-close-button">
+      <img [class.rotate-up]="exhibitCard" src="assets/images/common/arrow-down.svg">
+    </div>
+  </div>
+  <div [class.open]="exhibitCard" class="price-table-container">
+    <ng-content select="[body]"></ng-content>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div
+  *ngIf="isOpened"
+  class="select__modal-overlay"
+  (click)="close()"
+></div>
+<div class="select__content" [ngClass]="{ 'select__loading': isLoading }">
+  <div
+    *ngIf="!isOpened"
+    class="select__selected-option"
+    (click)="toggle()"
+    [ngClass]="handleClass()">
+    <span *ngIf="!selectedItem" class="select__placeholder">{{
+      texts?.placeholder
+    }}</span>
+    <app-select-option-selected
+      *ngIf="selectedItem"
+      class="select__option-selected"
+      [label]="selectedItem.description"
+      [isDisabled]="isDisabled"
+      [showTooltip]="showTooltip"
+      (removeEvent)="removeItem($event)"></app-select-option-selected>
+  </div>
+  <svg
+    class="select__arrow"
+    [ngClass]="{
+      'select__arrow--opened': isOpened,
+      'select__arrow--selected': selectedItem
+    }"
+    width="14"
+    height="8"
+    viewBox="0 0 14 8"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M6.99999 5.17168L11.95 0.22168L13.364 1.63568L6.99999 7.99968L0.635986 1.63568L2.04999 0.22168L6.99999 5.17168Z" fill="currentColor"/>
+  </svg>
+  <app-select-search
+    class="select__search"
+    *ngIf="isOpened"
+    [isReadOnly]="!isSearchable"
+    (searchChanges)="searchChanges($event)"
+  ></app-select-search>
+  <ul
+    *ngIf="isOpened"
+    class="select__options"
+    [ngStyle]="{
+      overflow: 'auto',
+      maxHeight: limitItem ? limitItem * 40 + 8 + 'px' : '168px'
+    }">
+    <li
+      *ngFor="let item of items | selectSearch : search"
+      class="select__options-item"
+      (click)="select(item)"
+    >
+      {{ item.description }}
+    </li>
+    <li
+      *ngIf="(items | selectSearch : search).length == 0"
+      class="select__options-item"
+      (click)="close()"
+    >
+      {{ texts?.notFoundPlaceHolder }}
+    </li>
+  </ul>
+</div>

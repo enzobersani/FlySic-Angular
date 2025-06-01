@@ -1,0 +1,115 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+ 
+.alert-content {
+    width: auto;
+    border-radius: 4px;
+    position: relative;
+    padding: 14.5px 16px;
+    padding-right: 3rem;
+ 
+    span.alert-text {
+        @include CSO_Subtitle_1;
+    }
+ 
+    .icon-content {
+        display: inline-block;
+        width: calc(16px + 4px);
+        height: 16px;
+ 
+        .icon {
+            position: absolute;
+            margin-top: 2px;
+        }
+    }
+ 
+    span.icon {
+        font-size: 16px;
+    }
+ 
+    .alert-close {
+        top: 19px;
+        right: 17px;
+        position: absolute;
+        cursor: pointer;
+        font-size: 16px;
+    }
+ 
+    &.info {
+        background: var(--CSO_Secondary_100);
+        border: 1px solid var(--CSO_Secondary_100);
+ 
+        span.alert-text {
+            color: var(--CSO_White);
+        }
+ 
+        span.icon {
+            color: var(--CSO_White);
+        }
+    }
+ 
+    &.info-Secondary {
+        background: var(--CSO_Primary_100);
+        border: 1px solid var(--CSO_Primary_100);
+ 
+        span.alert-text {
+            color: var(--CSO_White);
+        }
+ 
+        span.icon {
+            color: var(--CSO_White);
+        }
+    }
+ 
+    &.neutral {
+        background: var(--CSO_Neutral_30);
+        border: 1px solid var(--CSO_Neutral_100);
+ 
+        span.alert-text {
+            color: var(--CSO_Neutral_100);
+        }
+ 
+        span.icon {
+            color: var(--CSO_Neutral_100);
+        }
+    }
+ 
+    &.success {
+        background: var(--CSO_Success_30);
+        border: 1px solid var(--CSO_Success_100);
+ 
+        span.alert-text {
+            color: var(--CSO_Success_100);
+        }
+ 
+        span.icon {
+            color: var(--CSO_Success_100);
+        }
+    }
+ 
+    &.error {
+        background: var(--CSO_Danger_30);
+        border: 1px solid var(--CSO_Danger_100);
+ 
+        span.alert-text {
+            color: var(--CSO_Danger_100);
+        }
+ 
+        span.icon {
+            color: var(--CSO_Danger_100);
+        }
+    }
+ 
+    &.warn {
+        background: var(--CSO_Warning_30);
+        border: 1px solid var(--CSO_Warning_100);
+ 
+        span.alert-text {
+            color: var(--CSO_Warning_100);
+        }
+ 
+        span.icon {
+            color: var(--CSO_Warning_100);
+        }
+    }
+}

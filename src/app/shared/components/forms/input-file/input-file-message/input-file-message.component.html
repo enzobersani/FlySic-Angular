@@ -1,0 +1,4 @@
+<div class="cso-input-file-message" *ngIf="showEvent | async">
+  <img class="cso-input-file-message__img" [src]="'assets/images/components/form/input-file/' + ( success ? 'success' : 'warn' ) + '-icon.svg'" alt="" />
+  <label class="cso-input-file-message__label" [ngClass]="{ 'success' : success }">{{ message }}</label>
+</div>

@@ -1,0 +1,3 @@
+<div class="tooltip-hover" [title]="isOpen ? (tolltipUpArrowText) : (tolltipDownArrowText)">
+    <img id="main-panel-arrow" (click)="isOpen ? arrowUpClick.emit() : arrowDownClick.emit()" class="main-panel-arrow" [ngClass]="{ 'arrow-open': isOpen }" [src]='getImageSrc(isBlocked,isDisable)'>
+</div>

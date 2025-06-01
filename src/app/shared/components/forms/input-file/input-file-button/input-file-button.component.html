@@ -1,0 +1,14 @@
+<button
+  type="button"
+	[id]="id"
+	[class]="handleClass()"
+	[disabled]="isDisabled"
+	(click)="handleClick()"
+>
+  <div *ngIf="!isLoading" class="cso-button__content">
+    <img class="button-icon" src="assets/images/components/form/input-file/input-file-icon.svg" alt="" />
+    <span class="cso-button__label">
+      {{ label }}
+    </span>
+  </div>
+</button>

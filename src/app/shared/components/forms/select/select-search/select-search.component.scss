@@ -1,0 +1,42 @@
+@import "../../../../../assets/styles/typography";
+
+:host {
+    display: contents;
+}
+
+.filter-form {
+    height: 48px;
+    width: 100%;
+    left: 0px;
+    top: 23px;
+    border: 1px solid var(--CSO_Neutral_40);
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 8px 16px 8px 16px;
+    @include CSO_Body_1_Bold;
+    color: var(--CSO_Neutral_100);
+    outline: none;
+
+    &::placeholder {
+        @include CSO_Body_1;
+    }
+
+    &:focus,
+    &.focus {
+        border: 2px solid var(--CSO_Neutral_70);
+
+        &::placeholder {
+            @include CSO_Body_1_Bold;
+            color: var(--CSO_Neutral_100);
+            opacity: 1;
+        }
+    }
+
+    &.filled {
+        border: 2px solid var(--CSO_Neutral_100);
+    }
+
+    &.invalid {
+        border: 1px solid var(--CSO_Danger_100);
+    }
+}

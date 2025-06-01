@@ -1,0 +1,10 @@
+.list-toast-content {
+    position: fixed;
+    width: 300px;
+    height: fit-content;
+    z-index: 1000;
+    app-toast {
+        margin-bottom: 8px;
+        display: block;
+    }
+}

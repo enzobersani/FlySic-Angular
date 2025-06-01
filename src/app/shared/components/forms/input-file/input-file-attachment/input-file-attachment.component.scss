@@ -1,0 +1,61 @@
+@import '../../../../../../assets/styles/colors';
+@import '../../../../../../assets/styles/typography';
+
+.cso-input-file-attachment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &:hover {
+    .cso-input-file-attachment__tooltip {
+      opacity: 1;
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: -32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s linear;
+  }
+
+  &__file {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    margin: 6px 6px 3px 6px;
+    border-radius: 1px;
+    background-color: var(--CSO_Neutral_20);
+  }
+
+  &__remove {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--CSO_Secondary_100);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    top: -4px;
+    right: -4px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  &__name {
+    max-width: 25px;
+    color: var(--CSO_Success_100);
+    @include CSO_Mini_1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

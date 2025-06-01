@@ -1,0 +1,38 @@
+<aside [ngClass]="{'cso-sidebar': true, 'cso-sidebar--collapsed': isCollapsed, 'cso-sidebar--expanded': !isCollapsed}">
+    <div class="cso-sidebar__header">
+      <img *ngIf="titleImage" class="cso-sidebar__header-image" [src]="titleImage">
+      <div class="cso-sidebar__header-title">{{ titleLabel }}</div>
+      <div class="cso-sidebar__toggle" (click)="handleToggle()">
+        <i class="cso-sidebar__toggle-icon material-icons">chevron_right</i>
+      </div>
+    </div>
+    <nav class="cso-sidebar__nav">
+      <ul class="cso-sidebar__nav-list">
+        <li
+          *ngFor="let item of items"
+          class="cso-sidebar__nav-item"
+          [ngClass]="{'cso-sidebar__nav-item--active': item.isOpen, 'cso-sidebar__nav-item-submenu': !!item.hasSubmenu}"
+        >
+          <app-sidebar-link
+            class="cso-sidebar__nav-link"
+            [link]="item"
+            [labelNew]="labelNew"
+            [isOpen]="item.isOpen"
+            [isCollapsed]="isCollapsed"
+            (clickFunc)="handleNavClick($event)"
+          ></app-sidebar-link>
+  
+          <ul *ngIf="item.submenus" class="cso-sidebar__nav-list cso-sidebar__nav-submenu">
+            <li *ngFor="let subItem of item.submenus" class="cso-sidebar__nav-item">
+              <app-sidebar-link
+                class="cso-sidebar__nav-link"
+                [labelNew]="labelNew"
+                [link]="subItem"
+                [isCollapsed]="isCollapsed"
+              ></app-sidebar-link>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+</aside>

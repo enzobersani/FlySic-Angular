@@ -1,0 +1,10 @@
+<label class="input-file-wrapper">
+    {{ label }}
+    <input
+      type="file"
+      [multiple]="multiple"
+      [accept]="accept"
+      (change)="onFileChange($event)"
+      hidden
+    />
+</label>

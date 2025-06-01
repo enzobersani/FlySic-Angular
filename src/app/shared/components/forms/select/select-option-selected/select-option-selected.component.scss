@@ -1,0 +1,52 @@
+@import "../../../../../assets/styles/typography";
+
+:host {
+    display: contents;
+}
+
+.option {
+    background: var(--CSO_Neutral_20);
+    border-radius: 16px;
+    width: fit-content;
+    padding: 4px 8px 4px 12px;
+    text-align: center;
+    @include CSO_Body_1;
+    color: var(--CSO_Neutral_100);
+    display: inline-block;
+    margin-right: 8px;
+    max-width: calc(100% - 32px);
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right: 15px;
+    margin-top: 8px;
+
+    &.disabled {
+        background-color: var(--CSO_Neutral_40);
+        pointer-events: none;
+    }
+
+    img {
+        cursor: pointer;
+        background: none;
+    }
+
+    span {
+        width: calc(100% - 12px);
+        display: block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        float: left;
+    }
+
+    &:hover {
+        &+.option__tooltip {
+            visibility: visible;
+        }
+    }
+
+    &__tooltip {
+        visibility: hidden;
+        opacity: 1;
+    }
+}

@@ -1,0 +1,40 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+
+.cso-input-number {
+  display: block;
+  height: 48px;
+  width: 100%;
+
+  .cso-input-number__field {
+    height: 48px;
+    width: 100%;
+    border: 1px solid var(--CSO_Neutral_40);
+    border-radius: 6px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    @include CSO_Body_1_Bold;
+    color: var(--CSO_Neutral_100);
+    outline: none;
+
+    &:focus,
+    &--focus {
+      border: 2px solid var(--CSO_Neutral_100);
+    }
+
+    &--filled {
+      border: 2px solid var(--CSO_Neutral_100);
+    }
+
+    &--invalid {
+      border: 1px solid var(--CSO_Danger_100);
+    }
+
+    &--disabled {
+      background-color: var(--CSO_Neutral_20);
+      border: 2px solid var(--CSO_Neutral_100);
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}

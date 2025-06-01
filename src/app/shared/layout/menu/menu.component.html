@@ -1,0 +1,22 @@
+<nav *ngIf="isMenuVisible" [class.mobile-menu]="isMobileMenuOpen" [ngClass]="{'menu-open': isMobileMenuOpen}">
+    <div class="menu-container">
+      <!-- Logo/Brand -->
+      <div class="menu-brand">
+        <a href="#">FlySic</a>
+        <button class="mobile-toggle" (click)="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      
+      <!-- Menu Items -->
+      <ul class="menu-items">
+        <!-- <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Relatórios</a></li>
+        <li><a href="#">Configurações</a></li> -->
+        <li><a href="#">Alterar senha</a></li>
+        <li><a href="#" (click)="logout()">Sair</a></li>
+      </ul>
+    </div>
+</nav>

@@ -1,0 +1,13 @@
+<div class="button">
+    <div
+      class="item-button"
+      *ngFor="let item of items"
+      [ngClass]="{
+        'item-button__active': item.activated,
+        'item-button__pipe': showPipe
+      }"
+      (click)="onItemClick(item)"
+    >
+      <span class="button-text">{{ item.text }}</span>
+    </div>
+</div>

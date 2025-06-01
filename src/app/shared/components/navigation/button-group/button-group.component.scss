@@ -1,0 +1,56 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+
+.button{
+    display: flex;
+    align-items: center;
+    background: rgba(118, 118, 128, 0.12);
+    padding: 2px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+
+    .item-button{
+        position: relative;
+        padding: 4px;
+        width: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        .button-text{
+            @include CSO_Body_1;
+            color: var(--CSO_Neutral_100);
+            letter-spacing: -0.24px;
+        }
+
+        &__pipe:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background-color: var(--CSO_Neutral_50);
+        }
+
+        &__active{
+            padding: 4px;
+            width: 50%;
+            text-align: center;
+            background-color: var(--CSO_White);
+            border-radius: 12px;
+            box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.25);
+
+            .button-text{
+                @include CSO_Body_1_Bold;
+                color: var(--CSO_Primary_100);
+                letter-spacing: -0.24px;
+            }
+        }
+    }
+}
+
+.vl {
+    border-left: 2px solid #3C3C432E;
+    height: 25px;
+}

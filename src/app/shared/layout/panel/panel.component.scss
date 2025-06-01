@@ -1,0 +1,74 @@
+.card-container {
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(102, 102, 102, 0.2);
+  border-radius: 8px;
+  min-height: 80px;
+  margin: auto;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative; /* Para posicionar o ícone corretamente */
+}
+
+.header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 22px 32px 22px 32px;
+}
+
+.header:has(.icon-container) {
+  padding-left: 64px;
+}
+
+.icon-container {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--CSO_Secondary_90);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.panel-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.card-title {
+  color: #781E77;
+  font-family: 'DIN Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  flex: 1; /* Faz o título ocupar o espaço restante */
+}
+
+.arrow {
+  margin-left: auto; /* Empurra a seta para o final da linha */
+  transition: transform 0.6s ease;
+}
+
+.arrow img {
+  width: 24px;
+  height: 24px;
+}
+
+.rotate-up {
+  transform: rotate(180deg);
+}
+
+.price-table-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+}
+
+.price-table-container.open {
+  max-height: 500px;
+}

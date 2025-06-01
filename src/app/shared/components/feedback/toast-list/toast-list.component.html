@@ -1,0 +1,5 @@
+<div class="container">
+    <div class="list-toast-content" [ngStyle]="{ top: marginTop, right: marginRight }">
+          <app-toast *ngFor="let toast of toasts.reverse()" [toast]="toast"></app-toast>
+      </div>
+  </div>

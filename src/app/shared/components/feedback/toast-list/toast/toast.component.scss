@@ -1,0 +1,274 @@
+@import '../../../../../../assets/styles/colors';
+@import '../../../../../../assets/styles/typography';
+
+$fake_transparent_border: #e5e5e5;
+
+.toast-content {
+    background-color: var(--CSO_Success_100);
+    max-width: 348px;
+    box-shadow: 0px 8px 16px $fake_transparent_border;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadein 0.5s;
+    z-index: 1000;
+
+    .toast-header {
+        box-sizing: border-box;
+        min-height: 38px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px; /* Padding uniforme */
+        width: 100%; /* Garante que o header ocupe toda a largura */
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0; /* Começa da borda esquerda */
+            width: 100%; /* Ocupa toda a largura */
+            height: 100%;
+            background-color: var(--CSO_White);
+            opacity: 0.85;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        div,
+        span {
+            z-index: 1;
+        }
+
+        .icon {
+            padding-left: 0; /* Remove padding esquerdo desnecessário */
+            padding-top: 3px;
+
+            span {
+                color: var(--CSO_Success_100);
+                font-size: 22px;
+            }
+        }
+
+        .title {
+            @include CSO_Body_1_Bold;
+            color: var(--CSO_Neutral_100);
+            padding-left: 8px; /* Padding consistente */
+        }
+
+        .time {
+            @include CSO_Body_3;
+            color: var(--CSO_Neutral_100);
+            margin-left: auto; /* Empurra o tempo para a direita */
+            padding-right: 8px; /* Espaçamento à direita */
+        }
+
+        .close-toast {
+            font-size: 24px;
+            color: var(--CSO_Neutral_100);
+            cursor: pointer;
+            user-select: none;
+            margin-left: auto; /* Garante que o ícone fique à direita */
+        }
+    }
+
+    .toast-message {
+        @include CSO_Body_1;
+        padding: 12px;
+        color: var(--CSO_White);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 0px solid rgba(0, 0, 0, 0.1);
+        white-space: pre-wrap;
+        word-wrap: break-word; /* Quebra palavras longas */
+    }
+
+    &.info {
+        background-color: var(--CSO_Secondary_100);
+
+        .toast-header {
+            .icon {
+                span {
+                    color: var(--CSO_Secondary_100);
+                }
+            }
+
+            .title {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .time {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .close-toast {
+                color: var(--CSO_Neutral_100);
+            }
+        }
+
+        .toast-message {
+            color: var(--CSO_White);
+        }
+    }
+
+    &.info-secundary {
+        background-color: var(--CSO_Primary_100);
+
+        .toast-header {
+            .icon {
+                span {
+                    color: var(--CSO_Primary_100);
+                }
+            }
+
+            .title {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .time {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .close-toast {
+                color: var(--CSO_Neutral_100);
+            }
+        }
+
+        .toast-message {
+            color: var(--CSO_White);
+        }
+    }
+
+    &.neutral {
+        background-color: var(--CSO_Neutral_100);
+
+        .toast-header {
+            .icon {
+                span {
+                    color: var(--CSO_Neutral_100);
+                }
+            }
+
+            .title {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .time {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .close-toast {
+                color: var(--CSO_Neutral_100);
+            }
+        }
+
+        .toast-message {
+            color: var(--CSO_White);
+        }
+    }
+
+    &.success {
+        background-color: var(--CSO_Success_100);
+
+        .toast-header {
+            .icon {
+                span {
+                    color: var(--CSO_Success_100);
+                }
+            }
+
+            .title {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .time {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .close-toast {
+                color: var(--CSO_Neutral_100);
+            }
+        }
+
+        .toast-message {
+            color: var(--CSO_White);
+        }
+    }
+
+    &.error {
+        background-color: var(--CSO_Danger_100);
+
+        .toast-header {
+            .icon {
+                span {
+                    color: var(--CSO_Danger_100);
+                }
+            }
+
+            .title {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .time {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .close-toast {
+                color: var(--CSO_Neutral_100);
+            }
+        }
+
+        .toast-message {
+            color: var(--CSO_White);
+        }
+    }
+
+    &.warn {
+        background-color: var(--CSO_Warning_100);
+
+        .toast-header {
+            .icon {
+                span {
+                    color: var(--CSO_Warning_100);
+                }
+            }
+
+            .title {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .time {
+                color: var(--CSO_Neutral_100);
+            }
+
+            .close-toast {
+                color: var(--CSO_Neutral_100);
+            }
+        }
+
+        .toast-message {
+            color: var(--CSO_White);
+        }
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.list-toast-content {
+    position: fixed;
+    width: 348px;
+    height: fit-content;
+    top: 20px; /* Ajuste conforme necessário */
+    right: 20px; /* Ajuste conforme necessário */
+    z-index: 1000; /* Garante que o toast fique acima de outros elementos */
+
+    app-toast {
+        margin-bottom: 8px;
+        display: block;
+    }
+}

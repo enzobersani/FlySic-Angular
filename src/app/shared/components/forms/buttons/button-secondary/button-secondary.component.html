@@ -1,0 +1,38 @@
+<button
+  type="button"
+	[id]="id"
+	[class]="handleClass()"
+	[disabled]="isDisabled"
+	(click)="handleClick()"
+  [ngStyle]="{
+    width: customWidth || null,
+    height: customHeight || null,
+    'min-width': minWidth || null
+  }"
+> 
+  <div *ngIf="!isLoading" class="cso-button__content">
+    <span *ngIf="iconName" class="cso-button__icon material-icons material-icons-outlined">
+      {{ iconName }}
+    </span>
+    <span class="cso-button__label">
+      {{ label }}
+    </span>
+  </div>
+	<div *ngIf="isLoading" class="cso-button__loading">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="80"
+      height="80"
+      viewBox="0 0 80 80"
+      fill="none"
+    >
+      <path
+        xmlns="http://www.w3.org/2000/svg"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M17.9008 48.1044C22.6972 60.2196 36.4316 66.1634 48.5468 61.3669C60.662 56.5704 66.6058 42.8361 61.8093 30.7209C57.7328 20.4243 47.1916 14.5765 36.6758 16.0099C34.6733 16.2828 32.8286 14.8807 32.5557 12.8782C32.2827 10.8757 33.6848 9.0311 35.6873 8.75816C49.4589 6.88105 63.2681 14.5233 68.6142 28.0268C74.8985 43.9002 67.1144 61.8874 51.2409 68.1718C35.3674 74.4561 17.3803 66.672 11.0959 50.7985C10.3519 48.9194 11.2722 46.793 13.1513 46.049C15.0304 45.3051 17.1568 46.2253 17.9008 48.1044Z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+</button>

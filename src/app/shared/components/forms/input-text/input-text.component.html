@@ -1,0 +1,27 @@
+<div class="cso-input-text" [formGroup]="form">
+  <input
+      #input
+      [id]="inputId"
+      [ngClass]="{
+        'cso-input-text_field--filled': input.value.length > 0 ,
+        'cso-input-text_field--focus': setFocus,
+        'cso-input-text_field--invalid': invalid,
+        'cso-input-text_field--disabled': isDisabled
+      }"
+      [type]="type"
+      [maxlength]="maxlength"
+      class="cso-input-text__field"
+      [formControlName]="name"
+      [name]="name"
+      [placeholder]="placeholder"
+      [style]="icon ? { paddingRight: '40px' } : {}"
+      (focus)="focus.emit($event)"
+      (focusout)="focusout.emit($event)"
+      (keyup)="keyup.emit($event)"
+      (keydown)="keydown.emit($event)"
+      (paste)="paste.emit($event)"
+      [readonly]="isReadOnly"
+      (input)="applyMask($event)">
+  <img class="cso-input-text__img img-main" [src]="icon">
+  <img class="cso-input-text__img img-focus" [style]="input.value.length > 0 ? { display: 'inline-block' } : {}" [src]="iconFocus">
+</div>

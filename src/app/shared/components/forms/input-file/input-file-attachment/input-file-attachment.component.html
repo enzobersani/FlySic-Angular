@@ -1,0 +1,10 @@
+<div class="cso-input-file-attachment">
+  <div class="cso-input-file-attachment__file">
+    <app-tooltip class="cso-input-file-attachment__tooltip" [position]="CSOTooltipPositionEnum.BOTTOM_CENTER" [text]="file!.name"></app-tooltip>
+    <img class="cso-input-file-attachment__img" src="assets/images/components/form/input-file/file-icon.svg" alt="" />
+    <div class="cso-input-file-attachment__remove" (click)="removeFile($event)">
+      <img class="cso-input-file-attachment__img" src="assets/images/components/form/input-file/remove-file-icon.svg" alt="" />
+    </div>
+  </div>
+  <span class="cso-input-file-attachment__name">{{ file!.name }}</span>
+</div>

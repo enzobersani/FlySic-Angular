@@ -1,0 +1,26 @@
+<div class="cso-feedback" [ngClass]="type">
+    <img
+      *ngIf="type === FeedbackTypeEnum.WAITING"
+      class="cso-feedback__icon"
+      src="assets/images/components/feedback/feedback/feedback-icon--waiting.svg"
+    />
+    <img
+      *ngIf="type === FeedbackTypeEnum.SUCCESS"
+      class="cso-feedback__icon"
+      src="assets/images/components/feedback/feedback/feedback-icon--success.svg"
+    />
+    <img
+      *ngIf="type === FeedbackTypeEnum.WARNING"
+      class="cso-feedback__icon"
+      src="assets/images/components/feedback/feedback/feedback-icon--warning.svg"
+    />
+    <div class="cso-feedback__content">
+      <ng-content></ng-content>
+      <app-button-primary
+        *ngIf="hasAction"
+        class="cso-feedback__button"
+        [label]="actionLabel"
+        (clickEvent)="handleClick()"
+      ></app-button-primary>
+    </div>
+  </div>

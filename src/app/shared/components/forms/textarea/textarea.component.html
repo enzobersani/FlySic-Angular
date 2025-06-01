@@ -1,0 +1,11 @@
+<div class="form" [formGroup]="form">
+    <textarea [ngStyle]="{'min-height.px': minHeight}" #textarea [id]="textareaId" [ngClass]="{
+        'filled': textarea.value.length > 0,
+        'focus': setFocus,
+        'invalid': invalid
+      }" [formControlName]="name" [placeholder]="placeholder" [maxlength]="maxlength" (focus)="focus.emit($event)"
+      (focusout)="focusout.emit($event)" (keyup)="keyup.emit($event)" (resize)="resizeEvent($event)"></textarea>
+    <div class="textarea-tools">
+      <span class="no-select">{{ textarea.value.length + '/' + maxlength }}</span>
+    </div>
+</div>

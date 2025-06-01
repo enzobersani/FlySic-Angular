@@ -1,0 +1,65 @@
+@import '../../../../../../assets/styles/colors';
+@import '../../../../../../assets/styles/typography';
+
+.cso-button {
+background-color: var(--CSO_Warning_70);
+	color: var(--CSO_White);
+	border-color: var(--CSO_Warning_70);
+width: 254px;
+height: 76px;
+
+	.cso-button__label {
+		text-wrap: nowrap;
+		margin: 5px;
+	}
+
+	// THEMES
+	&--theme-white {
+		&.cso-button {
+			&:not(.cso-button--loading):not(:active):hover {
+				border-color: var(--CSO_Warning_80);
+			}
+
+    &:active,
+    &--loading {
+				background-color: var(--CSO_Warning_80);
+				border-color: var(--CSO_Warning_80);
+			}
+
+			&--disabled {
+				background-color: var(--CSO_Neutral_40);
+				border-color: var(--CSO_Neutral_40);
+			}
+
+    &--loading svg path {
+        color: var(--CSO_Neutral_30);
+    }
+		}
+	}
+
+	&--theme-pink {
+		&.cso-button {
+			&:not(.cso-button--loading):not(:active):hover {
+        background-color: var(--CSO_Secondary_40);
+        color: var(--CSO_Priamy_100);
+				border-color: var(--CSO_Secondary_40);
+			}
+
+    &:active,
+    &--loading {
+				background-color: var(--CSO_Secondary_160);
+				border-color: var(--CSO_Secondary_160);
+			}
+
+			&--disabled {
+				background-color: var(--CSO_Primary_80);
+				color: var(--CSO_Primary_100);
+				border-color: var(--CSO_Primary_80);
+			}
+
+    &--loading svg path {
+        color: var(--CSO_Neutral_30);
+    }
+		}
+	}
+}

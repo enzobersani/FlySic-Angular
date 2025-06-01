@@ -1,0 +1,90 @@
+@import "../../../../../assets/styles/colors";
+
+.cso-spinner {
+  display: inline-block;
+  border: solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spinner-rotate .75s linear infinite;
+  animation: spinner-rotate .75s linear infinite;
+
+  // THEMES
+  &.theme {
+    &--dark {
+      // COLORS
+      &.color {
+        &--primary {
+          color: var(--CSO_White);
+        }
+
+        &--secondary {
+          color: var(--CSO_Secondary_100);
+        }
+
+        &--tertiary {
+          color: var(--CSO_Primary_60);
+        }
+
+        &--neutral {
+          color: var(--CSO_Neutral_30);
+        }
+      }
+    }
+
+    &--light {
+      // COLORS
+      &.color {
+        &--primary {
+          color: var(--CSO_Primary_100);
+        }
+
+        &--secondary {
+          color: var(--CSO_Secondary_100);
+        }
+
+        &--tertiary {
+          color: var(--CSO_Primary_60);
+        }
+
+        &--neutral {
+          color: var(--CSO_Neutral_30);
+        }
+      }
+    }
+  }
+
+  // SIZES
+  &.size {
+    &--small {
+      width: 16px;
+      height: 16px;
+      border-width: 2px;
+    }
+
+    &--medium {
+      width: 32px;
+      height: 32px;
+      border-width: 4px;
+    }
+
+    &--large {
+      width: 64px;
+      height: 64px;
+      border-width: 8px;
+    }
+  }
+}
+
+@-webkit-keyframes spinner-rotate {
+  to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg)
+  }
+}
+
+@keyframes spinner-rotate {
+  to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg)
+  }
+}

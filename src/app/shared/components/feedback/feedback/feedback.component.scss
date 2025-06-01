@@ -1,0 +1,20 @@
+@import "../../../../../assets/styles/colors";
+@import "../../../../../assets/styles/typography";
+
+.cso-feedback {
+  .cso-feedback__icon {
+    display: block;
+    margin: 0 auto 20px;
+    border: 0;
+  }
+
+  .cso-feedback__content {
+    color: var(--CSO_Primary_100);
+    @include CSO_Headline_3;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+}

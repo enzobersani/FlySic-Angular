@@ -1,0 +1,13 @@
+<div class="cso-input-checkbox" [formGroup]="form">
+    <input
+      class="cso-input-checkbox__field"
+      [id]="id"
+      type="checkbox"
+      [formControlName]="name"
+    />
+    <label class="cso-input-checkbox__label" [for]="id">
+      {{ labelPrefix }}
+      <a href="#termos" (click)="handleLinkClick($event)">{{ linkText }}</a>
+    </label>
+  </div>
+  

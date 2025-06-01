@@ -1,0 +1,29 @@
+<div class="cso-input-number" [formGroup]="form">
+    <input
+      #input
+      [id]="inputId"
+      [ngClass]="{
+        'cso-input-number_field--filled': input.value.length > 0,
+        'cso-input-number_field--focus': setFocus,
+        'cso-input-number_field--invalid': invalid,
+        'cso-input-number_field--disabled': isDisabled
+      }"
+      [type]="'number'"
+      [maxlength]="maxlength"
+      class="cso-input-number__field"
+      [formControlName]="name"
+      [name]="name"
+      [placeholder]="placeholder"
+      [readonly]="isReadOnly"
+      [step]="'0.01'"
+      [min]="min"
+      [max]="max"
+      [type]="'number'"
+      (focus)="focus.emit($event)"
+      (focusout)="focusout.emit($event)"
+      (keyup)="keyup.emit($event)"
+      (keydown)="keydown.emit($event)"
+      (paste)="paste.emit($event)"
+      (input)="applyDecimalLimit($event)" />
+  </div>
+  

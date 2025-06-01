@@ -1,0 +1,149 @@
+@import "../../../../assets/styles/colors";
+@import "../../../../assets/styles/typography";
+@import "../../../../assets/styles/elevation";
+
+.panel {
+  &.is-disable {
+    pointer-events: none;
+  }
+
+  /* FIX BOOTSTRAP LEGACY */
+  height: auto;
+  padding: 0;
+  border: medium none currentColor;
+  font-family: 'DIN Pro', sans-serif;
+  text-decoration: none;
+  width: auto;
+  /* FIX BOOTSTRAP LEGACY */
+
+  @include CSO_Elevation_1;
+  background-color: var(--CSO_White);
+  border-radius: 8px;
+  margin-left: 0px;
+  margin-bottom: 16px;
+
+  .main-icon {
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 24px;
+  }
+
+  .panel-heading {
+    /* FIX BOOTSTRAP LEGACY */
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    align-self: auto;
+    border-color: transparent;
+    font-size: 16px;
+    text-transform: none;
+    width: auto;
+    /* FIX BOOTSTRAP LEGACY */
+    border-radius: 8px;
+    padding-left: 16px;
+    background-color: var(--CSO_White);
+    cursor: pointer;
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      margin-left: 0;
+      margin-right: 0;
+
+      div.panel-background {
+        color: var(--CSO_Primary_100);
+        line-height: 64px;
+
+        &.title-disable {
+          color: var(--CSO_Neutral_20);
+        }
+
+        &:first-child {
+          @include CSO_Headline_2;
+          font-weight: 600;
+          text-transform: uppercase;
+          line-height: 64px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding-left: 17px;
+
+          &:not(.panel-background--full-text) {
+            white-space: nowrap;
+          }
+        }
+      }
+
+      div:empty {
+        height: 10px;
+      }
+    }
+
+    .arrow-container {
+      display: flex;
+      align-items: center;
+      margin-left: auto; /* Empurra o arrow para o final da linha */
+    }
+  }
+
+  .panel-body {
+    border-radius: 8px;
+    padding-left: 32px;
+    padding-right: 35px;
+    overflow: hidden;
+    transition: height 0.5s ease-out;
+
+    &.panel-body-close {
+      overflow: hidden;
+      height: 0px;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+// @media (max-width: 1500px) {
+//   .panel {
+//     margin-left: 16px;
+//   }
+// }
+
+.description-row {
+  display: flex;
+  align-items: center;
+
+  div.panel-background {
+    color: var(--CSO_Primary_100);
+
+    &.title-disable {
+      color: var(--CSO_Neutral_20);
+    }
+
+    &:first-child {
+      @include CSO_Headline_2;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-left: 17px;
+    }
+
+    &:not(.panel-background--full-text) {
+      white-space: nowrap;
+    }
+  }
+
+  .description {
+    font-family: 'DIN Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-align: left;
+    color: var(--CSO_Primary_100);
+  }
+}

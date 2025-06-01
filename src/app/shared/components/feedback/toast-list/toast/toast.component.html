@@ -1,0 +1,11 @@
+<div *ngIf="show" class="toast-content" [ngClass]="toast.type">
+    <div class="toast-header">
+        <div class="icon">
+            <span class="material-icons-round">{{ toast.icon }}</span>
+        </div>
+        <div class="title">{{ toast.title }}</div>
+        <div class="time">{{ toast.time }}</div>
+        <span (click)="close()" class="material-icons-round close-toast">close</span>
+    </div>
+    <div class="toast-message">{{ toast.message }}</div>
+</div>

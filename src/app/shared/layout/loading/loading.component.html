@@ -1,0 +1,12 @@
+<div class="loading-wrapper">
+  <div class="loading-content" [class.overlay]="overlay">
+    <div class="spinner" [class.small]="size === 'small'" 
+                        [class.medium]="size === 'medium'" 
+                        [class.large]="size === 'large'">
+      <div class="spinner-circle"></div>
+    </div>
+    @if (message) {
+      <h1 class="loading-message">{{ message }}</h1>
+    }
+  </div>
+</div>
