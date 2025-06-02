@@ -1,0 +1,82 @@
+@import "../../../../assets/styles/colors";
+
+.content {
+    &__title {
+        font-family: 'Din Pro';
+        font-weight: bold;
+        font-size: 40px;
+        color: var(--CSO_Warning_70);
+    }
+
+    &__subtitle {
+        font-family: 'Din Pro';
+        font-weight: bold;
+        font-size: 25px;
+        color: var(--CSO_Background);
+        margin-top: 30px;
+    }
+
+    &__label {
+        font-family: 'Din Pro';
+        font-weight: bold;
+        font-size: 14px;
+        color: var(--CSO_Background);
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    &__fields-row {
+        display: flex;
+        gap: 16px;
+        margin-top: 10px;
+    }
+
+    &__field-date,
+    &__field-time {
+        width: 25%;
+    }
+
+    &__field-location,
+    &__field-plane {
+        width: 50%;
+    }
+
+    // RESPONSIVO: Mobile (até 768px)
+    @media screen and (max-width: 768px) {
+        &__fields-row {
+            flex-direction: column;
+        }
+
+        &__field-date,
+        &__field-time,
+        &__field-location,
+        &__field-plane {
+            width: 100%;
+        }
+
+        &__title {
+            font-size: 28px;
+        }
+
+        &__subtitle {
+            font-size: 20px;
+        }
+    }
+
+    // Garantia: Desktop (acima de 768px) - reforça a estrutura horizontal
+    @media screen and (min-width: 769px) {
+        &__fields-row {
+            flex-direction: row;
+        }
+
+        &__field-date,
+        &__field-time {
+            width: 25%;
+        }
+
+        &__field-location,
+        &__field-plane {
+            width: 50%;
+        }
+    }
+}

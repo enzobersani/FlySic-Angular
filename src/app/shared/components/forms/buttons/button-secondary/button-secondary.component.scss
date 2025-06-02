@@ -2,23 +2,23 @@
 
 .cso-button {
   background-color: transparent;
-	color: var(--CSO_Secondary_100);
-	border-color: var(--CSO_Secondary_100);
+	color: var(--CSO_Warning_70);
+	border-color: var(--CSO_Warning_70);
 
 	// THEMES
 	&--theme-white {
 		&.cso-button {
 			&:not(.cso-button--loading):not(:active):hover {
-				background-color: var(--CSO_Secondary_20);
-				color: var(--CSO_Secondary_160);
-				border-color: var(--CSO_Secondary_160);
+				// background-color: var(--CSO_Warning_20);
+				color: var(--CSO_Warning_80);
+				border-color: var(--CSO_Warning_80);
 			}
 
       &:active,
       &--loading {
-				background-color: var(--CSO_Secondary_40);
-				color: var(--CSO_Secondary_170);
-				border-color: var(--CSO_Secondary_170);
+				background-color: var(--CSO_Warning_40);
+				color: var(--CSO_Warning_90);
+				border-color: var(--CSO_Warning_90);
 			}
 
 			&--disabled {
@@ -27,7 +27,7 @@
 			}
 
       &--loading svg path {
-        color: var(--CSO_Secondary_100);
+        color: var(--CSO_Warning_70);
       }
 		}
 	}

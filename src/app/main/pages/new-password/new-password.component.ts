@@ -3,16 +3,24 @@ import { ButtonPrimaryComponent } from "../../../shared/components/forms/buttons
 import { InputTextComponent } from "../../../shared/components/forms/input-text/input-text.component";
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TabComponent } from "../../../shared/components/navigation/tab/tab.component";
+import { TabItemComponent } from "../../../shared/components/navigation/tab/tab-item/tab-item.component";
+import { TabHeaderComponent } from "../../../shared/components/navigation/tab/tab-item/tab-header/tab-header.component";
+import { ButtonSecondaryComponent } from "../../../shared/components/forms/buttons/button-secondary/button-secondary.component";
 
 @Component({
   selector: 'app-new-password',
   standalone: true,
   imports: [
-    ButtonPrimaryComponent, 
+    ButtonPrimaryComponent,
     InputTextComponent,
     CommonModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    TabComponent,
+    TabItemComponent,
+    TabHeaderComponent,
+    ButtonSecondaryComponent
+],
   templateUrl: './new-password.component.html',
   styleUrl: './new-password.component.scss'
 })

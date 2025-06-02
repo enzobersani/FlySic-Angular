@@ -1,0 +1,89 @@
+<div class="content">
+    <div class="content__title">
+        Ficha de voo
+    </div>
+
+    <div class="content__subtitle">
+        Partida
+    </div>
+
+    <div class="content__fields-row">
+        <div class="content__field-date">
+            <label class="content__label">Data</label>
+            <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="partidaData" [form]="form">
+            </app-input-text>
+        </div>
+
+        <div class="content__field-time">
+            <label class="content__label">Horário</label>
+            <app-input-text placeholder="Informe o horário..." mask="00:00" name="partidaHora" [form]="form">
+            </app-input-text>
+        </div>
+
+        <div class="content__field-location">
+            <label class="content__label">Local</label>
+            <app-input-text placeholder="Informe o local..." name="partidaLocal" [form]="form">
+            </app-input-text>
+        </div>
+    </div>
+
+    <div class="content__subtitle">
+        Chegada
+    </div>
+
+    <div class="content__fields-row">
+        <div class="content__field-date">
+            <label class="content__label">Data</label>
+            <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="chegadaData" [form]="form">
+            </app-input-text>
+        </div>
+
+        <div class="content__field-time">
+            <label class="content__label">Horário</label>
+            <app-input-text placeholder="Informe o horário..." mask="00:00" name="chegadaHora" [form]="form">
+            </app-input-text>
+        </div>
+
+        <div class="content__field-location">
+            <label class="content__label">Local</label>
+            <app-input-text placeholder="Informe o local..." name="chegadaLocal" [form]="form">
+            </app-input-text>
+        </div>
+    </div>
+
+    <div class="content__subtitle">
+        Aeronave
+    </div>
+    <div class="content__fields-row">
+        <div class="content__field-plane">
+            <app-input-text placeholder="Informe o tipo da aeronave..." name="tipoAeronave" [form]="form">
+            </app-input-text>
+        </div>
+    </div>
+
+    <div class="content__subtitle">
+        Comentários
+    </div>
+    <div class="content__fields-row">
+        <app-textarea style="width: 100%;" [form]="form" placeholder="Adicione comentários caso seja necessário..." name="comentarioVoo">
+        </app-textarea>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <app-input-checkbox
+            [form]="form"
+            [labelPrefix]="'Haverá pernoite?'"
+            name="checkboxPernoite"
+        ></app-input-checkbox>
+    </div>
+
+    <div class="content__fields-row">
+        <div style="width: 100%; margin-top: 15px;">
+            <app-button-secondary
+                [customWidth]="'100%'"
+                label="Enviar"
+                [isDisabled]="!form.valid"
+            ></app-button-secondary>
+        </div>
+    </div>
+</div>

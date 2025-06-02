@@ -23,8 +23,13 @@ export const routes: Routes = [
         data: { hideMenu: true }
     },
     {
-        path: 'new-password',
-        loadComponent: () => import('./main/pages/new-password/new-password.component').then(m => m.NewPasswordComponent),
-        canActivate: [AuthGuard]
+        path: 'configurations',
+        loadComponent: () => import('./main/pages/configurations/configurations.component').then(m => m.ConfigurationsComponent),
+        canActivate: [AuthGuard]  
+    },
+    {
+        path: 'flight-form',
+        loadComponent: () => import('./main/pages/flight-form/flight-form.component').then(m => m.FlightFormComponent),
+        canActivate: [AuthGuard] 
     }
 ];

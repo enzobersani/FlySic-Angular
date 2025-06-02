@@ -3,6 +3,7 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MenuVisibilityService } from './service/menu-visibility.service';
 import { AuthService } from '../../../infrastructure/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +20,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private menuVisibilityService: MenuVisibilityService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
