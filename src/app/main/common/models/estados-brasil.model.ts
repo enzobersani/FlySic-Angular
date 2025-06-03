@@ -1,0 +1,31 @@
+import { SelectItemModel } from "../../../shared/components/forms/select/models/select-item.model";
+
+export const ESTADOS_BRASIL: SelectItemModel[] = [
+    new SelectItemModel('AC', 'AC'),
+    new SelectItemModel('AL', 'AL'),
+    new SelectItemModel('AP', 'AP'),
+    new SelectItemModel('AM', 'AM'),
+    new SelectItemModel('BA', 'BA'),
+    new SelectItemModel('CE', 'CE'),
+    new SelectItemModel('DF', 'DF'),
+    new SelectItemModel('ES', 'ES'),
+    new SelectItemModel('GO', 'GO'),
+    new SelectItemModel('MA', 'MA'),
+    new SelectItemModel('MT', 'MT'),
+    new SelectItemModel('MS', 'MS'),
+    new SelectItemModel('MG', 'MG'),
+    new SelectItemModel('PA', 'PA'),
+    new SelectItemModel('PB', 'PB'),
+    new SelectItemModel('PR', 'PR'),
+    new SelectItemModel('PE', 'PE'),
+    new SelectItemModel('PI', 'PI'),
+    new SelectItemModel('RJ', 'RJ'),
+    new SelectItemModel('RN', 'RN'),
+    new SelectItemModel('RS', 'RS'),
+    new SelectItemModel('RO', 'RO'),
+    new SelectItemModel('RR', 'RR'),
+    new SelectItemModel('SC', 'SC'),
+    new SelectItemModel('SP', 'SP'),
+    new SelectItemModel('SE', 'SE'),
+    new SelectItemModel('TO', 'TO')
+  ];
