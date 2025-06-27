@@ -3,14 +3,23 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthResponseModel } from '../models/auth-response.model';
 import { Router } from '@angular/router';
+import { DecodedTokenModel } from '../models/decoded-token.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7127/api/v1/auth'
+  private apiUrl = 'https://localhost:7127/api/v1/auth';
+  
+  private _decodedToken: DecodedTokenModel | null = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.decodeToken(token);
+    }
+  }
 
   login(email: string, password: string): Observable<AuthResponseModel> {
     const authCommand = { Email: email, Password: password };
@@ -19,19 +28,18 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
+    if (!token) return false;
   
     try {
-      // const decodedToken: any = jwtDecode(token);
-      // const currentTime = Math.floor(Date.now() / 1000);
+      const decodedToken = jwtDecode<DecodedTokenModel>(token);
+      const currentTime = Math.floor(Date.now() / 1000);
   
-      // if (decodedToken.exp < currentTime) {
-      //   this.logout();
-      //   return false;
-      // }
-  
+      if (decodedToken.exp && decodedToken.exp < currentTime) {
+        this.logout();
+        return false;
+      }
+
+      this._decodedToken = decodedToken;
       return true;
     } catch (error) {
       console.error('Erro ao decodificar o token:', error);
@@ -45,29 +53,26 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // decodeToken(): TokenDecodeModel | null {
-  //   const token = localStorage.getItem('token');
+  decodeToken(token: string) {
+    try {
+      this._decodedToken = jwtDecode<DecodedTokenModel>(token);
+    } catch (e) {
+      console.error('Erro ao decodificar o token:', e);
+      this._decodedToken = null;
+    }
+  }
 
-  //   if (token) {
-  //     try {
-  //       const decodedToken: any = jwtDecode(token);
-  //       const userId = decodedToken.nameid;
-  //       const email = decodedToken.email;
-  //       const nome = decodedToken.unique_name;
-  //       return { userId, email, nome };
-  //     } catch (error) {
-  //       return null;
-  //     }
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  getDecodedToken(): DecodedTokenModel | null {
+    if (!this._decodedToken) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        this.decodeToken(token);
+      }
+    }
+    return this._decodedToken;
+  }
 
   private redirectToLogin() {
     this.router.navigate(['/login']);
   }
 }
-function jwtDecode(token: string): any {
-  throw new Error('Function not implemented.');
-}
-

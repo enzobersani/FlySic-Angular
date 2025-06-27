@@ -14,9 +14,9 @@
       <ul class="menu-items">
          <!-- <li><a href="#">Dashboard</a></li>
         <li><a href="#">Relatórios</a></li> -->
-        <li><a href="flight-form">Ficha de voo</a></li>
-        <li><a href="configurations">Configurações</a></li>
-        <li><a href="#" (click)="logout()">Sair</a></li>
+        <li *ngIf="isDonor"><a routerLink="/flight-form">Ficha de voo</a></li>
+        <li><a routerLink="/configurations">Configurações</a></li>
+        <li><a routerLink="#" (click)="logout()">Sair</a></li>
       </ul>
     </div>
 </nav>

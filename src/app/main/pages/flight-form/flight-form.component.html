@@ -15,19 +15,31 @@
         <app-input-text placeholder="Informe o horário..." mask="00:00" name="partidaHora" [form]="form">
         </app-input-text>
       </div>
-  
-      <div class="content__uf-local-wrap">
-        <div class="content__field-uf">
-          <label class="content__label">UF</label>
-          <app-select [form]="form" [items]="estadoBrasil" [isSearchable]="true" name="partidaUf" (valueChange)="setupCitySelects()"></app-select>
-        </div>
-  
-        <div class="content__field-location">
-          <label class="content__label">Cidade</label>
-          <app-select name="partidaLocal" [form]="form" [isSearchable]="true" [items]="cidadesPartida">
-          </app-select>
-        </div>
+
+      <div class="content__field-uf">
+        <label class="content__label">Aeroporto (ICAO)</label>
+        <app-select
+          name="aeroportoPartida"
+          [texts]="placeholderIcao"
+          [form]="form"
+          [isSearchable]="true"
+          [items]="aeroportosPartida"
+          (searchEvent)="onSearchAirport($event, 'partida')"
+          (valueChange)="onIcaoChange('partida')">
+        </app-select>
       </div>
+      
+      <ng-container *ngIf="showCustomLocation.partida">
+        <div class="content__field-location">
+          <label class="content__label">Local personalizado de partida</label>
+          <app-input-text
+            placeholder="Ex: Fazenda Santa Rita - GO"
+            name="localPartidaManual"
+            [form]="form">
+          </app-input-text>
+        </div>
+      </ng-container>
+      
     </div>
   
     <div class="content__subtitle">Chegada</div>
@@ -44,21 +56,31 @@
         <app-input-text placeholder="Informe o horário..." mask="00:00" name="chegadaHora" [form]="form">
         </app-input-text>
       </div>
-  
-      <div class="content__uf-local-wrap">
-        <div class="content__field-uf">
-            <label class="content__label">UF</label>
-            <app-select [form]="form" [items]="estadoBrasil" [isSearchable]="true" name="chegadaUf" 
-                (valueChange)="setupCitySelects()" (cleanEvent)="setupCitySelects()">
-            </app-select>
-        </div>
-  
-        <div class="content__field-location">
-          <label class="content__label">Cidade</label>
-          <app-select name="chegadaLocal" [form]="form" [isSearchable]="true" [items]="cidadesChegada">
+
+      <div class="content__field-uf">
+        <label class="content__label">Aeroporto (ICAO)</label>
+        <app-select
+          name="aeroportoChegada"
+          [texts]="placeholderIcao"
+          [form]="form"
+          [isSearchable]="true"
+          [items]="aeroportosChegada"
+          (searchEvent)="onSearchAirport($event, 'chegada')"
+          (valueChange)="onIcaoChange('chegada')">
         </app-select>
-        </div>
       </div>
+      
+      <ng-container *ngIf="showCustomLocation.chegada">
+        <div class="content__field-location">
+          <label class="content__label">Local personalizado de chegada</label>
+          <app-input-text
+            placeholder="Ex: Pista Fazenda São Miguel - MT"
+            name="localChegadaManual"
+            [form]="form">
+          </app-input-text>
+        </div>
+      </ng-container>
+      
     </div>
   
     <div class="content__subtitle">Aeronave</div>
@@ -93,3 +115,4 @@
       </div>
     </div>
   </div>
+  <app-toast-list></app-toast-list>

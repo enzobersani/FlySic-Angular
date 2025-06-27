@@ -3,12 +3,12 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MenuVisibilityService } from './service/menu-visibility.service';
 import { AuthService } from '../../../infrastructure/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [NgClass, NgIf],
+  imports: [NgClass, NgIf, RouterLink],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
@@ -16,6 +16,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   isMobileMenuOpen = false;
   isMobileView = false;
   isMenuVisible = true;
+  isDonor: boolean = false;
+  isSeeker: boolean = false;
   private visibilitySub!: Subscription;
 
   constructor(
@@ -29,6 +31,12 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.visibilitySub = this.menuVisibilityService.isVisible$.subscribe(
       visible => this.isMenuVisible = visible
     );
+
+    const tokenData = this.authService.getDecodedToken();
+    if (tokenData) {
+      this.isDonor = tokenData.IsDonateHours === 'true';
+      this.isSeeker = tokenData.IsSearchHours === 'true';
+    }
   }
 
   ngOnDestroy() {

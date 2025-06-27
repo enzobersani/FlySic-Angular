@@ -2,15 +2,15 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { authInterceptor } from './infrastructure/interceptor/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptorsFromDi()),
     provideAnimations()
   ],
 };

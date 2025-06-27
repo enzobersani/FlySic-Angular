@@ -3,6 +3,8 @@ import { ModalComponent } from "../../../shared/components/modals/modal/modal.co
 import { FirstAccessComponent } from "../first-access/first-access.component";
 import { MainPanelComponent } from "../../../shared/layout/main-panel/main-panel.component";
 import { PanelComponent } from "../../../shared/layout/panel/panel.component";
+import { UserService } from '../../common/services/user.service';
+import { AuthService } from '../../../infrastructure/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,17 +16,31 @@ import { PanelComponent } from "../../../shared/layout/panel/panel.component";
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('modalFirstAccess') modalFirstAccess!: ModalComponent;
   isFirstAccess: boolean = true;
+  userId: string = '';
 
-  constructor() {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-
+    const decodedToken = this.authService.getDecodedToken();
+    if (decodedToken) {
+      this.userId = decodedToken.sub;
+      this.userService.getFirstAccessStatus(this.userId).subscribe({
+        next: (result) => {
+          this.isFirstAccess = result;
+        },
+      })
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.isFirstAccess) {
       setTimeout(() => {
         this.modalFirstAccess.open();
+
+        this.userService.updateFirstAccess(this.userId).subscribe({});
       });
     }
   }

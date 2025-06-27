@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
         if (hideMenu) {
           this.menuVisibility.hideMenu();
         } else {
-          this.menuVisibility.showMenu();
+          this.menuVisibility.showMenu();    
         }
       });
   }

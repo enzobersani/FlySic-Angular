@@ -73,11 +73,11 @@
     }
 
     &__field-uf {
-      width: 40%;
+      width: calc(50% - 8px);
     }
 
     &__field-location {
-      width: 60%;
+      width: 100%;
     }
   }
 
@@ -95,9 +95,9 @@
       flex-direction: row;
     }
 
-    &__field-uf,
-    &__field-location {
-      width: 50%;
-    }
+    // &__field-uf,
+    // &__field-location {
+    //   width: 50%;
+    // }
   }
 }

@@ -6,7 +6,9 @@
         </section>
     </app-main-panel>
 
-    <app-modal #modalFirstAccess [closeButton]="true" [clickableOutside]="true" width="40%">
-        <app-first-access></app-first-access>
-    </app-modal>
+    @if (isFirstAccess) {
+        <app-modal #modalFirstAccess [closeButton]="true" [clickableOutside]="true" width="40%">
+            <app-first-access></app-first-access>
+        </app-modal>
+    }
 </div>
