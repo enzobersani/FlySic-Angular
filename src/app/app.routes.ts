@@ -31,5 +31,10 @@ export const routes: Routes = [
         path: 'flight-form',
         loadComponent: () => import('./main/pages/flight-form/flight-form.component').then(m => m.FlightFormComponent),
         canActivate: [AuthGuard] 
+    },
+    {
+        path: 'my-flights',
+        loadComponent: () => import('./main/pages/my-flight-forms/my-flight-forms.component').then(m => m.MyFlightFormsComponent),
+        canActivate: [AuthGuard]
     }
 ];

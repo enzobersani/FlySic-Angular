@@ -1,6 +1,5 @@
 <nav *ngIf="isMenuVisible" [class.mobile-menu]="isMobileMenuOpen" [ngClass]="{'menu-open': isMobileMenuOpen}">
     <div class="menu-container">
-      <!-- Logo/Brand -->
       <div class="menu-brand">
         <a href="#">FlySic</a>
         <button class="mobile-toggle" (click)="toggleMobileMenu()">
@@ -10,11 +9,9 @@
         </button>
       </div>
       
-      <!-- Menu Items -->
       <ul class="menu-items">
-         <!-- <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Relatórios</a></li> -->
         <li *ngIf="isDonor"><a routerLink="/flight-form">Ficha de voo</a></li>
+        <li *ngIf="isDonor"><a routerLink="/my-flights">Minhas fichas</a></li>
         <li><a routerLink="/configurations">Configurações</a></li>
         <li><a routerLink="#" (click)="logout()">Sair</a></li>
       </ul>

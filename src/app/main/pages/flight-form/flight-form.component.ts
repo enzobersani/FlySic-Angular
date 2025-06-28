@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InputTextComponent } from "../../../shared/components/forms/input-text/input-text.component";
 import { TextareaComponent } from "../../../shared/components/forms/textarea/textarea.component";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +16,10 @@ import { ToastListComponent } from "../../../shared/components/feedback/toast-li
 import { ToastService } from '../../../shared/components/feedback/toast-list/services/toast.service';
 import { ToastSuccessModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-success.model';
 import { ToastErrorModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-error.model';
+import { ModalComponent } from "../../../shared/components/modals/modal/modal.component";
+import { FeedbackComponent } from "../../../shared/components/feedback/feedback/feedback.component";
+import { FeedbackTypeEnum } from '../../../shared/components/feedback/feedback/enums/feedback-type.enum';
+import { LoadingComponent } from "../../../shared/layout/loading/loading.component";
 
 @Component({
   selector: 'app-flight-form',
@@ -27,17 +31,27 @@ import { ToastErrorModel } from '../../../shared/components/feedback/toast-list/
     ButtonSecondaryComponent,
     SelectComponent,
     NgIf,
-    ToastListComponent
+    ToastListComponent,
+    ModalComponent,
+    FeedbackComponent,
+    LoadingComponent
 ],
   templateUrl: './flight-form.component.html',
   styleUrl: './flight-form.component.scss'
 })
 export class FlightFormComponent implements OnInit{
+  @ViewChild('modalResponse') modalResponse!: ModalComponent;
+  isLoading: boolean = false;
   form: FormGroup;
   selectItems: SelectItemModel[] = [
     { key: 1, description: 'Sim' },
     { key: 0, description: 'Não' }
-  ]
+  ];
+  feedbackTypes: FeedbackTypeEnum[] = [
+    FeedbackTypeEnum.SUCCESS,
+    FeedbackTypeEnum.WAITING,
+    FeedbackTypeEnum.WARNING,
+  ];
   estadoBrasil = ESTADOS_BRASIL;
   cidadesPartida: SelectItemModel[] = [];
   cidadesChegada: SelectItemModel[] = [];
@@ -105,6 +119,7 @@ export class FlightFormComponent implements OnInit{
       return `${year}-${month}-${day}T${hour}:${minute}:00`;
     };
 
+    this.isLoading = true;
     const request: NewFlightFormRequestModel = {
       partidaData: toDate(formValue.partidaData),
       partidaHora: toTime(formValue.partidaHora, formValue.partidaData),
@@ -121,12 +136,16 @@ export class FlightFormComponent implements OnInit{
       checkboxPernoite: formValue.checkboxPernoite
     };
 
+    this.modalResponse.open();
     this.airportService.createFlight(request).subscribe({
       next: () => {
-        this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo criada!", "Agora"));
+        // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo criada!", "Agora"));
+        this.isLoading = false;
       },
       error: (err) => {
         this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao criar ficha!", "Agora"));
+        this.isLoading = false;
+        this.modalResponse.close();
       }
     });
   }

@@ -1,0 +1,18 @@
+<div class="flight-forms-container">
+    <div *ngFor="let form of flightForms" class="flight-card">
+        <div class="card-header">
+            <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
+            <span>→</span>
+            <strong>{{ form.arrivalAirport || form.arrivalManualLocation }}</strong>
+        </div>
+        <div class="card-body">
+            <p><strong>Data de partida:</strong> {{ form.departureDate | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Hora de partida:</strong> {{ form.departureTime | date:'HH:mm' }}</p>
+            <p><strong>Data de chegada:</strong> {{ form.arrivalDate | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Hora de chegada:</strong> {{ form.arrivalTime | date:'HH:mm' }}</p>
+            <p><strong>Aeronave:</strong> {{ form.aircraftType }}</p>
+            <!-- <p><strong>Comentário:</strong> {{ form.flightComment || 'Nenhum' }}</p> -->
+            <p><strong>Pernoite:</strong> {{ form.hasOvernight ? 'Sim' : 'Não' }}</p>
+        </div>
+    </div>
+</div>

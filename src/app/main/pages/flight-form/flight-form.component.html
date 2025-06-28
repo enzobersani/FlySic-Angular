@@ -1,118 +1,134 @@
 <div class="content">
-    <div class="content__title">Ficha de voo</div>
+  <div class="content__title">Ficha de voo</div>
   
-    <div class="content__subtitle">Partida</div>
+  <div class="content__subtitle">Partida</div>
   
-    <div class="content__fields-row">
-      <div class="content__field-date">
-        <label class="content__label">Data</label>
-        <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="partidaData" [form]="form">
-        </app-input-text>
-      </div>
+  <div class="content__fields-row">
+    <div class="content__field-date">
+      <label class="content__label">Data</label>
+      <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="partidaData" [form]="form">
+      </app-input-text>
+    </div>
   
-      <div class="content__field-time">
-        <label class="content__label">Horário</label>
-        <app-input-text placeholder="Informe o horário..." mask="00:00" name="partidaHora" [form]="form">
-        </app-input-text>
-      </div>
+    <div class="content__field-time">
+      <label class="content__label">Horário</label>
+      <app-input-text placeholder="Informe o horário..." mask="00:00" name="partidaHora" [form]="form">
+      </app-input-text>
+    </div>
 
-      <div class="content__field-uf">
-        <label class="content__label">Aeroporto (ICAO)</label>
-        <app-select
-          name="aeroportoPartida"
-          [texts]="placeholderIcao"
-          [form]="form"
-          [isSearchable]="true"
-          [items]="aeroportosPartida"
-          (searchEvent)="onSearchAirport($event, 'partida')"
-          (valueChange)="onIcaoChange('partida')">
-        </app-select>
-      </div>
-      
-      <ng-container *ngIf="showCustomLocation.partida">
-        <div class="content__field-location">
-          <label class="content__label">Local personalizado de partida</label>
-          <app-input-text
-            placeholder="Ex: Fazenda Santa Rita - GO"
-            name="localPartidaManual"
-            [form]="form">
-          </app-input-text>
-        </div>
-      </ng-container>
-      
-    </div>
-  
-    <div class="content__subtitle">Chegada</div>
-  
-    <div class="content__fields-row">
-      <div class="content__field-date">
-        <label class="content__label">Data</label>
-        <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="chegadaData" [form]="form">
-        </app-input-text>
-      </div>
-  
-      <div class="content__field-time">
-        <label class="content__label">Horário</label>
-        <app-input-text placeholder="Informe o horário..." mask="00:00" name="chegadaHora" [form]="form">
-        </app-input-text>
-      </div>
-
-      <div class="content__field-uf">
-        <label class="content__label">Aeroporto (ICAO)</label>
-        <app-select
-          name="aeroportoChegada"
-          [texts]="placeholderIcao"
-          [form]="form"
-          [isSearchable]="true"
-          [items]="aeroportosChegada"
-          (searchEvent)="onSearchAirport($event, 'chegada')"
-          (valueChange)="onIcaoChange('chegada')">
-        </app-select>
-      </div>
-      
-      <ng-container *ngIf="showCustomLocation.chegada">
-        <div class="content__field-location">
-          <label class="content__label">Local personalizado de chegada</label>
-          <app-input-text
-            placeholder="Ex: Pista Fazenda São Miguel - MT"
-            name="localChegadaManual"
-            [form]="form">
-          </app-input-text>
-        </div>
-      </ng-container>
-      
-    </div>
-  
-    <div class="content__subtitle">Aeronave</div>
-    <div class="content__fields-row">
-      <div class="content__field-plane">
-        <app-input-text placeholder="Informe o tipo da aeronave..." name="tipoAeronave" [form]="form">
-        </app-input-text>
-      </div>
-    </div>
-  
-    <div class="content__subtitle">Comentários</div>
-    <div class="content__fields-row">
-      <app-textarea style="width: 100%;" [form]="form" placeholder="Adicione comentários caso seja necessário..." name="comentarioVoo">
-      </app-textarea>
-    </div>
-  
-    <div style="margin-top: 20px;">
-      <app-input-checkbox
+    <div class="content__field-uf">
+      <label class="content__label">Aeroporto (ICAO)</label>
+      <app-select
+        name="aeroportoPartida"
+        [texts]="placeholderIcao"
         [form]="form"
-        [labelPrefix]="'Haverá pernoite?'"
-        name="checkboxPernoite"
-      ></app-input-checkbox>
+        [isSearchable]="true"
+        [items]="aeroportosPartida"
+        (searchEvent)="onSearchAirport($event, 'partida')"
+        (valueChange)="onIcaoChange('partida')">
+      </app-select>
+    </div>
+      
+    <ng-container *ngIf="showCustomLocation.partida">
+      <div class="content__field-location">
+        <label class="content__label">Local personalizado de partida</label>
+        <app-input-text
+          placeholder="Ex: Fazenda Santa Rita - GO"
+          name="localPartidaManual"
+          [form]="form">
+        </app-input-text>
+      </div>
+    </ng-container>
+      
+  </div>
+  
+  <div class="content__subtitle">Chegada</div>
+  
+  <div class="content__fields-row">
+    <div class="content__field-date">
+      <label class="content__label">Data</label>
+      <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="chegadaData" [form]="form">
+      </app-input-text>
     </div>
   
-    <div class="content__fields-row">
-      <div style="width: 100%; margin-top: 15px;">
-        <app-button-secondary
-          [customWidth]="'100%'"
-          label="Enviar"
-          (clickEvent)="onSubmit()"
-        ></app-button-secondary>
+    <div class="content__field-time">
+      <label class="content__label">Horário</label>
+      <app-input-text placeholder="Informe o horário..." mask="00:00" name="chegadaHora" [form]="form">
+      </app-input-text>
+    </div>
+
+    <div class="content__field-uf">
+      <label class="content__label">Aeroporto (ICAO)</label>
+      <app-select
+        name="aeroportoChegada"
+        [texts]="placeholderIcao"
+        [form]="form"
+        [isSearchable]="true"
+        [items]="aeroportosChegada"
+        (searchEvent)="onSearchAirport($event, 'chegada')"
+        (valueChange)="onIcaoChange('chegada')">
+      </app-select>
+    </div>
+      
+    <ng-container *ngIf="showCustomLocation.chegada">
+      <div class="content__field-location">
+        <label class="content__label">Local personalizado de chegada</label>
+        <app-input-text
+          placeholder="Ex: Pista Fazenda São Miguel - MT"
+          name="localChegadaManual"
+          [form]="form">
+        </app-input-text>
       </div>
+    </ng-container>
+      
+  </div>
+  
+  <div class="content__subtitle">Aeronave</div>
+  <div class="content__fields-row">
+    <div class="content__field-plane">
+      <app-input-text placeholder="Informe o tipo da aeronave..." name="tipoAeronave" [form]="form">
+      </app-input-text>
     </div>
   </div>
-  <app-toast-list></app-toast-list>
+  
+  <div class="content__subtitle">Comentários</div>
+  <div class="content__fields-row">
+    <app-textarea style="width: 100%;" [form]="form" placeholder="Adicione comentários caso seja necessário..." name="comentarioVoo">
+    </app-textarea>
+  </div>
+  
+  <div style="margin-top: 20px;">
+    <app-input-checkbox
+      [form]="form"
+      [labelPrefix]="'Haverá pernoite?'"
+      name="checkboxPernoite"
+    ></app-input-checkbox>
+  </div>
+  
+  <div class="content__fields-row">
+    <div style="width: 100%; margin-top: 15px;">
+      <app-button-secondary
+        [customWidth]="'100%'"
+        label="Enviar"
+        (clickEvent)="onSubmit()"
+      ></app-button-secondary>
+    </div>
+  </div>
+</div>
+<app-toast-list></app-toast-list>
+<app-modal #modalResponse>
+  @if (isLoading) {
+    <div class="carregando">
+      <app-loading
+      message="Criando ficha de voo, aguarde..."
+      [overlay]="false"
+      [size]="'large'"
+      ></app-loading>
+    </div>
+  }
+  @else {
+    <app-feedback [type]="feedbackTypes[0]" [hasAction]="true" actionLabel="Fechar" (clickEvent)="modalResponse.close()">
+      Ficha de voo criada com sucesso!
+    </app-feedback>
+  }
+</app-modal>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AirportModel } from '../models/airport.model';
 import { Observable } from 'rxjs';
 import { NewFlightFormRequestModel } from '../models/new-flight-form-request.model';
+import { FlightFormsModel } from '../models/flight-forms-model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class AirportService {
 
   createFlight(data: NewFlightFormRequestModel) {
     return this.http.post(this.apiForm, data);
+  }
+
+  getMyFlightForms(): Observable<FlightFormsModel[]> {
+    return this.http.get<FlightFormsModel[]>(`${this.apiForm}/my-flights`);
   }
 }

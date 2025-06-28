@@ -15,7 +15,7 @@ import { AuthService } from '../../../infrastructure/services/auth.service';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('modalFirstAccess') modalFirstAccess!: ModalComponent;
-  isFirstAccess: boolean = true;
+  isFirstAccess: boolean = false;
   userId: string = '';
 
   constructor(
