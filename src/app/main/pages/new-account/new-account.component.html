@@ -87,7 +87,7 @@
   <app-terms></app-terms>
 </app-modal>
 
-<app-modal #modalResponse>
+<app-modal #modalResponse width="40%">
   @if (loading) {
     <div class="carregando">
       <app-loading
@@ -98,9 +98,16 @@
     </div>
   }
   @else {
-    <app-feedback [type]="feedbackTypes[0]" [hasAction]="true" actionLabel="Entendi." (clickEvent)="modalResponse.close()">
-      Seu cadastro foi enviado com sucesso! Será realizada uma analise diante de seu perfil e documento. 
-      Caso ocorra tudo certo, em breve receberá um email com seu acesso inicial e poderá acessar sua conta.
-    </app-feedback>
+    @if (isModalSuccess) {
+      <app-feedback [type]="feedbackTypes[0]" [hasAction]="true" actionLabel="Entendi." (clickEvent)="redirectToLogin()">
+        Seu cadastro foi enviado com sucesso! Será realizada uma analise diante de seu perfil e documento. 
+        Caso ocorra tudo certo, em breve receberá um email com seu acesso inicial e poderá acessar sua conta.
+      </app-feedback>
+    }
+    @if (isModalError) {
+      <app-feedback [type]="feedbackTypes[2]" [hasAction]="true" actionLabel="Fechar." (clickEvent)="modalResponse.close()">
+        {{ mensagemErro }}
+      </app-feedback>
+    }
   }
 </app-modal>

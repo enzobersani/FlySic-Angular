@@ -13,7 +13,7 @@ import { AuthService } from '../../../infrastructure/services/auth.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   @ViewChild('modalFirstAccess') modalFirstAccess!: ModalComponent;
   isFirstAccess: boolean = false;
   userId: string = '';
@@ -30,18 +30,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.userService.getFirstAccessStatus(this.userId).subscribe({
         next: (result) => {
           this.isFirstAccess = result;
+          console.log(this.isFirstAccess);
+          setTimeout(() => {
+            if (this.isFirstAccess) {
+              this.modalFirstAccess?.open();
+              this.userService.updateFirstAccess(this.userId).subscribe();
+            }
+          });
         },
       })
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (this.isFirstAccess) {
-      setTimeout(() => {
-        this.modalFirstAccess.open();
-
-        this.userService.updateFirstAccess(this.userId).subscribe({});
-      });
     }
   }
 }

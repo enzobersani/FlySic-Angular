@@ -72,6 +72,22 @@ export class AuthService {
     return this._decodedToken;
   }
 
+  sendRecoveryCode(email: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/recovery-code`, { email });
+  }
+
+  validateRecoveryCode(email: string, code: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/validate-recovery-code`, { email, code });
+  }
+
+  resetPassword(email: string, code: string, newPassword: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/reset-password`, {
+      email,
+      code,
+      newPassword
+    });
+  }
+
   private redirectToLogin() {
     this.router.navigate(['/login']);
   }

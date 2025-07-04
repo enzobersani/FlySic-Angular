@@ -13,6 +13,7 @@ import { TermsComponent } from "../terms/terms.component";
 import { FeedbackComponent } from "../../../shared/components/feedback/feedback/feedback.component";
 import { FeedbackTypeEnum } from '../../../shared/components/feedback/feedback/enums/feedback-type.enum';
 import { LoadingComponent } from "../../../shared/layout/loading/loading.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-account',
@@ -49,9 +50,15 @@ export class NewAccountComponent {
     FeedbackTypeEnum.WARNING,
   ];
   loading: boolean = false;
+  isModalSuccess: boolean = false;
+  isModalError: boolean = false;
+  mensagemErro: string = '';
 
-
-  constructor(private fb: FormBuilder, private newAccountService: NewAccountService) {
+  constructor(
+    private fb: FormBuilder, 
+    private newAccountService: NewAccountService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       birthYear: ['', Validators.required],
@@ -87,11 +94,21 @@ export class NewAccountComponent {
     this.modalResponse.open();
     this.newAccountService.registerNewUser(formData).subscribe({
       next: () => {
+        this.isModalSuccess = true;
         this.loading = false;
       },
       error: err => {
+        this.isModalError = true;
         console.error('Erro ao enviar', err);
         this.loading = false;
+
+        this.registerForm.reset();
+        this.registerForm.patchValue({ checkboxTermos: false })
+        if (err.status === 400 && err.error){
+          this.mensagemErro = err.error.notifications[0].message;
+        } else {
+          this.mensagemErro = "Erro ao finalizar o pedido. Tente novamente. Caso continue, acione o suporte.";
+        }
       }
     });
   }
@@ -109,5 +126,9 @@ export class NewAccountComponent {
 
   abrirModal(){
     this.modalTerms.open();
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 }

@@ -14,6 +14,6 @@ export class FirstAccessComponent {
   constructor(private router: Router) {}
 
   goToChangePassword() {
-    this.router.navigate(['/new-password']);
+    this.router.navigate(['/configurations']);
   }
 }

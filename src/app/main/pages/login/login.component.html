@@ -20,7 +20,7 @@
         <app-input-text [form]="loginForm" name="password" type="password"></app-input-text>
 
         <div class="login__forgot">
-          <a href="#">Esqueceu a senha?</a>
+          <a [routerLink]="'/forgot-password'">Esqueceu a senha?</a>
         </div>
 
         <div class="login__login">

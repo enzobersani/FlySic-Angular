@@ -36,5 +36,10 @@ export const routes: Routes = [
         path: 'my-flights',
         loadComponent: () => import('./main/pages/my-flight-forms/my-flight-forms.component').then(m => m.MyFlightFormsComponent),
         canActivate: [AuthGuard]
-    }
+    },
+    { 
+        path: 'forgot-password', 
+        loadComponent: () => import('./main/pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
+        data: { hideMenu: true }
+    },
 ];

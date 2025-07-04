@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseUpdateResponseModel } from '../models/base-update-response.model';
+import { UpdatePasswordModel } from '../models/update-password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ export class UserService {
 
   getFirstAccessStatus(userId: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrl}/first-access-status/${userId}`);
+  }
+
+  updatePassword(request: UpdatePasswordModel): Observable<BaseUpdateResponseModel> {
+    return this.http.put<BaseUpdateResponseModel>(`${this.apiUrl}/password`, request);
   }
 }
