@@ -1,0 +1,56 @@
+<div class="back-button">
+  <button class="circle-back-btn" (click)="goBack()" title="Voltar">
+    <span class="arrow-icon">←</span>
+  </button>
+</div>
+
+<div *ngIf="flightForm" class="flight-details-container">
+    <h2>Ficha de Voo</h2>
+  
+    <div class="flight-summary">
+      <div class="route">
+        <strong class="label">Origem</strong>
+        <p class="value">{{ flightForm.departureAirport || flightForm.departureManualLocation }}</p>
+      </div>
+  
+      <div class="arrow">→</div>
+  
+      <div class="route">
+        <strong class="label">Destino</strong>
+        <p class="value">{{ flightForm.arrivalAirport || flightForm.arrivalManualLocation }}</p>
+      </div>
+    </div>
+  
+    <div class="dates">
+      <div>
+        <strong>Data de partida:</strong>
+        <p>{{ flightForm.departureDate | date:'dd/MM/yyyy' }} - {{ flightForm.departureTime | date:'HH:mm' }}</p>
+      </div>
+      <div>
+        <strong>Data de chegada:</strong>
+        <p>{{ flightForm.arrivalDate | date:'dd/MM/yyyy' }} - {{ flightForm.arrivalTime | date:'HH:mm' }}</p>
+      </div>
+    </div>
+  
+    <div class="details">
+      <p><strong>Aeronave:</strong> {{ flightForm.aircraftType }}</p>
+      <p><strong>Pernoite:</strong> {{ flightForm.hasOvernight ? 'Sim' : 'Não' }}</p>
+      <p><strong>Comentário:</strong> {{ flightForm.flightComment || 'Nenhum' }}</p>
+    </div>
+  
+    <h3>Dados de contato do piloto</h3>
+    <div class="pilot-info">
+      <p><strong>Nome:</strong> {{ flightForm.pilot.name }}</p>
+      <p><strong>Email:</strong> {{ flightForm.pilot.email }}</p>
+      <p><strong>Telefone:</strong> {{ flightForm.pilot.phone }}</p>
+    </div>
+  
+    <div class="interest-button">
+      <app-button-primary
+        label="Demonstrar Interesse"
+        iconName="flight_takeoff"
+        (clickEvent)="setInterest()"
+      ></app-button-primary>
+    </div>
+  </div>
+  <app-toast-list></app-toast-list>

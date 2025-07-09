@@ -1,5 +1,5 @@
 .card-container {
-  background-color: #fff;
+  background-color: var(--CSO_Neutral_170);
   box-shadow: 0 4px 10px rgba(102, 102, 102, 0.2);
   border-radius: 8px;
   min-height: 80px;
@@ -41,7 +41,7 @@
 }
 
 .card-title {
-  color: #781E77;
+  color: var(--CSO_Warning_70);
   font-family: 'DIN Pro';
   font-style: normal;
   font-weight: 600;

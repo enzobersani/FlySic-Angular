@@ -42,4 +42,14 @@ export const routes: Routes = [
         loadComponent: () => import('./main/pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
         data: { hideMenu: true }
     },
+    {
+        path: 'flights', 
+        loadComponent: () => import('./main/pages/flights/flights.component').then(m => m.FlightsComponent),
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'flight/:id', 
+        loadComponent: () => import('./main/pages/flight-details/flight-details.component').then(m => m.FlightDetailsComponent),
+        canActivate: [AuthGuard]
+    }
 ];

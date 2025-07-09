@@ -24,8 +24,13 @@ $RBS-Angular-theme: mat.define-theme((
 
 html, body {
   font-family: 'DIN Pro', sans-serif;
+  height: 100%;
   margin: 0;
   padding: 0;
+  // background-color: #121212; // Ou o mesmo tom escuro que você usa
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  transition: padding 0.3s ease;
+  // color: #ccc;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -2,16 +2,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'DIN Pro';
 }
 
-body {
+html, body {
+    height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: var(--cso-background);
-    color: var(--cso-neutral-170);
-}
-  
-main {
-    padding-top: 80px;
-    min-height: calc(100vh - 80px);
-    padding: 80px 20px 20px;
-    box-sizing: border-box;
+    padding: 0;
+    background-color: #121212; // Ou o mesmo tom escuro que você usa
+    color: #ccc;
 }

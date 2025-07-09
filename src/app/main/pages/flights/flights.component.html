@@ -1,0 +1,70 @@
+<div class="content">
+  <app-panel
+    [cardTitle]="'Filtro'"
+    [exhibitCard]="false"
+    class="filtro-panel"
+    icon="assets/images/common/filter.svg"
+  >
+    <section body>
+      <div class="filter-row">
+        <app-input-text
+          mask="00/00/0000"
+          [form]="filtersForm"
+          name="departureDate"
+          placeholder="Data de Partida"
+        />
+        <app-input-text
+          mask="00/00/0000"
+          [form]="filtersForm"
+          name="arrivalDate"
+          placeholder="Data de Chegada"
+        />
+      </div>
+
+      <div class="filter-row">
+        <app-input-text
+          type="text"
+          [form]="filtersForm"
+          name="departureLocation"
+          placeholder="Local de Partida"
+        />
+        <app-input-text
+          type="text"
+          [form]="filtersForm"
+          name="arrivalLocation"
+          placeholder="Local de Chegada"
+        />
+      </div>
+
+      <div class="filter-buttons">
+        <app-button-primary
+          label="Filtrar"
+          (clickEvent)="onFilter()"
+          minWidth="140px"
+        ></app-button-primary>
+        <app-button-primary
+          label="Limpar"
+          (clickEvent)="onClear()"
+          minWidth="140px"
+        ></app-button-primary>
+      </div>
+    </section>
+  </app-panel>
+
+  <div class="flight-forms-container">
+    <div *ngFor="let form of flightForms" class="flight-card" (click)="goToDetails(form)">
+      <div class="card-header">
+        <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
+        <span>→</span>
+        <strong>{{ form.arrivalAirport || form.arrivalManualLocation }}</strong>
+      </div>
+      <div class="card-body">
+        <p><strong>Data de partida:</strong> {{ form.departureDate | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Data de chegada:</strong> {{ form.arrivalDate | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Aeronave:</strong> {{ form.aircraftType }}</p>
+        <p><strong>Pernoite:</strong> {{ form.hasOvernight ? 'Sim' : 'Não' }}</p>
+        <p><strong>Piloto:</strong> {{ form.pilot.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>

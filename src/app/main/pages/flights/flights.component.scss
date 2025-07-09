@@ -1,0 +1,106 @@
+.content {
+  margin-top: 10px;
+}
+
+/* Filtro dentro do app-panel */
+.filtro-panel {
+  section[body] {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+
+    .filter-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      app-button-primary {
+        min-width: 140px;
+        height: 40px;
+
+        ::ng-deep button {
+          min-width: 140px;
+          height: 40px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+
+        app-button-primary {
+          width: 100%;
+
+          ::ng-deep button {
+            width: 100%;
+            min-width: unset;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Container dos cards */
+.flight-forms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+
+  @media screen and (min-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilo individual dos cards de ficha de voo */
+.flight-card {
+  border: 2px solid var(--CSO_Warning_70);
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: #1f1f1f;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.15);
+    border-color: var(--CSO_Warning_100);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--CSO_Warning_70);
+  }
+
+  .card-body {
+    font-size: 0.95rem;
+
+    p {
+      margin: 0.3rem 0;
+      color: #cccccc;
+    }
+
+    p strong {
+      color: #ffffff;
+    }
+  }
+}
