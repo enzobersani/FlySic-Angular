@@ -1,6 +1,6 @@
 .back-button {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 
   .circle-back-btn {
     width: 40px;
@@ -128,15 +128,43 @@
     }
   
     .pilot-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 2rem;
+    
+      .pilot-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 0.75rem;
+        border: 2px solid var(--CSO_Warning_70);
+        background-color: #444;
+    
+        @media (max-width: 480px) {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 0.5rem;
+        }
+      }
+    
       p {
-        margin: 0.3rem 0;
-        font-size: 1rem;
-  
+        margin: 0.25rem 0;
+        font-size: 0.95rem;
+    
         strong {
           color: #fff;
         }
       }
-    }
+    
+      @media (max-width: 480px) {
+        p {
+          font-size: 0.85rem;
+        }
+      }
+    }   
   
     .interest-button {
       margin-top: 2rem;

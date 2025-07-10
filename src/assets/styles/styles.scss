@@ -22,15 +22,24 @@ $RBS-Angular-theme: mat.define-theme((
 @import './fonts';
 @import './typography';
 
-html, body {
-  font-family: 'DIN Pro', sans-serif;
-  height: 100%;
+html {
+  min-height: 100%;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+}
+
+body {
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  // background-color: #121212; // Ou o mesmo tom escuro que você usa
-  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-  transition: padding 0.3s ease;
-  // color: #ccc;
+  font-family: 'DIN Pro', sans-serif;
+  background: inherit;
+  color: #ccc;
+  overflow-x: hidden;
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -1,31 +1,57 @@
 .interests-container {
-    margin-top: 1rem;
-    padding: 1rem;
-  
-    h3 {
-      margin-bottom: 1rem;
-      color: var(--CSO_Warning_80);
+  margin-top: 1rem;
+  padding: 1rem;
+
+  h3 {
+    margin-bottom: 1rem;
+    color: var(--CSO_Warning_80);
+  }
+
+  .interest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
-  
-    .interest-card {
-      background-color: #292929;
-      padding: 1rem;
-      border-radius: 8px;
-      border: 1px solid #444;
-      margin-bottom: 1rem;
-  
-      p {
-        margin: 0.2rem 0;
-        color: #ccc;
-  
-        strong {
-          color: #fff;
-        }
-      }
+  }
+
+  .interest-card {
+    background-color: #292929;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .user-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.75rem;
+      border: 2px solid var(--CSO_Warning_70);
+      background-color: #444;
     }
 
     p {
-        color: var(--CSO_White);
+      margin: 0.2rem 0;
+      color: #ccc;
+
+      strong {
+        color: #fff;
+      }
+    }
+
+    app-button-primary {
+      margin-top: 0.75rem;
     }
   }
-  
+
+  p {
+    color: var(--CSO_White);
+  }
+}
