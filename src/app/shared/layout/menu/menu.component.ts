@@ -64,4 +64,10 @@ export class MenuComponent implements OnInit, OnDestroy {
   logout(): void {
     this.authService.logout();
   }
+
+  closeMobileMenu() {
+    if (this.isMobileView && this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = false;
+    }
+  }
 }

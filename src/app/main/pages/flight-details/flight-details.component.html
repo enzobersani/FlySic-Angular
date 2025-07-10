@@ -47,7 +47,8 @@
   
     <div class="interest-button">
       <app-button-primary
-        label="Demonstrar Interesse"
+        [label]="flightForm.userAlreadyInterested ? 'Você ja se interessou' : 'Demonstrar Interesse'"
+        [isDisabled]="flightForm.userAlreadyInterested"
         iconName="flight_takeoff"
         (clickEvent)="setInterest()"
       ></app-button-primary>

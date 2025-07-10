@@ -13,6 +13,7 @@ export interface FlightFormsListResponseModel {
     aircraftType: string;
     flightComment?: string;
     hasOvernight: boolean;
+    userAlreadyInterested: boolean;
     
     pilot: PilotFlightForms;
 }

@@ -51,5 +51,10 @@ export const routes: Routes = [
         path: 'flight/:id', 
         loadComponent: () => import('./main/pages/flight-details/flight-details.component').then(m => m.FlightDetailsComponent),
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'my-flight/:id', 
+        loadComponent: () => import('./main/pages/my-flight-form-detail/my-flight-form-detail.component').then(m => m.MyFlightFormDetailComponent),
+        canActivate: [AuthGuard]
     }
 ];

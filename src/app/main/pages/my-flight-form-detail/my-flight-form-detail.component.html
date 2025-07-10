@@ -1,0 +1,10 @@
+<div class="content">
+    <app-button-group
+        [items]="items"
+        (itemClick)="onSetOption($event)"
+    ></app-button-group>
+
+    @if (option == 'Interessados') {
+        <app-interests></app-interests>
+    }
+</div>

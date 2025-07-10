@@ -52,12 +52,22 @@
   </app-panel>
 
   <div class="flight-forms-container">
-    <div *ngFor="let form of flightForms" class="flight-card" (click)="goToDetails(form)">
+    <div
+      *ngFor="let form of flightForms"
+      class="flight-card"
+      [class.already-interested]="form.userAlreadyInterested"
+      (click)="goToDetails(form)"
+    >
       <div class="card-header">
         <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
         <span>→</span>
         <strong>{{ form.arrivalAirport || form.arrivalManualLocation }}</strong>
       </div>
+  
+      <div class="interest-tag" *ngIf="form.userAlreadyInterested">
+        Já demonstrou interesse
+      </div>
+  
       <div class="card-body">
         <p><strong>Data de partida:</strong> {{ form.departureDate | date:'dd/MM/yyyy' }}</p>
         <p><strong>Data de chegada:</strong> {{ form.arrivalDate | date:'dd/MM/yyyy' }}</p>

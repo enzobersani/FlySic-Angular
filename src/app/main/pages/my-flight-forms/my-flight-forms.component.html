@@ -1,5 +1,5 @@
 <div class="flight-forms-container">
-    <div *ngFor="let form of flightForms" class="flight-card">
+    <div *ngFor="let form of flightForms" class="flight-card" (click)="goToMyFlightDetail(form.id)">
         <div class="card-header">
             <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
             <span>→</span>

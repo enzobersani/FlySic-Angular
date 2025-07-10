@@ -2,7 +2,6 @@
   margin-top: 10px;
 }
 
-/* Filtro dentro do app-panel */
 .filtro-panel {
   section[body] {
     display: flex;
@@ -51,7 +50,6 @@
   }
 }
 
-/* Container dos cards */
 .flight-forms-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -67,8 +65,8 @@
   }
 }
 
-/* Estilo individual dos cards de ficha de voo */
 .flight-card {
+  position: relative;
   border: 2px solid var(--CSO_Warning_70);
   border-radius: 12px;
   padding: 1rem;
@@ -103,4 +101,25 @@
       color: #ffffff;
     }
   }
+}
+
+.flight-card.already-interested {
+  border-color: var(--CSO_Success_70);
+
+  &:hover {
+    border-color: var(--CSO_Success_100);
+    box-shadow: 0 4px 12px rgba(0, 255, 150, 0.15);
+  }
+}
+
+.interest-tag {
+  display: inline-block;
+  background-color: var(--CSO_Success_100);
+  color: #000000;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  width: fit-content;
 }

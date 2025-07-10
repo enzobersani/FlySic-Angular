@@ -1,0 +1,16 @@
+<div class="interests-container">
+    <h3>Interessados</h3>
+
+    <div *ngIf="interests.length > 0; else noInterests">
+        <div *ngFor="let user of interests" class="interest-card">
+          <p><strong>Nome:</strong> {{ user.name }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Telefone:</strong> {{ user.phone }}</p>
+          <app-button-primary label="Aceitar"></app-button-primary>
+        </div>
+    </div>
+    
+    <ng-template #noInterests>
+        <p>Nenhum interessado neste voo ainda.</p>
+    </ng-template>
+</div>

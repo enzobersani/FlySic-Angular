@@ -10,10 +10,10 @@
       </div>
       
       <ul class="menu-items">
-        <li *ngIf="isSeeker"><a routerLink="/flights">Lista de voos</a></li>
-        <li *ngIf="isDonor"><a routerLink="/flight-form">Ficha de voo</a></li>
-        <li *ngIf="isDonor"><a routerLink="/my-flights">Minhas fichas</a></li>
-        <li><a routerLink="/configurations">Configurações</a></li>
+        <li *ngIf="isSeeker"><a routerLink="/flights" (click)="closeMobileMenu()">Lista de voos</a></li>
+        <li *ngIf="isDonor"><a routerLink="/flight-form" (click)="closeMobileMenu()">Ficha de voo</a></li>
+        <li *ngIf="isDonor"><a routerLink="/my-flights" (click)="closeMobileMenu()">Minhas fichas</a></li>
+        <li><a routerLink="/configurations" (click)="closeMobileMenu()">Configurações</a></li>
         <li><a routerLink="#" (click)="logout()">Sair</a></li>
       </ul>
     </div>
