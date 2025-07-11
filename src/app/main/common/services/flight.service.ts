@@ -14,4 +14,9 @@ export class FlightService {
   getFlightInterests(flightFormId: string): Observable<UserInterestModel[]> {
     return this.http.get<UserInterestModel[]>(`${this.apiUrl}/interests/${flightFormId}`);
   }
+
+  acceptInterest(interestId: string, flightFormId: string): Observable<void> {
+    const url = `${this.apiUrl}/accept`;
+    return this.http.post<void>(url, { interestId, flightFormId });
+  }
 }

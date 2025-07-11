@@ -54,6 +54,7 @@
       <app-button-primary
         [label]="flightForm.userAlreadyInterested ? 'Você ja se interessou' : 'Demonstrar Interesse'"
         [isDisabled]="flightForm.userAlreadyInterested"
+        [isLoading]="loadingSave"
         iconName="flight_takeoff"
         (clickEvent)="setInterest()"
       ></app-button-primary>

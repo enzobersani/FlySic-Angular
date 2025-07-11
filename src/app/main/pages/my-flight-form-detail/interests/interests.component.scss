@@ -20,8 +20,8 @@
   .interest-card {
     background-color: #292929;
     padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #444;
+    border: 2px solid var(--CSO_Warning_70);
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,4 +54,25 @@
   p {
     color: var(--CSO_White);
   }
+}
+
+.interest-card.already-interested {
+  border-color: var(--CSO_Success_70) !important;
+  box-shadow: 0 4px 12px rgba(0, 255, 150, 0.15);
+  background-color: #1f1f1f;
+
+  .user-avatar {
+    border-color: var(--CSO_Success_70) !important;
+  }
+
+  &:hover {
+    border-color: var(--CSO_Success_100) !important;
+    box-shadow: 0 4px 16px rgba(0, 255, 150, 0.25);
+  }
+}
+
+
+.accepted-label {
+  color: #4CAF50;
+  font-weight: bold;
 }

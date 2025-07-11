@@ -2,7 +2,7 @@
     <h3>Interessados</h3>
   
     <div *ngIf="interests.length > 0; else noInterests" class="interest-grid">
-      <div *ngFor="let user of interests" class="interest-card">
+      <div *ngFor="let user of interests" class="interest-card" [class.already-interested]="user.isAccepted">
         <img
           src="assets/images/user.png"
           alt="Foto do usuário"
@@ -13,7 +13,15 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Telefone:</strong> {{ user.phone }}</p>
   
-        <app-button-primary label="Aceitar"></app-button-primary>
+        <app-button-primary 
+        label="Aceitar" 
+        [isLoading]="loadingAccept"
+        [isDisabled]="someoneAccepted"
+        *ngIf="!someoneAccepted"
+        (click)="acceptInterest(user.userId)" 
+        ></app-button-primary>
+
+        <span *ngIf="user.isAccepted" class="accepted-label">Aceito ✅</span>
       </div>
     </div>
   

@@ -24,6 +24,7 @@ import { ToastListComponent } from "../../../shared/components/feedback/toast-li
 export class FlightDetailsComponent implements OnInit{
   flightForm?: FlightFormsListResponseModel;
   flightFormId: string | null = null;
+  loadingSave: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,9 +36,7 @@ export class FlightDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.flightFormId = this.route.snapshot.paramMap.get('id');
     if (this.flightFormId) {
-      this.airportService.getByFlightId(this.flightFormId).subscribe({
-        next: (data) => this.flightForm = data
-      });
+      this.getFlight(this.flightFormId);
     }
   }
 
@@ -47,10 +46,24 @@ export class FlightDetailsComponent implements OnInit{
 
   setInterest(): void {
     if (this.flightFormId) {
+      this.loadingSave = true;
       this.airportService.postInterest(this.flightFormId).subscribe({
-        next: () => this.toastService.send(new ToastSuccessModel("Sucesso", "Interesse enviado com sucesso!")),
-        error: () =>  this.toastService.send(new ToastErrorModel("Erro", "Ocorreu ao enviar intersse."))
+        next: () => {
+          this.toastService.send(new ToastSuccessModel("Sucesso", "Interesse enviado com sucesso!"));
+          this.getFlight(this.flightFormId!);
+          this.loadingSave = false;
+        },
+        error: () => {
+          this.toastService.send(new ToastErrorModel("Erro", "Ocorreu ao enviar intersse."));
+          this.loadingSave = false;
+        }
       });
     }
+  }
+
+  getFlight(flightFormId: string): void {
+    this.airportService.getByFlightId(flightFormId).subscribe({
+      next: (data) => this.flightForm = data
+    });
   }
 }
