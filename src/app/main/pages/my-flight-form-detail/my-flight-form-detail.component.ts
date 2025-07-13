@@ -4,11 +4,12 @@ import { ButtonGroupInput } from '../../../shared/components/navigation/button-g
 import { InterestsComponent } from "./interests/interests.component";
 import { UserInterestModel } from '../../common/models/user-interest-model';
 import { ActivatedRoute } from '@angular/router';
+import { FlightFormComponent } from "../flight-form/flight-form.component";
 
 @Component({
   selector: 'app-my-flight-form-detail',
   standalone: true,
-  imports: [ButtonGroupComponent, InterestsComponent],
+  imports: [ButtonGroupComponent, InterestsComponent, FlightFormComponent],
   templateUrl: './my-flight-form-detail.component.html',
   styleUrl: './my-flight-form-detail.component.scss'
 })

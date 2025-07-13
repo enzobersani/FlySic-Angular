@@ -19,6 +19,7 @@
     <div class="content__field-uf">
       <label class="content__label">Aeroporto (ICAO)</label>
       <app-select
+        #selectAeroportoPartida
         name="aeroportoPartida"
         [texts]="placeholderIcao"
         [form]="form"
@@ -60,6 +61,7 @@
     <div class="content__field-uf">
       <label class="content__label">Aeroporto (ICAO)</label>
       <app-select
+        #selectAeroportoChegada
         name="aeroportoChegada"
         [texts]="placeholderIcao"
         [form]="form"
@@ -128,7 +130,11 @@
   }
   @else {
     <app-feedback [type]="feedbackTypes[0]" [hasAction]="true" actionLabel="Fechar" (clickEvent)="modalResponse.close()">
-      Ficha de voo criada com sucesso!
+      @if (flightFormId) {
+        Ficha de voo atualizada com sucesso!
+      } @else {
+        Ficha de voo criada com sucesso!
+      }
     </app-feedback>
   }
 </app-modal>

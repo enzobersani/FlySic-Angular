@@ -51,6 +51,12 @@ export class SelectComponent implements OnInit{
   }
 
   resetOption() {
+    const value = this.form.get(this.name)?.value;
+    if (value) {
+      const item = this.getItemByKey(value);
+      this.setSelectedItem(item);
+    }
+  
     this.form.get(this.name)?.valueChanges.subscribe(this.valueChanges.bind(this));
   }
 
@@ -87,7 +93,13 @@ export class SelectComponent implements OnInit{
   setFormValue(item: SelectItemModel) {
     var obj = {} as any;
     obj[this.name] = item.key;
-    this.form.patchValue(obj);
+  
+    const current = this.form.get(this.name)?.value;
+    if (current !== item.key) {
+      this.form.patchValue(obj);
+    }
+  
+    this.setSelectedItem(item);
   }
 
   setSelectedItem(item: SelectItemModel | null) {

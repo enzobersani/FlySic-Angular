@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { InputTextComponent } from "../../../shared/components/forms/input-text/input-text.component";
 import { TextareaComponent } from "../../../shared/components/forms/textarea/textarea.component";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,6 +20,9 @@ import { ModalComponent } from "../../../shared/components/modals/modal/modal.co
 import { FeedbackComponent } from "../../../shared/components/feedback/feedback/feedback.component";
 import { FeedbackTypeEnum } from '../../../shared/components/feedback/feedback/enums/feedback-type.enum';
 import { LoadingComponent } from "../../../shared/layout/loading/loading.component";
+import { FlightFormsListResponseModel } from '../../common/models/flight-forms-list-response.model';
+import { FlightService } from '../../common/services/flight.service';
+import { FlightFormRequestModel } from '../../common/models/flight-form-request.model';
 
 @Component({
   selector: 'app-flight-form',
@@ -40,7 +43,9 @@ import { LoadingComponent } from "../../../shared/layout/loading/loading.compone
   styleUrl: './flight-form.component.scss'
 })
 export class FlightFormComponent implements OnInit{
+  @Input() flightFormId?: string;
   @ViewChild('modalResponse') modalResponse!: ModalComponent;
+  flight!: FlightFormsListResponseModel;
   isLoading: boolean = false;
   form: FormGroup;
   selectItems: SelectItemModel[] = [
@@ -67,11 +72,16 @@ export class FlightFormComponent implements OnInit{
     notFoundPlaceHolder: 'Não foram encontrados dados'
   }
 
+  @ViewChild('selectAeroportoPartida') selectAeroportoPartida?: SelectComponent;
+  @ViewChild('selectAeroportoChegada') selectAeroportoChegada?: SelectComponent;
+
   constructor(
     private fb: FormBuilder,
     private ibgeService: IbgeService,
     private airportService: AirportService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private cdr: ChangeDetectorRef,
+    private flightService: FlightService
   ){
     this.form = this.fb.group({
       partidaData: ['', Validators.required],
@@ -98,6 +108,10 @@ export class FlightFormComponent implements OnInit{
 
     this.aeroportosPartida = [semIcaoOption];
     this.aeroportosChegada = [semIcaoOption];
+
+    if (this.flightFormId){
+      this.loadFlightFormData();
+    }
   }
 
   onSubmit(){
@@ -120,7 +134,7 @@ export class FlightFormComponent implements OnInit{
     };
 
     this.isLoading = true;
-    const request: NewFlightFormRequestModel = {
+    const request: FlightFormRequestModel = {
       partidaData: toDate(formValue.partidaData),
       partidaHora: toTime(formValue.partidaHora, formValue.partidaData),
       aeroportoPartida: formValue.aeroportoPartida !== 'sem-icao' ? formValue.aeroportoPartida : null,
@@ -137,17 +151,31 @@ export class FlightFormComponent implements OnInit{
     };
 
     this.modalResponse.open();
-    this.airportService.createFlight(request).subscribe({
-      next: () => {
-        // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo criada!", "Agora"));
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao criar ficha!", "Agora"));
-        this.isLoading = false;
-        this.modalResponse.close();
-      }
-    });
+    if (this.flightFormId) {
+      this.flightService.updateFlightForm(this.flightFormId, request).subscribe({
+        next: () => {
+          // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo atualizada!", "Agora"));
+          this.isLoading = false;
+        },
+        error: (err) => {
+          this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao atualizar ficha!", "Agora"));
+          this.isLoading = false;
+          this.modalResponse.close();
+        }
+      });
+    } else {
+      this.airportService.createFlight(request).subscribe({
+        next: () => {
+          // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo criada!", "Agora"));
+          this.isLoading = false;
+        },
+        error: (err) => {
+          this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao criar ficha!", "Agora"));
+          this.isLoading = false;
+          this.modalResponse.close();
+        }
+      });
+    }
   }
 
   setupCitySelects() {
@@ -207,10 +235,10 @@ export class FlightFormComponent implements OnInit{
   //   }
   // }
 
-  onSearchAirport(query: string, tipo: 'partida' | 'chegada') {
-    if (!query || query.length < 2) return;
+  onSearchAirport(icao: string, tipo: 'partida' | 'chegada') {
+    if (!icao) return;
   
-    this.airportService.searchAirport(query).subscribe({
+    this.airportService.searchAirport(icao).subscribe({
       next: (airports) => {
         const mapped = airports.map(a => ({
           key: a.icao,
@@ -227,10 +255,14 @@ export class FlightFormComponent implements OnInit{
         } else {
           this.aeroportosChegada = mapped;
         }
+
+        this.patchFlightForm();
       },
       error: () => {
         if (tipo === 'partida') this.aeroportosPartida = [];
         else this.aeroportosChegada = [];
+
+        this.patchFlightForm();
       }
     });
   }
@@ -251,5 +283,80 @@ export class FlightFormComponent implements OnInit{
     }
 
     this.form.get(manualKey)?.updateValueAndValidity();
+  }
+
+  loadFlightFormData() {
+    this.airportService.getByFlightId(this.flightFormId!).subscribe({
+      next: (flight) => {
+        this.flight = flight;
+  
+        if (flight.departureAirport) {
+          this.onSearchAirport(flight.departureAirport, 'partida');
+        }
+  
+        if (flight.arrivalAirport) {
+          this.onSearchAirport(flight.arrivalAirport, 'chegada');
+        }
+  
+        if (!flight.departureAirport && !flight.arrivalAirport) {
+          setTimeout(() => this.patchFlightForm());
+        }
+      },
+      error: () => {
+        this.toastService.send(new ToastErrorModel("Erro", "Erro ao carregar ficha de voo!", "Agora"));
+      }
+    });
+  }
+
+  patchFlightForm() {
+    const flight = this.flight;
+    if (!flight) return;
+  
+    this.form.patchValue({
+      partidaData: this.formatDateToInput(flight.departureDate),
+      partidaHora: this.formatTimeToInput(flight.departureTime),
+      aeroportoPartida: flight.departureAirport ?? 'sem-icao',
+      localPartidaManual: flight.departureManualLocation ?? '',
+  
+      chegadaData: this.formatDateToInput(flight.arrivalDate),
+      chegadaHora: this.formatTimeToInput(flight.arrivalTime),
+      aeroportoChegada: flight.arrivalAirport ?? 'sem-icao',
+      localChegadaManual: flight.arrivalManualLocation ?? '',
+  
+      tipoAeronave: flight.aircraftType,
+      comentarioVoo: flight.flightComment,
+      checkboxPernoite: flight.hasOvernight
+    });
+
+    setTimeout(() => {
+      this.showCustomLocation.partida = !flight.departureAirport;
+      this.showCustomLocation.chegada = !flight.arrivalAirport;
+
+      const partidaKey = this.form.get('aeroportoPartida')?.value;
+      const chegadaKey = this.form.get('aeroportoChegada')?.value;
+    
+      const partidaItem = this.aeroportosPartida.find(i => i.key === partidaKey);
+      const chegadaItem = this.aeroportosChegada.find(i => i.key === chegadaKey);
+    
+      if (partidaItem) {
+        this.selectAeroportoPartida?.select(partidaItem);
+      }
+    
+      if (chegadaItem) {
+        this.selectAeroportoChegada?.select(chegadaItem);
+      }
+
+      this.cdr.detectChanges();
+    });
+  }  
+
+  private formatDateToInput(dateStr: string): string {
+    const date = new Date(dateStr);
+    return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+  }
+  
+  private formatTimeToInput(datetimeStr: string): string {
+    const date = new Date(datetimeStr);
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
   }
 }
