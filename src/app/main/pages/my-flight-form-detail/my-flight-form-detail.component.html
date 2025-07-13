@@ -4,10 +4,13 @@
         (itemClick)="onSetOption($event)"
     ></app-button-group>
 
-    @if (option == 'Interessados') {
+    @if (option === 'Interessados') {
         <app-interests [flightFormId]="flightFormId"></app-interests>
     }
-    @if (option == 'Editar') {
+    @if (option === 'Editar') {
         <app-flight-form [flightFormId]="flightFormId"></app-flight-form>
+    }
+    @if (option === 'Ações') {
+        <app-actions></app-actions>
     }
 </div>

@@ -1,0 +1,17 @@
+.stars {
+    display: flex;
+    align-items: center;
+  }
+  
+.star {
+    margin-right: 4px;
+    transition: transform 0.2s ease;
+}
+  
+.clickable {
+    cursor: pointer;
+}
+  
+.clickable:hover {
+    transform: scale(1.1);
+}

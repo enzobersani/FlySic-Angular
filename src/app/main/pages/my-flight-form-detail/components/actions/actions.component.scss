@@ -1,0 +1,108 @@
+.content {
+      &__title {
+        font-family: 'Din Pro';
+        font-weight: bold;
+        font-size: 40px;
+        color: var(--CSO_Warning_70);
+    
+        @media screen and (max-width: 768px) {
+          font-size: 28px;
+        }
+      }
+    
+      &__actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        height: 200px;
+    
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+        }
+    
+        @media screen and (min-width: 769px) {
+          flex-direction: row;
+        }
+      }
+}
+
+.modal-content {
+  text-align: center;
+
+  h2 {
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: var(--CSO_Warning_70);
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: var(--CSO_Neutral_90);
+    font-weight: bold;
+  }
+
+  .modal-buttons {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+}
+
+.modal-content {
+  text-align: center;
+
+  h2 {
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: var(--CSO_Warning_70);
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: var(--CSO_Neutral_90);
+    font-weight: bold;
+  }
+
+  .modal-rating,
+  .modal-comment {
+    text-align: left;
+    margin: 24px 0;
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: var(--CSO_Neutral_90);
+    }
+
+    app-rating {
+      display: block;
+      margin-top: 8px;
+    }
+
+    app-textarea {
+      display: block;
+      margin-top: 8px;
+    }
+  }
+
+  .modal-buttons {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+}

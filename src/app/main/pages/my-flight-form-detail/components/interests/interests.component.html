@@ -1,5 +1,5 @@
 <div class="interests-container">
-    <h3>Interessados</h3>
+    <div class="content__title">Interessados</div>
   
     <div *ngIf="interests.length > 0; else noInterests" class="interest-grid">
       <div *ngFor="let user of interests" class="interest-card" [class.already-interested]="user.isAccepted">

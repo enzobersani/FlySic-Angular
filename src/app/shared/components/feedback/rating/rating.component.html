@@ -1,0 +1,46 @@
+<div class="stars">
+    <!-- Estrelas cheias -->
+    <ng-container *ngFor="let _ of fullStars; let i = index">
+      <img
+        class="star"
+        src="assets/icons/estrela-cheia.svg"
+        [style.width.px]="size"
+        [style.height.px]="size"
+        (click)="setRating(i + 1)"
+        (mouseenter)="onMouseEnter(i + 1)"
+        (mouseleave)="onMouseLeave()"
+        [class.clickable]="editable"
+        alt="Estrela cheia"
+      />
+    </ng-container>
+  
+    <!-- Meia estrela -->
+    <img
+      *ngIf="hasHalfStar"
+      class="star"
+      src="assets/icons/estrela-metade.svg"
+      [style.width.px]="size"
+      [style.height.px]="size"
+      (click)="setRating(fullStars.length + 0.5)"
+      (mouseenter)="onMouseEnter(fullStars.length + 0.5)"
+      (mouseleave)="onMouseLeave()"
+      [class.clickable]="editable"
+      alt="Meia estrela"
+    />
+  
+    <!-- Estrelas vazias -->
+    <ng-container *ngFor="let _ of emptyStars; let i = index">
+      <img
+        class="star"
+        src="assets/icons/estrela-vazia.svg"
+        [style.width.px]="size"
+        [style.height.px]="size"
+        (click)="setRating(fullStars.length + (hasHalfStar ? 1 : 0) + i + 1)"
+        (mouseenter)="onMouseEnter(fullStars.length + (hasHalfStar ? 1 : 0) + i + 1)"
+        (mouseleave)="onMouseLeave()"
+        [class.clickable]="editable"
+        alt="Estrela vazia"
+      />
+    </ng-container>
+  </div>
+  

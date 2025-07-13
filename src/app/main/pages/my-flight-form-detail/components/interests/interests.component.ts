@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserInterestModel } from '../../../common/models/user-interest-model';
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { ButtonGroupComponent } from "../../../../shared/components/navigation/button-group/button-group.component";
-import { ButtonPrimaryComponent } from "../../../../shared/components/forms/buttons/button-primary/button-primary.component";
-import { FlightService } from '../../../common/services/flight.service';
 import { ActivatedRoute, Route } from '@angular/router';
-import { ToastService } from '../../../../shared/components/feedback/toast-list/services/toast.service';
-import { ToastSuccessModel } from '../../../../shared/components/feedback/toast-list/toast/models/toast-success.model';
-import { ToastErrorModel } from '../../../../shared/components/feedback/toast-list/toast/models/toast-error.model';
+import { ToastService } from '../../../../../shared/components/feedback/toast-list/services/toast.service';
+import { ToastErrorModel } from '../../../../../shared/components/feedback/toast-list/toast/models/toast-error.model';
+import { ToastSuccessModel } from '../../../../../shared/components/feedback/toast-list/toast/models/toast-success.model';
+import { ButtonPrimaryComponent } from '../../../../../shared/components/forms/buttons/button-primary/button-primary.component';
+import { UserInterestModel } from '../../../../common/models/user-interest-model';
+import { FlightService } from '../../../../common/services/flight.service';
 
 @Component({
   selector: 'app-interests',

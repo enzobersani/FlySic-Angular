@@ -1,0 +1,53 @@
+<div class="content">
+    <div class="content__title">Ações</div>
+  
+    <div class="content__actions">
+      <app-button-primary label="Finalizar" (clickEvent)="finishFlight()"></app-button-primary>
+      <app-button-primary label="Cancelar" (clickEvent)="cancelFlight()"></app-button-primary>
+    </div>
+  </div>
+  
+  <app-modal #modalActions width="40%">
+    <div class="modal-content">
+      <h2>Confirmação</h2>
+      <p>
+        Tem certeza que deseja
+        <strong *ngIf="selectedAction === 'finalizar'">finalizar</strong>
+        <strong *ngIf="selectedAction === 'cancelar'">cancelar</strong>
+        este voo?
+      </p>
+
+      @if (selectedAction === 'finalizar') {
+        <div class="modal-rating">
+          <label>Avalie o participante:</label>
+          <app-rating [editable]="true" [size]="32" [(rating)]="rating"></app-rating>
+        </div>
+        <div class="modal-comment">
+          <label>Comentário (opcional):</label>
+          <app-textarea
+            style="width: 100%;"
+            [form]="form"
+            placeholder="Adicione comentários caso seja necessário..."
+            name="comentarioFinalizacao"
+          ></app-textarea>
+        </div>
+      }
+
+      @if (selectedAction === 'cancelar') {
+        <div class="modal-comment">
+          <label>Justifique o cancelamento:</label>
+          <app-textarea
+            style="width: 100%;"
+            [form]="form"
+            placeholder="Motivo do cancelamento..."
+            name="comentarioCancelamento"
+          ></app-textarea>
+        </div>
+      }
+
+      <div class="modal-buttons">
+          <app-button-secondary label="Cancelar" (clickEvent)="closeModal()"></app-button-secondary>
+          <app-button-primary label="Confirmar" (clickEvent)="confirmAction()"></app-button-primary>
+      </div>
+    </div>
+</app-modal>
