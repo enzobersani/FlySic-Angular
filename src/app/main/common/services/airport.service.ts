@@ -50,9 +50,20 @@ export class AirportService {
     return this.http.get<FlightFormsListResponseModel[]>(`${this.apiForm}`, { params });
   }
 
-  private parseDate(dateStr: string): string {
-    const [day, month, year] = dateStr.split('/');
-    const date = new Date(+year, +month - 1, +day); // mês começa do zero
-    return date.toISOString();
+  private parseDate(date: string | Date | null): string {
+    if (!date) return '';
+  
+    if (typeof date === 'string') {
+      const [day, month, year] = date.split('/');
+      const utcDate = new Date(Date.UTC(+year, +month - 1, +day));
+      return utcDate.toISOString();
+    }
+  
+    if (date instanceof Date) {
+      const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+      return utcDate.toISOString();
+    }
+  
+    return '';
   }
 }

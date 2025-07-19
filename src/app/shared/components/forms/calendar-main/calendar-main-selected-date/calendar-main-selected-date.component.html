@@ -1,0 +1,23 @@
+<div
+    class="cso-calendar-main-selected"
+    [ngClass]="{ 'cso-calendar-main-selected--has-value': hasValue(rangeSelected) || isOpen }"
+>
+    <i class="material-icons">calendar_month</i>
+    <label *ngIf="!hasValue(rangeSelected)" class="cso-calendar-main-selected__label">{{ placeholder }}</label>
+    <div class="cso-calendar-main-selected__option" *ngIf="hasValue(rangeSelected)">
+        <span class="cso-calendar-main-selected__dates">
+            <span *ngIf="rangeSelected?.initialDate">
+                {{ fromToModel?.from }}: {{ formatDate(rangeSelected?.initialDate) }}
+            </span>
+            <span *ngIf="showSeparator(rangeSelected)">-</span>
+            <span *ngIf="rangeSelected?.finalDate">
+                {{ fromToModel?.to }}: {{ formatDate(rangeSelected?.finalDate) }}
+            </span>
+        </span>
+        <img
+            class="cso-calendar-main-selected__close"
+            src="assets/images/components/calendar-main/close-multi-select-option.svg"
+            (click)="remove()"
+        >
+    </div>
+</div>

@@ -1,0 +1,172 @@
+@import "./style-imports.scss";
+:host {
+    display: contents;
+}
+
+.row {
+    color: var(--CSO_Neutral_100);
+    font:
+        400 16px "DIN Pro",
+        sans-serif;
+}
+
+.open-base-position {
+    width: 440px;
+    height: 340px;
+}
+
+.calendar-background-clickout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    z-index: 9999;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.calendar-background {
+    width: 100%;
+    height: 48px;
+
+    [type="text"] {
+        background: var(--CSO_White);
+        box-sizing: border-box;
+        border: 1px solid var(--CSO_Neutral_40);
+        border-radius: 6px;
+        width: 100%;
+        height: 48px;
+        padding-left: 16px;
+        line-height: 48px;
+        outline: none;
+        padding-right: 36px;
+        position: relative;
+        @include CSO_Body_1_Bold;
+        color: var(--CSO_Neutral_100);
+    }
+
+    &.has-value {
+        .arrow-content {
+            border-width: 2px;
+            border-color: var(--CSO_Neutral_100);
+        }
+    }
+}
+
+.close-calendar {
+    width: 12px;
+    height: 12px;
+    right: 14px;
+    position: absolute;
+    top: 14px;
+    cursor: pointer;
+}
+
+.buttons-content {
+    display: flex;
+    flex-basis: 100%;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px 0px !important;
+    button {
+        width: 194px;
+        height: 48px;
+        margin-top: 10px;
+        border-radius: 6px;
+        font-family: "DINPro-Regular";
+        font-weight: 700;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 150%; /* 24px */
+        letter-spacing: 1px;
+
+        &.clear {
+            border: 2px solid var(--CSO_Secondary_100);
+            color: var(--CSO_Secondary_100);
+            background-color: var(--CSO_White);
+        }
+        &.confirm {
+            border: 2px solid var(--CSO_Secondary_100);
+            color: var(--CSO_White);
+            background-color: var(--CSO_Secondary_100);
+        }
+    }
+}
+
+::ng-deep .calendar-main {
+    border-radius: 10px !important;
+}
+
+::ng-deep .calendar-head {
+    padding: 25px 0px !important;
+    display: flex;
+    justify-content: center;
+}
+
+.calendar {
+    position: fixed;
+    width: 439px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 !important;
+    background-color: var(--CSO_White);
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(102, 102, 102, 0.3);
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 99999;
+}
+
+@media (max-width: 470px) {
+    .calendar {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: 330px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin: 0 !important;
+        background-color: var(--CSO_White);
+        font-size: 14px;
+        box-shadow: 0 10px 30px rgba(102, 102, 102, 0.3);
+        border-radius: 10px;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        z-index: 99999;
+    }
+
+    .buttons-content {
+        display: grid;
+        flex-basis: 100%;
+        gap: 20px;
+        justify-content: center;
+        padding: 15px 0px !important;
+        button {
+            width: 194px;
+            height: 48px;
+            margin-top: 10px;
+            border-radius: 6px;
+            @include CSO_Subtitle_2;
+
+            &.clear {
+                border: 2px solid var(--CSO_Secondary_100);
+                color: var(--CSO_Secondary_100);
+                background-color: var(--CSO_White);
+            }
+            &.confirm {
+                border: 2px solid var(--CSO_Secondary_100);
+                color: var(--CSO_White);
+                background-color: var(--CSO_Secondary_100);
+            }
+        }
+    }
+}

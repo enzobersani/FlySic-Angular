@@ -10,9 +10,10 @@ import { FlightFormFiltersModel } from './models/flight-form-filters.model';
 import { ToastErrorModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-error.model';
 import { ButtonPrimaryComponent } from "../../../shared/components/forms/buttons/button-primary/button-primary.component";
 import { InputTextComponent } from "../../../shared/components/forms/input-text/input-text.component";
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { PanelComponent } from "../../../shared/layout/panel/panel.component";
 import { Router } from '@angular/router';
+import { CalendarSingleComponent } from "../../../shared/components/forms/calendar-single/calendar-single.component";
+import { CalendarMainComponent } from "../../../shared/components/forms/calendar-main/calendar-main.component";
 
 @Component({
   selector: 'app-flights',
@@ -21,7 +22,8 @@ import { Router } from '@angular/router';
     DatePipe, NgFor, NgIf,
     ButtonPrimaryComponent,
     InputTextComponent,
-    PanelComponent
+    PanelComponent,
+    CalendarSingleComponent
 ],
   templateUrl: './flights.component.html',
   styleUrl: './flights.component.scss'
@@ -56,7 +58,15 @@ export class FlightsComponent implements OnInit{
   }
 
   loadFlightForms(): void {
-    const filters = this.filtersForm.value as FlightFormFiltersModel;
+    // const filters = this.filtersForm.value as FlightFormFiltersModel;
+    const filtersFormValue = this.filtersForm.value;
+
+    const filters: FlightFormFiltersModel = {
+      departureDate: filtersFormValue.departureDate?.initialDate || null,
+      arrivalDate: filtersFormValue.arrivalDate?.initialDate || null,
+      departureLocation: filtersFormValue.departureLocation,
+      arrivalLocation: filtersFormValue.arrivalLocation
+    };
 
     this.airportService.getFlights(filters).subscribe({
       next: (data) => this.flightForms = data,

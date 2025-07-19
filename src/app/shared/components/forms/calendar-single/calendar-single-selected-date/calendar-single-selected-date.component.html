@@ -1,0 +1,23 @@
+<div
+  class="selected-option"
+  [ngClass]="{ 'has-value': hasValue(rangeSelected) || isOpen }"
+>
+  <i class="material-icons">calendar_month</i>
+  <label *ngIf="!hasValue(rangeSelected)">{{ placeholder }}</label>
+  <div class="option" *ngIf="hasValue(rangeSelected)">
+    <span>
+      <span *ngIf="rangeSelected?.initialDate">
+        {{ formatDate(rangeSelected?.initialDate) }}
+      </span>
+      <span *ngIf="showSeparator(rangeSelected)">-</span>
+      <span *ngIf="rangeSelected?.finalDate">
+        {{ fromToModel?.to }}: {{ formatDate(rangeSelected?.finalDate) }}
+      </span>
+    </span>
+    <img
+      (click)="remove()"
+      class="btn-close"
+      src="assets/images/components/calendar-main/close-multi-select-option.svg"
+    />
+  </div>
+</div>

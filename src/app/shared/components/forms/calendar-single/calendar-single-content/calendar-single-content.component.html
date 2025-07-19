@@ -1,0 +1,43 @@
+<div class="fixed-point-double-calendar" #fixedPoint></div>
+<div class="double-calendar" CalendarSingleLegacyScroll [fixedPoint]="fixedPoint"
+    [ngClass]="{ 'hide-left-controls': hideLeftControls }">
+    <div class="double-calendar-control">
+        <ul>
+            <li *ngIf="showOption.includes(1)" [ngClass]="{ 'active': range == 1 }" (click)="custom()">{{
+                presets?.custom }}</li>
+            <li *ngIf="showOption.includes(2)" [ngClass]="{ 'active': range == 2 }" (click)="week()">{{
+                presets?.thisWeek }}</li>
+            <li *ngIf="showOption.includes(3)" [ngClass]="{ 'active': range == 3 }" (click)="month()">{{
+                presets?.thisMonth }}</li>
+            <li *ngIf="showOption.includes(4)" [ngClass]="{ 'active': range == 4 }" (click)="lastMonth()">{{
+                presets?.lastMonth }}</li>
+            <li *ngIf="showOption.includes(5)" [ngClass]="{ 'active': range == 5 }" (click)="lastTwoMonth()">{{
+                presets?.lastTwoMonth }}</li>
+            <li *ngIf="showOption.includes(6)" [ngClass]="{ 'active': range == 6 }" (click)="lastSemester()">{{
+                presets?.lastSemester }}</li>
+            <li *ngIf="showOption.includes(7)" [ngClass]="{ 'active': range == 7 }" (click)="year()">{{
+                presets?.thisYear }}</li>
+            <li *ngIf="showOption.includes(8)" [ngClass]="{ 'active': range == 8 }" (click)="lastYear()">{{
+                presets?.lastYear }}
+            </li>
+        </ul>
+    </div>
+    <div class="double-calendar-content">
+        <div class="double-calendars">
+            <cso-calendar-single-control text="{{ fromTo?.from }}:" [status]="status" [limit]="limit"
+                [selectedDate]="selectedRange?.initialDate" [selectedRange]="selectedRange"
+                (changeDate)="changeInitialDate($event)">
+            </cso-calendar-single-control>
+            <cso-calendar-single-control text="{{ fromTo?.to }}:" [status]="status" [limit]="limit"
+                [selectedDate]="selectedRange?.finalDate" [selectedRange]="selectedRange"
+                (changeDate)="changeFinalDate($event)">
+            </cso-calendar-single-control>
+        </div>
+        <img src="assets/images/components/calendar-main/close-calendar.svg" class="close-calendar"
+            (click)="toggleService.close()">
+        <div class="buttons-content d-flex">
+            <button class="clear" type="button" (click)="clear.emit()">{{ buttons?.clear }}</button>
+            <button class="confirm" type="button" (click)="confirm.emit()">{{ buttons?.confirm }}</button>
+        </div>
+    </div>
+</div>

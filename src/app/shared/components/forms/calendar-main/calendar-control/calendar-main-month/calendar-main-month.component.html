@@ -1,0 +1,24 @@
+<div class="cso-calendar-main-month">
+    <ul class="cso-calendar-main-month__list">
+        <!-- <li
+            *ngFor="let month of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+            class="cso-calendar-main-month__month"
+            [ngClass]="{ 'active': getMonth(date) == month, 'is-disabled': !isEnable(month) }"
+            (click)="setMonth(month)"
+        >
+            <span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.january }}</span>
+        </li> -->
+        <li class="cso-calendar-main-months__month" (click)="setMonth(1)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 1, 'cso-calendar-main-months__month--disabled': !isEnable(1) }"><span class="cso-calendar-main-months__label">{{ monthsAbbreviated?.january }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(2)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 2, 'cso-calendar-main-months__month--disabled': !isEnable(2) }"><span class="cso-calendar-main-months__label">{{ monthsAbbreviated?.february }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(3)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 3, 'cso-calendar-main-months__month--disabled': !isEnable(3) }"><span class="cso-calendar-main-months__label">{{ monthsAbbreviated?.march }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(4)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 4, 'cso-calendar-main-months__month--disabled': !isEnable(4) }"><span class="cso-calendar-main-months__label">{{ monthsAbbreviated?.april }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(5)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 5, 'cso-calendar-main-months__month--disabled': !isEnable(5) }"><span class="cso-calendar-main-months__label">{{ monthsAbbreviated?.may }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(6)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 6, 'cso-calendar-main-months__month--disabled': !isEnable(6) }"><span class="cso-calendar-main-months__label">{{ monthsAbbreviated?.june }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(7)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 7, 'cso-calendar-main-months__month--disabled': !isEnable(7) }"><span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.july }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(8)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 8, 'cso-calendar-main-months__month--disabled': !isEnable(8) }"><span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.august }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(9)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 9, 'cso-calendar-main-months__month--disabled': !isEnable(9) }"><span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.september }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(10)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 10, 'cso-calendar-main-months__month--disabled': !isEnable(10) }"><span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.october }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(11)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 11, 'cso-calendar-main-months__month--disabled': !isEnable(11) }"><span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.november }}</span></li>
+        <li class="cso-calendar-main-months__month" (click)="setMonth(12)" [ngClass]="{ 'cso-calendar-main-months__month--active': getMonth(date) == 12, 'cso-calendar-main-months__month--disabled': !isEnable(12) }"><span class="cso-calendar-main-month__label">{{ monthsAbbreviated?.december }}</span></li>
+    </ul>   
+</div>

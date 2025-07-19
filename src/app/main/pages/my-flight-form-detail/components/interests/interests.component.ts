@@ -12,7 +12,7 @@ import { FlightService } from '../../../../common/services/flight.service';
   selector: 'app-interests',
   standalone: true,
   imports: [
-    NgFor, NgIf, NgClass,
+    NgFor, NgIf,
     ButtonPrimaryComponent
 ],
   templateUrl: './interests.component.html',

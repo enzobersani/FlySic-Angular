@@ -1,0 +1,55 @@
+<div class="calendar-main">
+  <div class="calendar-head">
+    <div class="calendar-from">
+      {{ text }}
+    </div>
+    <div class="calendar-control">
+      <div class="calendar-arrow-left" *ngIf="status != 2" (click)="prev()">
+        <img src="assets/images/components/calendar-main/arrow-calendar-left.svg" />
+      </div>
+      <div class="calendar-arrow-left" *ngIf="status == 2">
+        <img
+          src="assets/images/components/calendar-main/arrow-calendar-left-disable.svg"
+        />
+      </div>
+      <div
+        [ngClass]="{ active: status == 2 }"
+        class="calendar-month"
+        (click)="month()"
+      >
+        {{ getMonth(paginationDate) }}
+      </div>
+      <div
+        [ngClass]="{ active: status == 3 }"
+        class="calendar-year"
+        (click)="year()"
+      >
+        {{ getYear(paginationDate) }}
+      </div>
+      <div class="calendar-arrow-right" *ngIf="status != 2" (click)="next()">
+        <img src="assets/images/components/calendar-main/arrow-calendar-right.svg" />
+      </div>
+      <div class="calendar-arrow-right" *ngIf="status == 2">
+        <img
+          src="assets/images/components/calendar-main/arrow-calendar-right-disable.svg"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="calendar-body">
+    <cso-calendar-month
+      (changeDate)="changeDate.emit($event)"
+      [limit]="limit"
+      [currentYear]="getYear(paginationDate)"
+      [date]="paginationDate"
+      *ngIf="status == 2"
+    ></cso-calendar-month>
+    <cso-calendar-year
+      *ngIf="status == 3"
+      [limit]="limit"
+      [date]="paginationDate"
+      [page]="pagesYear"
+      (changeDate)="changeDate.emit($event)"
+    ></cso-calendar-year>
+  </div>
+</div>

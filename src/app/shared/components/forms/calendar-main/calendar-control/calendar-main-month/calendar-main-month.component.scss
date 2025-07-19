@@ -1,0 +1,57 @@
+@import "../../../../../../../assets/styles/colors";
+@import "../../../../../../../assets/styles/typography";
+
+$dimensionMonth: 48px;
+$doubleMaginMonth: 16px;
+
+.cso-calendar-main-month {
+  margin: 24px auto;
+
+  .cso-calendar-main-months__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 4 * ($dimensionMonth + $doubleMaginMonth);
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+
+    .cso-calendar-main-months__month {
+      margin: calc($doubleMaginMonth  / 2);
+      text-align: center;
+  
+      &:hover:not(.is-disabled) .cso-calendar-main-months__label {
+        background-color: var(--CSO_Secondary_20);
+      }
+  
+      &--active .cso-calendar-main-months__label {
+        background-color: var(--CSO_Secondary_100);
+        color: var(--CSO_White);
+      }
+  
+      &--disabled .cso-calendar-main-months__label {
+        color: var(--CSO_Neutral_40);
+        cursor: default;
+      }
+
+      .cso-calendar-main-months__label {
+        display: block;
+        width: 48px;
+        height: 28px;
+        line-height: 30px !important;
+        cursor: pointer;
+        text-transform: uppercase;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        color: var(--CSO_Neutral_100);
+        transition: background-color 300ms linear;
+        border-radius: 16px;
+        @include CSO_Headline_5;
+      }
+    }
+  }
+}

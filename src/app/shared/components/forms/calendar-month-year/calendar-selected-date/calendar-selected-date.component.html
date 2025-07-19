@@ -1,0 +1,14 @@
+<div class="selected-option" [ngClass]="{ 'has-value': isOpen }">
+  <img (click)="previousDate()" class="arrow" src="assets/images/components/calendar-month-year/arrow-calendar-left-disable.svg">
+  <div
+    class="option"
+    [ngClass]="{ active: dateToShow.getMonth() == currentDate.getMonth() }"
+    *ngFor="let dateToShow of datesToShow"
+  >
+  <span class="month-label" (click)="changeCurrentDate(dateToShow)">
+    <span *ngIf="dateToShow.getMonth() == currentDate.getMonth()" appToggle #toggle [compomentId]="idService.get()" class="modal-toggle">&nbsp;</span> 
+      {{ formatDate(dateToShow.getMonth(), currentDate.getFullYear()) }}
+    </span>
+  </div>
+  <img (click)="nextDate()" class="arrow" src="assets/images/components/calendar-month-year/arrow-calendar-right-disable.svg">
+</div>

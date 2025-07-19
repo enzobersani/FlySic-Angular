@@ -1,0 +1,72 @@
+@import "../style-imports.scss";
+
+:host {
+    display: contents;
+}
+
+.selected-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    height: 48px;
+    padding-left: 12px;
+    padding-right: 36px;
+    line-height: 48px;
+    background: var(--CSO_White);
+    color: var(--CSO_White);
+    outline: none;
+
+    > label {
+        margin: 1px 0 0;
+        color: var(--CSO_White);
+        font-size: 14px;
+        line-height: 150%;
+        letter-spacing: 0.25px;
+    }
+
+    &.has-value {
+        > label {
+            color: var(--CSO_White);
+            font-weight: bold
+        }
+    }
+
+    .month-label{
+        display: flex;
+        position: relative;
+        .modal-toggle{
+            display: flex;
+            position: absolute;
+            width: 100%;
+        }
+    }
+    
+    .option {
+        display: flex;
+        align-content: center;
+        cursor: pointer;
+        justify-content: space-between;
+        color:var(--CSO_Neutral_100);
+        min-width: fit-content;
+        max-width: calc(100% - 84px);
+        padding: 4px 12px 4px 12px;
+        font-size: 14px;
+        line-height: 150%;
+        letter-spacing: 0.25px;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .active{
+        background: var(--CSO_Secondary_100);
+        color: var(--CSO_White);
+    }
+
+    img { 
+        width: 10px;
+        height: 15px;
+        cursor: pointer;
+    }
+}

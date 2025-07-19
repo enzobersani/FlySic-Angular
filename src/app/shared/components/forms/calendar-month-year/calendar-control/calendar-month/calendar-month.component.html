@@ -1,0 +1,16 @@
+<div class="calendar-month">
+    <ul class="weekdays">
+        <li (click)="setMonth(1)" [ngClass]="{ 'active': getMonth(date) == 1, 'is-disabled': !isEnable(1) }"><span>{{ monthsAbbreviated?.january }}</span></li>
+        <li (click)="setMonth(2)" [ngClass]="{ 'active': getMonth(date) == 2, 'is-disabled': !isEnable(2) }"><span>{{ monthsAbbreviated?.february }}</span></li>
+        <li (click)="setMonth(3)" [ngClass]="{ 'active': getMonth(date) == 3, 'is-disabled': !isEnable(3) }"><span>{{ monthsAbbreviated?.march }}</span></li>
+        <li (click)="setMonth(4)" [ngClass]="{ 'active': getMonth(date) == 4, 'is-disabled': !isEnable(4) }"><span>{{ monthsAbbreviated?.april }}</span></li>
+        <li (click)="setMonth(5)" [ngClass]="{ 'active': getMonth(date) == 5, 'is-disabled': !isEnable(5) }"><span>{{ monthsAbbreviated?.may }}</span></li>
+        <li (click)="setMonth(6)" [ngClass]="{ 'active': getMonth(date) == 6, 'is-disabled': !isEnable(6) }"><span>{{ monthsAbbreviated?.june }}</span></li>
+        <li (click)="setMonth(7)" [ngClass]="{ 'active': getMonth(date) == 7, 'is-disabled': !isEnable(7) }"><span>{{ monthsAbbreviated?.july }}</span></li>
+        <li (click)="setMonth(8)" [ngClass]="{ 'active': getMonth(date) == 8, 'is-disabled': !isEnable(8) }"><span>{{ monthsAbbreviated?.august }}</span></li>
+        <li (click)="setMonth(9)" [ngClass]="{ 'active': getMonth(date) == 9, 'is-disabled': !isEnable(9) }"><span>{{ monthsAbbreviated?.september }}</span></li>
+        <li (click)="setMonth(10)" [ngClass]="{ 'active': getMonth(date) == 10, 'is-disabled': !isEnable(10) }"><span>{{ monthsAbbreviated?.october }}</span></li>
+        <li (click)="setMonth(11)" [ngClass]="{ 'active': getMonth(date) == 11, 'is-disabled': !isEnable(11) }"><span>{{ monthsAbbreviated?.november }}</span></li>
+        <li (click)="setMonth(12)" [ngClass]="{ 'active': getMonth(date) == 12, 'is-disabled': !isEnable(12) }"><span>{{ monthsAbbreviated?.december }}</span></li>
+    </ul>   
+</div>

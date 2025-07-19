@@ -1,0 +1,48 @@
+<div class="cso-calendar-main-control">
+    <div class="cso-calendar-main-control__header">
+        <div class="cso-calendar-main-control__from">
+            {{ text }}
+        </div>
+        <div class="cso-calendar-main-control__month-year">
+            <div class="cso-calendar-main-control__arrow-left" (click)="prev(paginationDate)">
+                <img class="cso-calendar-main-control__img" [src]="'assets/images/components/calendar-main/arrow-calendar-left' + (status == 2 ? '-disable' : '') + '.svg'">
+            </div>
+            <div
+                class="cso-calendar-main-control__month"
+                [ngClass]="{ 'cso-calendar-main-control__month--active': status == 2 }"
+                (click)="month()"
+            >{{ getMonth(paginationDate) }}</div>
+            <div
+                class="cso-calendar-main-control__year"
+                [ngClass]="{ 'cso-calendar-main-control__year--active': status == 3 }"
+                (click)="year()"
+            >{{ getYear(paginationDate) }}</div>
+            <div class="cso-calendar-main-control__right" (click)="next(paginationDate)">
+                <img class="cso-calendar-main-control__img" [src]="'assets/images/components/calendar-main/arrow-calendar-right' + (status == 2 ? '-disable' : '') + '.svg'">
+            </div>
+        </div>
+    </div>
+    <div class="cso-calendar-main-control__body">
+        <cso-calendar-main-month-number
+            *ngIf="status == 1"
+            [selectedRange]="selectedRange"
+            [limit]="limit"
+            [paginationDate]="paginationDate"
+            [active]="selectedDate"
+            (changeDate)="changeDate.emit($event)"
+        ></cso-calendar-main-month-number>
+        <cso-calendar-main-month
+            (changeDate)="changeDate.emit($event)"
+            [limit]="limit"
+            [currentYear]="getYear(paginationDate)"
+            [date]="paginationDate"
+            *ngIf="status == 2"
+        ></cso-calendar-main-month>
+        <cso-calendar-main-year 
+            *ngIf="status == 3"
+            [date]="paginationDate"
+            [page]="pagesYear"
+            (changeDate)="changeDate.emit($event)"
+        ></cso-calendar-main-year>
+    </div>
+</div>

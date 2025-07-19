@@ -1,0 +1,28 @@
+<div class="cso-calendar-main">
+	<div
+		*ngIf="isOpen"
+		class="cso-calendar-main__overlay"
+		(click)="closeCalendar()"
+	></div>
+	<div class="row" [class]="componentID">
+		<div class="col-12">
+			<div class="cso-calendar-main__selection" [ngClass]="{ 'has-value': hasValue || isOpen }" (click)="toggleCalendar()">
+				<cso-calendar-main-selected-date
+					[isOpen]="isOpen"
+					[placeholder]="placeholder"
+					(reset)="resetCalendar()"
+				></cso-calendar-main-selected-date>
+				<div class="arrow-content" (click)="toggleCalendar()">
+					<img *ngIf="!isOpen && !hasValue" src="assets/images/components/calendar-main/arrow-multi-select-down.svg">
+					<img *ngIf="!isOpen && hasValue" src="assets/images/components/calendar-main/arrow-multi-select-down-focus.svg">
+					<img *ngIf="isOpen" src="assets/images/components/calendar-main/arrow-multi-select-up-focus.svg">
+				</div>
+			</div>
+			<div class="cso-calendar-main__content" [ngClass]="{ 'cso-calendar-main__content--open': isOpen }">
+				<cso-calendar-main-double [limit]="limit" [presetSelected]="presetSelected" [hideLeftControls]="hideLeftControls"
+					(clear)="resetCalendar()" (confirm)="buttonConfirm()" (changePreset)="updatePreset($event)" (close)="closeCalendar()">
+				</cso-calendar-main-double>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+@import "../../style-imports.scss";
+
+$dimensionYear: 56px;
+$doubleMaginYear: 16px;
+
+.calendar-year {
+  margin: 24px 0;
+  background-color: var(--CSO_White);
+
+  ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+		max-width: 4 * ($dimensionYear + $doubleMaginYear);
+		margin: 0 auto;
+    padding: 0;
+		list-style-type: none;
+
+    li {
+      width: $dimensionYear;
+      height: 28px;
+			margin: calc($doubleMaginYear / 2);
+      color: var(--CSO_Neutral_100);
+      line-height: 30px !important;
+      border-radius: 30px;
+      box-sizing: content-box;
+      @include CSO_Headline_5;
+      text-align: center;
+      cursor: pointer;
+      text-transform: uppercase;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+			box-sizing: border-box;
+
+      &:hover {
+        background-color: var(--CSO_Secondary_20);
+        transition: background-color 300ms linear;
+      }
+
+      &.active {
+        background-color: var(--CSO_Secondary_100);
+        color: var(--CSO_White);
+      }
+    }
+  }
+}

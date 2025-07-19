@@ -1,0 +1,56 @@
+@import "../../style-imports.scss";
+
+$dimensionMonth: 48px;
+$doubleMaginMonth: 16px;
+
+.calendar-month {
+  margin: 24px auto;
+
+  ul.weekdays {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 4 * ($dimensionMonth + $doubleMaginMonth);
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      margin: calc($doubleMaginMonth / 2);
+      text-align: center;
+
+      span {
+        display: block;
+        width: 48px;
+        height: 28px;
+        line-height: 30px !important;
+        cursor: pointer;
+        text-transform: uppercase;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        color: var(--CSO_Neutral_100);
+        transition: background-color 300ms linear;
+        border-radius: 16px;
+        @include CSO_Headline_5;
+      }
+
+      &:hover:not(.is-disabled) span {
+        background-color: var(--CSO_Secondary_20);
+      }
+
+      &.active span {
+        background-color: var(--CSO_Secondary_100);
+        color: var(--CSO_White);
+      }
+
+      &.is-disabled span {
+        color: var(--CSO_Neutral_40);
+        cursor: default;
+      }
+    }
+  }
+}

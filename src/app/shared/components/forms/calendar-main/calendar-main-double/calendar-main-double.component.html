@@ -1,0 +1,96 @@
+<div class="cso-calendar-main-double__fixed-point" #fixedPoint></div>
+<div class="cso-calendar-main-double"
+    csoCalendarMainLegacyScroll
+    [fixedPoint]="fixedPoint"
+    [ngClass]="{ 'cso-calendar-main-double--hide-left-controls': hideLeftControls }"
+>
+    <div class="cso-calendar-main-double__control">
+        <ul class="cso-calendar-main-double__filters">
+            <li
+                *ngIf="showOption.includes(1)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 1 }"
+                (click)="custom()"
+            >{{ presets?.custom }}</li>
+            <li
+                *ngIf="showOption.includes(2)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 2 }"
+                (click)="week()"
+            >{{ presets?.thisWeek }}</li>
+            <li
+                *ngIf="showOption.includes(3)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 3 }"
+                (click)="month()"
+            >{{ presets?.thisMonth }}</li>
+            <li
+                *ngIf="showOption.includes(4)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 4 }"
+                (click)="lastMonth()"
+            >{{ presets?.lastMonth }}</li>
+            <li
+                *ngIf="showOption.includes(5)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 5 }"
+                (click)="lastTwoMonth()"
+            >{{ presets?.lastTwoMonth }}</li>
+            <li
+                *ngIf="showOption.includes(6)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 6 }"
+                (click)="lastSemester()"
+            >{{ presets?.lastSemester }}</li>
+            <li
+                *ngIf="showOption.includes(7)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 7 }"
+                (click)="year()"
+            >{{ presets?.thisYear }}</li>
+            <li
+                *ngIf="showOption.includes(8)"
+                class="cso-calendar-main-double__filter"
+                [ngClass]="{ 'cso-calendar-main-double__filter--active': range == 8 }"
+                (click)="lastYear()"
+            >{{ presets?.lastYear }}</li>
+        </ul>
+    </div>
+    <div class="cso-calendar-main-double__content">
+        <div class="cso-calendar-main-double__calendars">
+            <cso-calendar-main-control
+                text="{{ fromTo?.from }}:"
+                [status]="status"
+                [limit]="limit"
+                [selectedDate]="selectedRange?.initialDate"
+                [selectedRange]="selectedRange"
+                (changeDate)="changeInitialDate($event)"
+            ></cso-calendar-main-control>
+            <cso-calendar-main-control
+                text="{{ fromTo?.to }}:"
+                [status]="status"
+                [limit]="limit"
+                [selectedDate]="selectedRange?.finalDate"
+                [selectedRange]="selectedRange"
+                (changeDate)="changeFinalDate($event)"
+            ></cso-calendar-main-control>
+        </div>
+        <img
+            class="cso-calendar-main-double__close"
+            src="assets/images/components/calendar-main/close-calendar.svg"
+            (click)="close.emit()"
+        >
+        <div class="cso-calendar-main-double__actions d-flex">
+            <button
+                class="cso-calendar-main-double__button cso-calendar-main-double__clear"
+                type="button"
+                (click)="clear.emit()"
+            >{{ buttons?.clear }}</button>
+            <button
+                class="cso-calendar-main-double__button cso-calendar-main-double__confirm"
+                type="button"
+                (click)="confirm.emit()"
+            >{{ buttons?.confirm }}</button>
+        </div>
+    </div>
+</div>

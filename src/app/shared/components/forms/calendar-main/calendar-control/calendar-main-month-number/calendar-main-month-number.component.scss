@@ -1,0 +1,100 @@
+@import "../../../../../../../assets/styles/colors";
+@import "../../../../../../../assets/styles/typography";
+
+$daysOnWeek: 7;
+$dimensionDay: 32px;
+$marginBetweenDay: 4px;
+
+.cso-calendar-main-month {
+  width: $daysOnWeek * ($dimensionDay + ($marginBetweenDay * 2));
+  margin: 0 auto;
+
+  .cso-calendar-main-month__weekdays {
+    .cso-calendar-main-month__weekday {
+      @include CSO_Body_2_Bold;
+      line-height: 29px;
+      color: var(--CSO_Neutral_100);
+    }
+  }
+
+  .cso-calendar-main-month__weekdays,
+  .cso-calendar-main-month__days {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    &::after {
+      content: "";
+      display: table;
+      height: 0;
+      clear: both;
+    }
+  }
+
+  .cso-calendar-main-month__weekday,
+  .cso-calendar-main-month__day {
+    float: left;
+    width: $dimensionDay;
+    height: $dimensionDay;
+    margin: 4px;
+    text-align: center;
+    border-radius: 50%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @include CSO_Body_2;
+    color: var(--CSO_Neutral_100);
+    line-height: $dimensionDay !important;
+    transition: background-color 300ms linear;
+    list-style: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--CSO_Secondary_20);
+    }
+
+    &--disable {
+      color: var(--CSO_Neutral_40);
+    }
+
+    &--noClick {
+      pointer-events: none;
+      color: var(--CSO_Neutral_20);
+    }
+    
+    &--today {
+      border: 1px solid var(--CSO_Secondary_100);
+    }
+
+    &--inRange {
+      background-color: var(--CSO_Secondary_100);
+      color: var(--CSO_White);
+      opacity: 0.5;
+    }
+    
+    &--active {
+      background-color: var(--CSO_Secondary_100);
+      color: var(--CSO_White);
+      opacity: 1;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+	$dimensionDay: 38px;
+  .cso-calendar-main-month {
+		width: $daysOnWeek * ($dimensionDay + ($marginBetweenDay * 2));
+
+		ul {
+			li {
+				width: $dimensionDay;
+				height: $dimensionDay;
+				line-height: $dimensionDay !important;
+			}
+		}
+	}
+}

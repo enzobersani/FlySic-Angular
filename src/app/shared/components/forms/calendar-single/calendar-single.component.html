@@ -1,0 +1,78 @@
+<div
+  class="calendar-background-clickout"
+  *ngIf="toggleService.isOpen.value"
+  [ngClass]="{ 'pointer-events-none': scrollService.scrolling }"
+></div>
+<div
+  class="row"
+  CalendarSingleToggle
+  #toggle
+  [class]="idService.get()"
+  [componentID]="idService.get()"
+>
+  <div class="col-12">
+    <div
+      class="calendar-background"
+      [ngClass]="{
+        'has-value':
+          getCurrentRangeDateModel?.dates?.initialDate ||
+          toggleService.isOpen.value
+      }"
+    >
+      <cso-calendar-single-selected-date
+        [placeholder]="placeHolder"
+        [isOpen]="toggleService.isOpen.value"
+        (reset)="resetCalendar()"
+      >
+      </cso-calendar-single-selected-date>
+      <!-- <div class="arrow-content" (click)="toggleService.toggle()">
+        <img
+          *ngIf="
+            !toggleService.isOpen.value &&
+            !getCurrentRangeDateModel?.dates?.initialDate
+          "
+          src="assets/images/components/calendar-main/arrow-multi-select-down.svg"
+        />
+        <img
+          *ngIf="
+            !toggleService.isOpen.value &&
+            getCurrentRangeDateModel?.dates?.initialDate
+          "
+          src="assets/images/components/calendar-main/arrow-multi-select-down-focus.svg"
+        />
+        <img
+          *ngIf="toggleService.isOpen.value"
+          src="assets/images/components/calendar-main/arrow-multi-select-up-focus.svg"
+        />
+      </div> -->
+    </div>
+
+    <div
+      class="calendar"
+      [ngClass]="{ open: toggleService.isOpen.value }"
+      *ngIf="toggleService.isOpen.value"
+    >
+      <cso-calendar-single-control
+        [limit]="limit"
+        [selectedDate]="getCurrentRangeDateModel?.dates?.initialDate"
+        [selectedRange]="getCurrentRangeDateModel"
+        (changeDate)="changeDate($event)"
+      >
+      </cso-calendar-single-control>
+
+      <img
+        src="assets/images/components/calendar-main/close-calendar.svg"
+        class="close-calendar"
+        (click)="toggleService.close()"
+      />
+      <div class="buttons-content">
+        <button class="clear" type="button" (click)="resetCalendar()">
+          {{ buttons?.clear }}
+        </button>
+        <button class="confirm" type="button" (click)="buttonConfirm()">
+          {{ buttons?.confirm }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

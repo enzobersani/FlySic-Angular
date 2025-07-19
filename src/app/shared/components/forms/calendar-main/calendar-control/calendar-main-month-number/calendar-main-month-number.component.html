@@ -1,0 +1,23 @@
+<div class="cso-calendar-main-month">
+    <ul class="cso-calendar-main-month__weekdays">
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.sunday }}</li>
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.monday }}</li>
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.tuesday }}</li>
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.wednesday }}</li>
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.thursday }}</li>
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.friday }}</li>
+        <li class="cso-calendar-main-month__weekday">{{ weekdaysLetterModel?.saturday }}</li>
+    </ul>
+    <ul class="cso-calendar-main-month__days">
+        <li *ngFor="let day of daysOfMonth" (click)="selectDay(day)"
+            [ngClass]="{
+                'cso-calendar-main-month__day': true,
+                'cso-calendar-main-month__day--today': isToday(day),
+                'cso-calendar-main-month__day--active': isActiveDate(day),
+                'cso-calendar-main-month__day--inRange': inRange(day),
+                'cso-calendar-main-month__day--disable': !isDateCurrentMonth(day),
+                'cso-calendar-main-month__day--noClick': isStartDate(day) || isEndDate(day)
+            }">
+            {{ getDay(day) }}</li>
+    </ul>
+</div>

@@ -14,6 +14,7 @@ import { FeedbackComponent } from "../../../shared/components/feedback/feedback/
 import { FeedbackTypeEnum } from '../../../shared/components/feedback/feedback/enums/feedback-type.enum';
 import { LoadingComponent } from "../../../shared/layout/loading/loading.component";
 import { Router } from '@angular/router';
+import { CalendarSingleComponent } from "../../../shared/components/forms/calendar-single/calendar-single.component";
 
 @Component({
   selector: 'app-new-account',
@@ -28,7 +29,8 @@ import { Router } from '@angular/router';
     ModalComponent,
     TermsComponent,
     FeedbackComponent,
-    LoadingComponent
+    LoadingComponent,
+    CalendarSingleComponent
 ],
   templateUrl: './new-account.component.html',
   styleUrl: './new-account.component.scss'
@@ -77,8 +79,11 @@ export class NewAccountComponent {
     const file: File = this.registerForm.get('documentPicture')?.value;
     const formData = new FormData();
 
+    const birthValue = this.registerForm.get('birthYear')?.value;
+    const birthDate = birthValue?.initialDate ? new Date(birthValue.initialDate).toISOString() : '';
+
     formData.append('name', this.registerForm.get('name')?.value);
-    formData.append('birthDate', this.registerForm.get('birthYear')?.value);
+    formData.append('birthDate', birthDate);
     formData.append('cpf', rawCpf);
     formData.append('email', this.registerForm.get('email')?.value);
     formData.append('phone', rawPhone);

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { RandomKey } from '../../../helper/random-key';
+import { RandomKey }  from '../helper/random-key';
 
 @Injectable()
-export class CalendarIdService {
+export class IdService {
 
   private _id: string;
 

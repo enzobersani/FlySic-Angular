@@ -1,0 +1,13 @@
+<div class="cso-calendar-main-year">
+  <ul class="cso-calendar-main-year__list">
+      <li
+        *ngFor="let year of years"
+        class="cso-calendar-main-year__item"
+        [ngClass]="{
+          'cso-calendar-main-year__item--active': date.getFullYear() == year,
+          'cso-calendar-main-year__item--disabled': isFutureYear(year)
+        }"
+        (click)="setYear(year)"
+      >{{year}}</li>
+  </ul>
+</div>

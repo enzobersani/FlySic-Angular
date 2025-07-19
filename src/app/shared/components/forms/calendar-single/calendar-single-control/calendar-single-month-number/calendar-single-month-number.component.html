@@ -1,0 +1,26 @@
+<div class="month-number">
+  <ul class="weekdays">
+    <li>{{ weekdaysLetterModel?.sunday }}</li>
+    <li>{{ weekdaysLetterModel?.monday }}</li>
+    <li>{{ weekdaysLetterModel?.tuesday }}</li>
+    <li>{{ weekdaysLetterModel?.wednesday }}</li>
+    <li>{{ weekdaysLetterModel?.thursday }}</li>
+    <li>{{ weekdaysLetterModel?.friday }}</li>
+    <li>{{ weekdaysLetterModel?.saturday }}</li>
+  </ul>
+  <ul class="days">
+    <li
+      *ngFor="let day of daysOfMonth"
+      (click)="selectDay(day)"
+      [ngClass]="{
+        today: isToday(day),
+        active: isActiveDate(day),
+        inRange: inRange(day),
+        disable: !isDateCurrentMonth(day),
+        disableClick: isStartDate(day) || isEndDate(day)
+      }"
+    >
+      {{ getDay(day) }}
+    </li>
+  </ul>
+</div>

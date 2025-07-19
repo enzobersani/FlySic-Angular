@@ -1,0 +1,11 @@
+<div class="calendar-year">
+  <ul class="yearlist">
+    <li
+      *ngFor="let y of years"
+      [ngClass]="{ active: date.getFullYear() == y }"
+      (click)="setYear(y)"
+    >
+      {{ y }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,50 @@
+<div
+  class="calendar-background-clickout"
+  *ngIf="toggleService.isOpen.value"
+  [ngClass]="{ 'pointer-events-none': scrollService.scrolling }"
+></div>
+<div class="row" [class]="idService.get()">
+  <div class="col-12">
+    <cso-calendar-selected-date
+      [isOpen]="toggleService.isOpen.value"
+      [currentDate]="form.get(name)?.value"
+      [fowardLimit]="fowardLimit"
+      [backwardLimit]="backwardLimit"
+      [limit]="limit"
+      (monthChangeEmitter)="changeDate($event)"
+    >
+    </cso-calendar-selected-date>
+    <div class="position-absolute open-base-position">
+      <div
+        class="calendar position-absolute"
+        [ngStyle]="{
+          top: position.top,
+          left: position.left
+        }"
+        [ngClass]="{ open: toggleService.isOpen.value }"
+        *ngIf="toggleService.isOpen.value"
+      >
+        <cso-calendar-control
+          [limit]="limit"
+          [selectedDate]="dateWrapper"
+          (changeDate)="changeDateWrapper($event)"
+        >
+        </cso-calendar-control>
+
+        <img
+          src="assets/images/components/calendar-main/close-calendar.svg"
+          class="close-calendar"
+          (click)="toggleService.close()"
+        />
+        <div class="buttons-content">
+          <button class="clear" type="button" (click)="resetCalendar()">
+            {{ buttons?.clear | uppercase }}
+          </button>
+          <button class="confirm" type="button" (click)="buttonConfirm()">
+            {{ buttons?.confirm | uppercase }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
