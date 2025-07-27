@@ -1,9 +1,12 @@
 <div class="content">
     <div class="content__title">Ações</div>
+    @if (!canFinish() && !canCancel()){
+      <h3>Ficha não pode realizar ações!</h3>
+    }
   
     <div class="content__actions">
-      <app-button-primary label="Finalizar" (clickEvent)="finishFlight()"></app-button-primary>
-      <app-button-primary label="Cancelar" (clickEvent)="cancelFlight()"></app-button-primary>
+      <app-button-primary *ngIf="canFinish()" label="Finalizar" (clickEvent)="finishFlight()"></app-button-primary>
+      <app-button-primary *ngIf="canCancel()" label="Cancelar" (clickEvent)="cancelFlight()"></app-button-primary>
     </div>
   </div>
   
@@ -51,3 +54,4 @@
       </div>
     </div>
 </app-modal>
+<app-toast-list></app-toast-list>
