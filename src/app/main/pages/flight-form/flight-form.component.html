@@ -117,7 +117,6 @@
     </div>
   </div>
 </div>
-<app-toast-list></app-toast-list>
 <app-modal #modalResponse>
   @if (isLoading) {
     <div class="carregando">
@@ -138,3 +137,5 @@
     </app-feedback>
   }
 </app-modal>
+
+<app-toast-list [waitTime]="4000"></app-toast-list>

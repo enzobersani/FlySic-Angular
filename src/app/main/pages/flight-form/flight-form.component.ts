@@ -23,6 +23,9 @@ import { LoadingComponent } from "../../../shared/layout/loading/loading.compone
 import { FlightFormsListResponseModel } from '../../common/models/flight-forms-list-response.model';
 import { FlightService } from '../../common/services/flight.service';
 import { FlightFormRequestModel } from '../../common/models/flight-form-request.model';
+import { FlightFormStatus } from '../../common/enum/flight-form-status.enum';
+import { FlightFormStatusResponseModel } from '../../common/models/flight-form-status-response.model';
+import { ToastWarnModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-warn.model';
 
 @Component({
   selector: 'app-flight-form',
@@ -71,6 +74,7 @@ export class FlightFormComponent implements OnInit{
     placeholder: 'Comece a digitar para buscar',
     notFoundPlaceHolder: 'Não foram encontrados dados'
   }
+  statusFlightForm!: FlightFormStatus;
 
   @ViewChild('selectAeroportoPartida') selectAeroportoPartida?: SelectComponent;
   @ViewChild('selectAeroportoChegada') selectAeroportoChegada?: SelectComponent;
@@ -111,6 +115,7 @@ export class FlightFormComponent implements OnInit{
 
     if (this.flightFormId){
       this.loadFlightFormData();
+      this.getStatus();
     }
   }
 
@@ -150,8 +155,13 @@ export class FlightFormComponent implements OnInit{
       checkboxPernoite: formValue.checkboxPernoite
     };
 
-    this.modalResponse.open();
     if (this.flightFormId) {
+      if (this.statusFlightForm !== FlightFormStatus.Aberta) {
+        this.toastService.send(new ToastWarnModel("Aviso", "Não é possivel realizar alterações! Já realizado aceite de usuario!"));
+        return;
+      }
+      this.modalResponse.open();
+
       this.flightService.updateFlightForm(this.flightFormId, request).subscribe({
         next: () => {
           // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo atualizada!", "Agora"));
@@ -164,6 +174,7 @@ export class FlightFormComponent implements OnInit{
         }
       });
     } else {
+      this.modalResponse.open();
       this.airportService.createFlight(request).subscribe({
         next: () => {
           // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo criada!", "Agora"));
@@ -208,32 +219,6 @@ export class FlightFormComponent implements OnInit{
       this.form.get('chegadaLocal')?.reset();
     }
   }
-
-  // onEstadoChange(event: string) {
-  //   this.estado = event;
-  //   if (this.estado) {
-  //     this.buscarCidadesPorUf(this.estado);
-  //   } else {
-  //     this.cidadesUf = [];
-  //   }
-  // }
-
-  // buscarCidadesPorUf(uf: string) {
-  //   if (uf) {
-  //     this.enderecoService.buscarCidadePorUf(uf).subscribe({
-  //       next: (cidades) => {
-  //         this.cidadesUf = cidades.map((cidade: any) => ({ label: cidade.nome, value: cidade.id }));
-  //       },
-  //       error: (error) => {
-  //         console.error('Erro ao buscar cidades:', error);
-  //         this.toastService.send(new ToastErrorModel('Erro', 'Não foi possível buscar as cidades.', ''));
-  //         this.cidadesUf = [];
-  //       },
-  //     });
-  //   } else {
-  //     this.cidadesUf = [];
-  //   }
-  // }
 
   onSearchAirport(icao: string, tipo: 'partida' | 'chegada') {
     if (!icao) return;
@@ -349,6 +334,14 @@ export class FlightFormComponent implements OnInit{
       this.cdr.detectChanges();
     });
   }  
+
+  getStatus(): void {
+    this.flightService.getStatus(this.flightFormId!).subscribe({
+      next: (status: FlightFormStatusResponseModel) => {
+        this.statusFlightForm = status.status;
+      },
+    });
+  }
 
   private formatDateToInput(dateStr: string): string {
     const date = new Date(dateStr);
