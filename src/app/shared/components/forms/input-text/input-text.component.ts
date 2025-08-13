@@ -25,6 +25,7 @@ export class InputTextComponent implements OnInit {
   @Input() isDisabled: boolean = false;
   @Input() type: string = 'text';
   @Input() returnUnmaskedValue: boolean = false; // Define se deve retornar o valor sem máscara
+  @Input() autocomplete: string = '';
 
   @Output() focus: EventEmitter<any> = new EventEmitter<any>();
   @Output() keyup: EventEmitter<any> = new EventEmitter<any>();

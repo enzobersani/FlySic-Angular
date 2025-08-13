@@ -68,3 +68,11 @@
     </div>
   </div>
 </div>
+
+@if (flightForms.length === 0) {
+  <div class="no-flight-forms">
+    <h3>Nenhum formulário de voo encontrado.</h3>
+  </div>
+}
+
+<app-toast-list></app-toast-list>

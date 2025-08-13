@@ -6,7 +6,7 @@ $RBS-Angular-theme: mat.define-theme((
   color: (
     theme-type: light,
     primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
+    tertiary: mat.$blue-palette
   ),
   density: (
     scale: 0,
@@ -45,3 +45,5 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'DIN Pro', sans-serif;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

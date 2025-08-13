@@ -1,51 +1,75 @@
-.flight-forms-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-    cursor: pointer;
-  
-    @media screen and (min-width: 900px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    @media screen and (max-width: 600px) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  
-.flight-card {
-    border: 2px solid var(--CSO_Warning_70);
-    border-radius: 12px;
-    padding: 1rem;
-    background-color: #1f1f1f;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
-
-    &:hover {
-        transform: scale(1.01);
-    }
-
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        color: var(--CSO_Warning_70);
-    }
-
-    .card-body {
-        font-size: 0.95rem;
-
-        p {
-        margin: 0.3rem 0;
-        color: #cccccc;
-        }
-
-        p strong {
-        color: #ffffff;
-        }
-    }
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
 }
-  
+
+.filter-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.flight-forms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 900px) {
+  .flight-forms-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .flight-forms-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.flight-card {
+  border: 2px solid var(--CSO_Warning_70);
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: #1f1f1f;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.flight-card:hover {
+  transform: scale(1.01);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--CSO_Warning_70);
+}
+
+.card-body {
+  font-size: 0.95rem;
+}
+
+.card-body p {
+  margin: 0.3rem 0;
+  color: #cccccc;
+}
+
+.card-body p strong {
+  color: #ffffff;
+}
+
+.no-flight-forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  text-align: center;
+  color: var(--CSO_Warning_70);
+}

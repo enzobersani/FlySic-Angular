@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { authInterceptor } from './infrastructure/interceptor/auth-interceptor';
 import { provideStore } from '@ngrx/store';
 import { calendarSingleRangeDateReducer } from './shared/components/forms/calendar-single/store/reducers/range-date.reducer';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideStore({
       calendarMainReducers: calendarSingleRangeDateReducer
-    }),
+    }), provideAnimationsAsync(),
   ],
 };

@@ -1,7 +1,7 @@
 <div class="interests-container">
     <div class="content__title">Interessados</div>
   
-    <div *ngIf="interests.length > 0; else noInterests" class="interest-grid">
+    <div *ngIf="interests.length > 0" class="interest-grid">
       <div *ngFor="let user of interests" class="interest-card" [class.already-interested]="user.isAccepted">
         <img
           src="assets/images/user.png"
@@ -24,8 +24,9 @@
         <span *ngIf="user.isAccepted" class="accepted-label">Aceito ✅</span>
       </div>
     </div>
-  
-    <ng-template #noInterests>
-      <p>Nenhum interessado neste voo ainda.</p>
-    </ng-template>
 </div>
+@if (interests.length == 0) {
+  <div class="no-flight-forms">
+    <h3>Nenhum usuário ainda demonstrou interesse!</h3>
+  </div>
+}

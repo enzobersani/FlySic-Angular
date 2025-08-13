@@ -14,13 +14,13 @@
     <div class="login__form-container">
       <form [formGroup]="loginForm">
         <h3 class="login__usuario">Usuário</h3>
-        <app-input-text [form]="loginForm" name="userName"></app-input-text>
+        <app-input-text [form]="loginForm" name="userName" tabindex="1" autocomplete="username"></app-input-text>
 
         <h3 class="login__senha">Senha</h3>
-        <app-input-text [form]="loginForm" name="password" type="password"></app-input-text>
+        <app-input-text [form]="loginForm" name="password" type="password" tabindex="2" autocomplete="new-password"></app-input-text>
 
         <div class="login__forgot">
-          <a [routerLink]="'/forgot-password'">Esqueceu a senha?</a>
+          <a [routerLink]="'/forgot-password'" tabindex="4">Esqueceu a senha?</a>
         </div>
 
         <div class="login__login">
@@ -29,12 +29,13 @@
             [customWidth]="'100%'"
             (clickEvent)="onSubmit()"
             [isLoading]="isLoading"
+            tabindex="3"
           ></app-button-primary>
         </div>
 
         <div class="login__signup">
           <span>Não possui uma conta?</span>
-          <a [routerLink]="'/new-account'">Criar conta</a>
+          <a [routerLink]="'/new-account'" tabindex="5">Criar conta</a>
         </div>
       </form>
     </div>

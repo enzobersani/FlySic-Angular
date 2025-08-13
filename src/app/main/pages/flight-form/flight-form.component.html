@@ -6,8 +6,11 @@
   <div class="content__fields-row">
     <div class="content__field-date">
       <label class="content__label">Data</label>
-      <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="partidaData" [form]="form">
-      </app-input-text>
+      <app-calendar-single
+        [form]="form"
+        name="partidaData"
+        placeHolder="Data de partida"
+      ></app-calendar-single>
     </div>
   
     <div class="content__field-time">
@@ -48,8 +51,11 @@
   <div class="content__fields-row">
     <div class="content__field-date">
       <label class="content__label">Data</label>
-      <app-input-text placeholder="Informe a data..." mask="00/00/0000" name="chegadaData" [form]="form">
-      </app-input-text>
+      <app-calendar-single
+        [form]="form"
+        name="chegadaData"
+        placeHolder="Data de chegada"
+      ></app-calendar-single>
     </div>
   
     <div class="content__field-time">
@@ -113,6 +119,7 @@
         [customWidth]="'100%'"
         label="Enviar"
         (clickEvent)="onSubmit()"
+        [isDisabled]="!canSubmit"
       ></app-button-secondary>
     </div>
   </div>

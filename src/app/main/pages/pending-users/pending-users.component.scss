@@ -1,0 +1,27 @@
+@import '../../../../assets/styles/colors';
+@import '../../../../assets/styles/typography';
+@import '../../../../assets/styles/table';
+
+table.responsive-table-like-card {
+  thead {
+    background-color: red;
+    color: #fff;
+
+    tr th {
+      @include Text_Thead;
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        @include Text_Tbody;
+      }
+      &:nth-child(odd) {
+        td {
+          background-color: var(--CSO_Background);
+        }
+      }
+    }
+  }
+}

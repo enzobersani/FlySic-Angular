@@ -14,6 +14,9 @@ import { PanelComponent } from "../../../shared/layout/panel/panel.component";
 import { Router } from '@angular/router';
 import { CalendarSingleComponent } from "../../../shared/components/forms/calendar-single/calendar-single.component";
 import { CalendarMainComponent } from "../../../shared/components/forms/calendar-main/calendar-main.component";
+import { futureOrTodayDateValidator } from '../../common/validators/future-or-today-date.validator';
+import { ToastListComponent } from "../../../shared/components/feedback/toast-list/toast-list.component";
+import { ToastWarnModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-warn.model';
 
 @Component({
   selector: 'app-flights',
@@ -23,7 +26,8 @@ import { CalendarMainComponent } from "../../../shared/components/forms/calendar
     ButtonPrimaryComponent,
     InputTextComponent,
     PanelComponent,
-    CalendarSingleComponent
+    CalendarSingleComponent,
+    ToastListComponent
 ],
   templateUrl: './flights.component.html',
   styleUrl: './flights.component.scss'
@@ -42,8 +46,8 @@ export class FlightsComponent implements OnInit{
   ) {
     // this.userId = this.authService.getDecodedToken()!.sub;
     this.filtersForm = this.fb.group({
-      departureDate: [null],
-      arrivalDate: [null],
+      departureDate: [null, futureOrTodayDateValidator()],
+      arrivalDate: [null, futureOrTodayDateValidator()],
       departureLocation: [''],
       arrivalLocation: ['']
     });
@@ -58,7 +62,6 @@ export class FlightsComponent implements OnInit{
   }
 
   loadFlightForms(): void {
-    // const filters = this.filtersForm.value as FlightFormFiltersModel;
     const filtersFormValue = this.filtersForm.value;
 
     const filters: FlightFormFiltersModel = {
@@ -70,11 +73,24 @@ export class FlightsComponent implements OnInit{
 
     this.airportService.getFlights(filters).subscribe({
       next: (data) => this.flightForms = data,
-      error: () => this.toastService.send(new ToastErrorModel("Erro", "Erro ao carregar fichas disponíveis."))
+      error: (err) => {
+        if (err.status === 400 && err.error){
+          this.toastService.send(new ToastWarnModel("Erro", err.error.notifications[0].message));
+        } else {
+          this.toastService.send(new ToastErrorModel("Erro", "Erro ao carregar fichas disponíveis."))
+        }
+      }
     })
   }
 
   onFilter(): void {
+    if (this.filtersForm.invalid) {
+      this.toastService.send(new ToastErrorModel(
+        "Erro",
+        "A data de partida e a data de chegada não podem ser anteriores a hoje."
+      ));
+      return;
+    }
     this.loadFlightForms();
   }
 

@@ -1,18 +1,35 @@
-<div class="flight-forms-container">
-    <div *ngFor="let form of flightForms" class="flight-card" (click)="goToMyFlightDetail(form.id)">
-        <div class="card-header">
-            <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
-            <span>→</span>
-            <strong>{{ form.arrivalAirport || form.arrivalManualLocation }}</strong>
-        </div>
-        <div class="card-body">
-            <p><strong>Data de partida:</strong> {{ form.departureDate | date:'dd/MM/yyyy' }}</p>
-            <p><strong>Hora de partida:</strong> {{ form.departureTime | date:'HH:mm' }}</p>
-            <p><strong>Data de chegada:</strong> {{ form.arrivalDate | date:'dd/MM/yyyy' }}</p>
-            <p><strong>Hora de chegada:</strong> {{ form.arrivalTime | date:'HH:mm' }}</p>
-            <p><strong>Aeronave:</strong> {{ form.aircraftType }}</p>
-            <!-- <p><strong>Comentário:</strong> {{ form.flightComment || 'Nenhum' }}</p> -->
-            <p><strong>Pernoite:</strong> {{ form.hasOvernight ? 'Sim' : 'Não' }}</p>
-        </div>
-    </div>
+<div class="filter-container">
+  <label for="statusSelect" class="filter-label">Filtro por status</label>
+  <app-select 
+    id="statusSelect"
+    [isSearchable]="true" 
+    name="select"
+    [form]="form" 
+    [items]="statusOptions"
+    (valueChange)="searchMyFlights($event)"
+    (cleanEvent)="searchMyFlights(1)">
+  </app-select>
 </div>
+  
+<div class="flight-forms-container">
+  <div *ngFor="let form of flightForms" class="flight-card" (click)="goToMyFlightDetail(form.id)">
+    <div class="card-header">
+      <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
+      <span>→</span>
+      <strong>{{ form.arrivalAirport || form.arrivalManualLocation }}</strong>
+    </div>
+    <div class="card-body">
+      <p><strong>Data de partida:</strong> {{ form.departureDate | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Hora de partida:</strong> {{ form.departureTime | date:'HH:mm' }}</p>
+      <p><strong>Data de chegada:</strong> {{ form.arrivalDate | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Hora de chegada:</strong> {{ form.arrivalTime | date:'HH:mm' }}</p>
+      <p><strong>Aeronave:</strong> {{ form.aircraftType }}</p>
+      <p><strong>Pernoite:</strong> {{ form.hasOvernight ? 'Sim' : 'Não' }}</p>
+    </div>
+  </div>
+</div>
+@if (flightForms.length == 0) {
+  <div class="no-flight-forms">
+    <h3>Nenhum formulário de voo encontrado.</h3>
+  </div>
+}

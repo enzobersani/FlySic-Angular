@@ -21,7 +21,10 @@
       (keydown)="keydown.emit($event)"
       (paste)="paste.emit($event)"
       [readonly]="isReadOnly"
-      (input)="applyMask($event)">
+      (input)="applyMask($event)"
+      [attr.autocomplete]="autocomplete || null"
+      [attr.autocapitalize]="'off'"
+      [attr.spellcheck]="false">
   <img class="cso-input-text__img img-main" [src]="icon">
   <img class="cso-input-text__img img-focus" [style]="input.value.length > 0 ? { display: 'inline-block' } : {}" [src]="iconFocus">
 </div>

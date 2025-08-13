@@ -6,6 +6,7 @@ import { UpdateFlightFormRequestModel } from '../models/update-flight-form-reque
 import { BaseUpdateResponseModel } from '../models/base-update-response.model';
 import { FlightFormStatusResponseModel } from '../models/flight-form-status-response.model';
 import { FinishFlightFormModelRequest } from '../../pages/my-flight-form-detail/components/actions/models/finish-flight-form.model';
+import { CancelFlightFormModelRequest } from '../../pages/my-flight-form-detail/components/actions/models/cancel-flight-form.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,9 @@ export class FlightService {
 
   finishFlight(request: FinishFlightFormModelRequest): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/finish`, request);
+  }
+
+  cancelFlight(request: CancelFlightFormModelRequest): Observable<void>{
+    return this.http.post<void>(`${this.apiUrl}/cancel`, request);
   }
 }

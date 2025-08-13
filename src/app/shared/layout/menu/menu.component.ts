@@ -3,12 +3,12 @@ import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MenuVisibilityService } from './service/menu-visibility.service';
 import { AuthService } from '../../../infrastructure/services/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink],
+  imports: [NgClass, NgIf, RouterLink, RouterLinkActive],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })

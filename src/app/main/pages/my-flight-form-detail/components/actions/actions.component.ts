@@ -15,6 +15,9 @@ import { ToastService } from '../../../../../shared/components/feedback/toast-li
 import { ToastSuccessModel } from '../../../../../shared/components/feedback/toast-list/toast/models/toast-success.model';
 import { ToastErrorModel } from '../../../../../shared/components/feedback/toast-list/toast/models/toast-error.model';
 import { ToastListComponent } from "../../../../../shared/components/feedback/toast-list/toast-list.component";
+import { SelectComponent } from "../../../../../shared/components/forms/select/select.component";
+import { CancelFlightFormModelRequest } from './models/cancel-flight-form.model';
+
 
 @Component({
   selector: 'app-actions',
@@ -51,11 +54,13 @@ export class ActionsComponent implements OnInit{
   }
 
   finishFlight() {
+    if (!this.canFinish()) return;
     this.selectedAction = 'finalizar';
     this.modalActions.open();
   }
 
   cancelFlight() {
+    if (!this.canCancel()) return;
     this.selectedAction = 'cancelar';
     this.modalActions.open();
   }
@@ -63,26 +68,12 @@ export class ActionsComponent implements OnInit{
   
   confirmAction() {
     if (this.selectedAction === 'finalizar') {
-      const comment = this.form.get('comentarioFinalizacao')?.value;
-      const request: FinishFlightFormModelRequest = {
-        evaluatorId: this.evaluatorId,
-        evaluatedId: this.evaluatedId,
-        flightFormId: this.flightFormId,
-        rating: this.rating,
-        comment: comment,
-      }
-
-      console.log(request);
-
-      this.flightService.finishFlight(request).subscribe({
-        next: () => {
-          this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha finalizada!", "Agora"));
-          this.getStatus();
-        },
-        error: () => this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao finalizar ficha", "Agora")),
-      });
+      if (!this.canFinish()) return;
+      this.finish();
+    } else if (this.selectedAction === 'cancelar') {
+      if (!this.canCancel()) return;
+      this.cancel();
     }
-
     this.modalActions.close();
     this.form.reset();
     this.selectedAction = null;
@@ -111,5 +102,41 @@ export class ActionsComponent implements OnInit{
   
   canFinish(): boolean {
     return this.flightStatus === FlightFormStatus.Fechada;
+  }
+
+  private finish(): void {
+    const comment = this.form.get('comentarioFinalizacao')?.value;
+    const request: FinishFlightFormModelRequest = {
+      evaluatorId: this.evaluatorId,
+      evaluatedId: this.evaluatedId,
+      flightFormId: this.flightFormId,
+      rating: this.rating,
+      comment: comment,
+    }
+
+    this.flightService.finishFlight(request).subscribe({
+      next: () => {
+        this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha finalizada!", "Agora"));
+        this.getStatus();
+      },
+      error: () => this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao finalizar ficha", "Agora")),
+    });
+  }
+
+  private cancel(): void {
+    const comment = this.form.get('comentarioCancelamento')?.value;
+    const request: CancelFlightFormModelRequest = {
+      flightFormId: this.flightFormId,
+      userId: this.evaluatorId,
+      comment: comment
+    }
+
+    this.flightService.cancelFlight(request).subscribe({
+      next: () => {
+        this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha cancelada!", "Agora"));
+        this.getStatus();
+      },
+      error: () => this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao cancelar ficha", "Agora")),
+    });
   }
 }

@@ -21,11 +21,16 @@ export class AirportService {
   }
 
   createFlight(data: NewFlightFormRequestModel) {
-    return this.http.post(this.apiForm, data);
+    const headers = ({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.post(this.apiForm, data, { headers });
   }
 
-  getMyFlightForms(): Observable<FlightFormsModel[]> {
-    return this.http.get<FlightFormsModel[]>(`${this.apiForm}/my-flights`);
+  getMyFlightForms(status: number): Observable<FlightFormsModel[]> {
+    return this.http.get<FlightFormsModel[]>(`${this.apiForm}/my-flights/${status}`);
   }
 
   getByFlightId(id: string): Observable<FlightFormsListResponseModel>{

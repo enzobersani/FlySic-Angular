@@ -56,5 +56,11 @@ export const routes: Routes = [
         path: 'my-flight/:id', 
         loadComponent: () => import('./main/pages/my-flight-form-detail/my-flight-form-detail.component').then(m => m.MyFlightFormDetailComponent),
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'admin/pending-users',
+        loadComponent: () => import('./main/pages/pending-users/pending-users.component').then(m => m.PendingUsersComponent),
+        canActivate: [AuthGuard],
+        data: { hideMenu: true }
     }
 ];

@@ -1,0 +1,26 @@
+<div>
+  <app-input-text
+    [form]="filterForm"
+    name="filter"
+    placeholder="Filtrar usuários"
+    (keyup)="onFilterChange($event)"
+  ></app-input-text>
+
+  <table class="table responsive-table-like-card">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Status</th>
+        <!-- <th>Ações</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td data-label="Nome">{{ user.name }}</td>
+        <td data-label="Email">{{ user.email }}</td>
+        <td data-label="Status">{{ user.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

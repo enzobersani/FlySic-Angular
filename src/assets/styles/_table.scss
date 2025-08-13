@@ -1,0 +1,112 @@
+@import "./colors";
+@import "./typography";
+
+@mixin Text_Thead {
+    @include CSO_Caption;
+    line-height: 48px;
+    text-transform: uppercase;
+    color: var(--CSO_Neutral_80);
+}
+
+@mixin Text_Tbody {
+    @include CSO_Body_2;
+    line-height: 48px;
+    color: var(--CSO_Neutral_100);
+}
+
+@mixin Text_Tbody_Bold {
+    @include CSO_Body_2_Bold;
+    line-height: 48px;
+    color: var(--CSO_Neutral_100);
+}
+
+table.responsive-table-like-card {
+    thead tr th,
+    tbody tr td {
+        border: 0;
+        padding: 0px 8px !important;
+        box-sizing: border-box;
+        height: 48px;
+        background-color: var(--CSO_White);
+        font-weight: normal;
+    }
+    thead {
+        tr {
+            th {
+                @include Text_Thead;
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                @include Text_Tbody;
+            }
+            &:nth-child(odd) {
+                td {
+                    background-color: var(--CSO_Background);
+                }
+            }
+        }
+    }
+}
+
+@mixin Responsive_Table_Like_Card {
+    table.responsive-table-like-card {
+        &.no-sort {
+            thead {
+                display: none;
+            }
+        }
+        thead {
+            tr {
+                &::before {
+                    @include Text_Tbody_Bold;
+                    content: attr(data-label);
+                    display: block;
+                    height: 40px;
+                    line-height: 40px;
+                    padding: 0 8px;
+                }
+                border: 0;
+                th {
+                    height: 40px;
+                    border: 1px solid var(--CSO_Neutral_20);
+                    border-radius: 0.25rem;
+                    margin-right: 4px;
+                    padding: 0 8px;
+                    line-height: 40px;
+                    cursor: pointer;
+                    user-select: none;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    width: 100%;
+                    border-bottom: 1px solid var(--CSO_Neutral_30);
+                }
+            }
+        }
+        tr {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid var(--CSO_Neutral_20);
+            border-radius: 0.25rem;
+            margin: 6px 6px 10px 6px;
+
+            td {
+                border: 0px;
+                border-bottom: 1px solid var(--CSO_Neutral_30);
+                display: block;
+                text-align: right;
+            }
+            td::before {
+                content: attr(data-label);
+                float: left;
+                @include Text_Tbody_Bold;
+            }
+        }
+    }
+}

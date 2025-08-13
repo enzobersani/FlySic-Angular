@@ -26,6 +26,8 @@ import { FlightFormRequestModel } from '../../common/models/flight-form-request.
 import { FlightFormStatus } from '../../common/enum/flight-form-status.enum';
 import { FlightFormStatusResponseModel } from '../../common/models/flight-form-status-response.model';
 import { ToastWarnModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-warn.model';
+import { Router } from '@angular/router';
+import { CalendarSingleComponent } from "../../../shared/components/forms/calendar-single/calendar-single.component";
 
 @Component({
   selector: 'app-flight-form',
@@ -40,7 +42,8 @@ import { ToastWarnModel } from '../../../shared/components/feedback/toast-list/t
     ToastListComponent,
     ModalComponent,
     FeedbackComponent,
-    LoadingComponent
+    LoadingComponent,
+    CalendarSingleComponent
 ],
   templateUrl: './flight-form.component.html',
   styleUrl: './flight-form.component.scss'
@@ -75,6 +78,7 @@ export class FlightFormComponent implements OnInit{
     notFoundPlaceHolder: 'Não foram encontrados dados'
   }
   statusFlightForm!: FlightFormStatus;
+  canSubmit: boolean = true;
 
   @ViewChild('selectAeroportoPartida') selectAeroportoPartida?: SelectComponent;
   @ViewChild('selectAeroportoChegada') selectAeroportoChegada?: SelectComponent;
@@ -85,15 +89,16 @@ export class FlightFormComponent implements OnInit{
     private airportService: AirportService,
     private toastService: ToastService,
     private cdr: ChangeDetectorRef,
-    private flightService: FlightService
+    private flightService: FlightService,
+    private router: Router
   ){
     this.form = this.fb.group({
-      partidaData: ['', Validators.required],
+      partidaData: [null, Validators.required],
       partidaHora: ['', Validators.required],
       aeroportoPartida: ['', Validators.required],
       localPartidaManual: [''],
     
-      chegadaData: ['', Validators.required],
+      chegadaData: [null, Validators.required],
       chegadaHora: ['', Validators.required],
       aeroportoChegada: ['', Validators.required],
       localChegadaManual: [''],
@@ -116,71 +121,119 @@ export class FlightFormComponent implements OnInit{
     if (this.flightFormId){
       this.loadFlightFormData();
       this.getStatus();
+      if (this.statusFlightForm !== FlightFormStatus.Aberta) {
+        this.canSubmit = false;
+        return;
+      }
     }
+
   }
 
-  onSubmit(){
-    if (this.form.invalid){
+  onSubmit() {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-
-    const formValue = this.form.value;
-
-    const toDate = (dateStr: string) => {
-      const [day, month, year] = dateStr.split('/');
-      return `${year}-${month}-${day}`;
-    };
-
-    const toTime = (timeStr: string, dateStr: string) => {
-      const [day, month, year] = dateStr.split('/');
-      const [hour, minute] = timeStr.split(':');
-      return `${year}-${month}-${day}T${hour}:${minute}:00`;
-    };
-
-    this.isLoading = true;
-    const request: FlightFormRequestModel = {
-      partidaData: toDate(formValue.partidaData),
-      partidaHora: toTime(formValue.partidaHora, formValue.partidaData),
-      aeroportoPartida: formValue.aeroportoPartida !== 'sem-icao' ? formValue.aeroportoPartida : null,
-      localPartidaManual: formValue.aeroportoPartida === 'sem-icao' ? formValue.localPartidaManual : null,
   
-      chegadaData: toDate(formValue.chegadaData),
-      chegadaHora: toTime(formValue.chegadaHora, formValue.chegadaData),
-      aeroportoChegada: formValue.aeroportoChegada !== 'sem-icao' ? formValue.aeroportoChegada : null,
-      localChegadaManual: formValue.aeroportoChegada === 'sem-icao' ? formValue.localChegadaManual : null,
+    type RangeLike = { initialDate?: any; finalDate?: any } | null | undefined;
   
-      tipoAeronave: formValue.tipoAeronave,
-      comentarioVoo: formValue.comentarioVoo,
-      checkboxPernoite: formValue.checkboxPernoite
-    };
-
-    if (this.flightFormId) {
-      if (this.statusFlightForm !== FlightFormStatus.Aberta) {
-        this.toastService.send(new ToastWarnModel("Aviso", "Não é possivel realizar alterações! Já realizado aceite de usuario!"));
-        return;
+    const v = this.form.getRawValue();
+  
+    // app-select pode mandar objeto { key, description } ou string
+    const getSelectValue = (val: any) =>
+      (val && typeof val === 'object' && 'key' in val) ? val.key : val;
+  
+    // Se vier um objeto do calendário, pegamos o initialDate
+    const extractDateFromRange = (val: any): any =>
+      (val && typeof val === 'object' && 'initialDate' in val)
+        ? (val as RangeLike)!.initialDate
+        : val;
+  
+    const coerceToDate = (val: unknown): Date => {
+      if (val instanceof Date) return val;
+      if (typeof val === 'string') {
+        if (val.includes('/')) {
+          const [dd, mm, yyyy] = val.split('/').map(Number);
+          return new Date(yyyy, (mm ?? 1) - 1, dd ?? 1);
+        }
+        const parsed = new Date(val);
+        if (!isNaN(parsed.getTime())) return parsed;
       }
-      this.modalResponse.open();
-
+      // se for number (timestamp) ou algo convertível
+      return new Date(val as any);
+    };
+  
+    const toIsoDate = (value: unknown): string => {
+      const raw = extractDateFromRange(value);     // <— pega initialDate se for range
+      const d = coerceToDate(raw);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}T00:00:00`;
+    };
+  
+    const toIsoDateTime = (time: unknown, date: unknown): string => {
+      const rawDate = extractDateFromRange(date);  // <— idem
+      const d = coerceToDate(rawDate);
+      let hh = '00', mi = '00';
+  
+      if (time instanceof Date) {
+        hh = String(time.getHours()).padStart(2, '0');
+        mi = String(time.getMinutes()).padStart(2, '0');
+      } else if (typeof time === 'string' && time.includes(':')) {
+        const [h, m] = time.split(':');
+        hh = String(h ?? '00').padStart(2, '0');
+        mi = String(m ?? '00').padStart(2, '0');
+      }
+  
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}T${hh}:${mi}:00`;
+    };
+  
+    const aeroportoPartidaVal = getSelectValue(v.aeroportoPartida);
+    const aeroportoChegadaVal = getSelectValue(v.aeroportoChegada);
+  
+    const request: FlightFormRequestModel = {
+      partidaData: toIsoDate(v.partidaData),
+      partidaHora: toIsoDateTime(v.partidaHora, v.partidaData),
+  
+      chegadaData: toIsoDate(v.chegadaData),
+      chegadaHora: toIsoDateTime(v.chegadaHora, v.chegadaData),
+  
+      aeroportoPartida: aeroportoPartidaVal !== 'sem-icao' ? aeroportoPartidaVal : null,
+      localPartidaManual: aeroportoPartidaVal === 'sem-icao' ? v.localPartidaManual : null,
+  
+      aeroportoChegada: aeroportoChegadaVal !== 'sem-icao' ? aeroportoChegadaVal : null,
+      localChegadaManual: aeroportoChegadaVal === 'sem-icao' ? v.localChegadaManual : null,
+  
+      tipoAeronave: v.tipoAeronave,
+      comentarioVoo: v.comentarioVoo,
+      checkboxPernoite: !!v.checkboxPernoite
+    };
+  
+    this.isLoading = true;
+    this.modalResponse.open();
+  
+    if (this.flightFormId) {
       this.flightService.updateFlightForm(this.flightFormId, request).subscribe({
         next: () => {
-          // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo atualizada!", "Agora"));
           this.isLoading = false;
         },
-        error: (err) => {
+        error: () => {
           this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao atualizar ficha!", "Agora"));
           this.isLoading = false;
           this.modalResponse.close();
         }
       });
     } else {
-      this.modalResponse.open();
       this.airportService.createFlight(request).subscribe({
         next: () => {
-          // this.toastService.send(new ToastSuccessModel("Sucesso", "Ficha de voo criada!", "Agora"));
           this.isLoading = false;
+          this.router.navigate(["/home"]);
         },
-        error: (err) => {
+        error: () => {
           this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao criar ficha!", "Agora"));
           this.isLoading = false;
           this.modalResponse.close();
@@ -188,7 +241,7 @@ export class FlightFormComponent implements OnInit{
       });
     }
   }
-
+  
   setupCitySelects() {
     const partidaUf = this.form.get('partidaUf')?.value;
     const chegadaUf = this.form.get('chegadaUf')?.value;
@@ -298,13 +351,17 @@ export class FlightFormComponent implements OnInit{
     if (!flight) return;
   
     this.form.patchValue({
-      partidaData: this.formatDateToInput(flight.departureDate),
+      // Passe objeto com initialDate/finalDate
+      partidaData: { initialDate: new Date(flight.departureDate), finalDate: null },
+      chegadaData: { initialDate: new Date(flight.arrivalDate),   finalDate: null },
+  
+      // horários continuam "HH:mm"
       partidaHora: this.formatTimeToInput(flight.departureTime),
+      chegadaHora: this.formatTimeToInput(flight.arrivalTime),
+  
       aeroportoPartida: flight.departureAirport ?? 'sem-icao',
       localPartidaManual: flight.departureManualLocation ?? '',
   
-      chegadaData: this.formatDateToInput(flight.arrivalDate),
-      chegadaHora: this.formatTimeToInput(flight.arrivalTime),
       aeroportoChegada: flight.arrivalAirport ?? 'sem-icao',
       localChegadaManual: flight.arrivalManualLocation ?? '',
   
@@ -312,28 +369,24 @@ export class FlightFormComponent implements OnInit{
       comentarioVoo: flight.flightComment,
       checkboxPernoite: flight.hasOvernight
     });
-
+  
     setTimeout(() => {
       this.showCustomLocation.partida = !flight.departureAirport;
       this.showCustomLocation.chegada = !flight.arrivalAirport;
-
+  
       const partidaKey = this.form.get('aeroportoPartida')?.value;
       const chegadaKey = this.form.get('aeroportoChegada')?.value;
-    
+  
       const partidaItem = this.aeroportosPartida.find(i => i.key === partidaKey);
-      const chegadaItem = this.aeroportosChegada.find(i => i.key === chegadaKey);
-    
-      if (partidaItem) {
-        this.selectAeroportoPartida?.select(partidaItem);
-      }
-    
-      if (chegadaItem) {
-        this.selectAeroportoChegada?.select(chegadaItem);
-      }
-
+      const chegadaItem  = this.aeroportosChegada.find(i => i.key === chegadaKey);
+  
+      if (partidaItem) this.selectAeroportoPartida?.select(partidaItem);
+      if (chegadaItem)  this.selectAeroportoChegada?.select(chegadaItem);
+  
       this.cdr.detectChanges();
     });
-  }  
+  }
+   
 
   getStatus(): void {
     this.flightService.getStatus(this.flightFormId!).subscribe({
