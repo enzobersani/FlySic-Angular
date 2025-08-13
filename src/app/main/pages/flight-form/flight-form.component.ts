@@ -28,6 +28,7 @@ import { FlightFormStatusResponseModel } from '../../common/models/flight-form-s
 import { ToastWarnModel } from '../../../shared/components/feedback/toast-list/toast/models/toast-warn.model';
 import { Router } from '@angular/router';
 import { CalendarSingleComponent } from "../../../shared/components/forms/calendar-single/calendar-single.component";
+import { futureOrTodayDateValidator } from '../../common/validators/future-or-today-date.validator';
 
 @Component({
   selector: 'app-flight-form',
@@ -93,12 +94,12 @@ export class FlightFormComponent implements OnInit{
     private router: Router
   ){
     this.form = this.fb.group({
-      partidaData: [null, Validators.required],
+      partidaData: [null, Validators.required, futureOrTodayDateValidator()],
       partidaHora: ['', Validators.required],
       aeroportoPartida: ['', Validators.required],
       localPartidaManual: [''],
     
-      chegadaData: [null, Validators.required],
+      chegadaData: [null, Validators.required, futureOrTodayDateValidator()],
       chegadaHora: ['', Validators.required],
       aeroportoChegada: ['', Validators.required],
       localChegadaManual: [''],
@@ -221,8 +222,12 @@ export class FlightFormComponent implements OnInit{
         next: () => {
           this.isLoading = false;
         },
-        error: () => {
-          this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao atualizar ficha!", "Agora"));
+        error: (err) => {
+          if (err.status === 400 && err.error){
+            this.toastService.send(new ToastWarnModel("Erro", err.error.notifications[0].message));
+          } else {
+            this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao atualizar ficha!", "Agora"));
+          }
           this.isLoading = false;
           this.modalResponse.close();
         }
@@ -233,8 +238,12 @@ export class FlightFormComponent implements OnInit{
           this.isLoading = false;
           this.router.navigate(["/home"]);
         },
-        error: () => {
-          this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao criar ficha!", "Agora"));
+        error: (err) => {
+          if (err.status === 400 && err.error){
+            this.toastService.send(new ToastWarnModel("Erro", err.error.notifications[0].message));
+          } else {
+            this.toastService.send(new ToastErrorModel("Erro", "Ocorreu um erro ao criar ficha!", "Agora"));
+          }
           this.isLoading = false;
           this.modalResponse.close();
         }
@@ -394,11 +403,6 @@ export class FlightFormComponent implements OnInit{
         this.statusFlightForm = status.status;
       },
     });
-  }
-
-  private formatDateToInput(dateStr: string): string {
-    const date = new Date(dateStr);
-    return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
   }
   
   private formatTimeToInput(datetimeStr: string): string {

@@ -15,7 +15,11 @@
   
     <div class="content__field-time">
       <label class="content__label">Horário</label>
-      <app-input-text placeholder="Informe o horário..." mask="00:00" name="partidaHora" [form]="form">
+      <app-input-text
+        type="time"
+        step="60"
+        name="partidaHora"
+        [form]="form">
       </app-input-text>
     </div>
 
@@ -60,7 +64,11 @@
   
     <div class="content__field-time">
       <label class="content__label">Horário</label>
-      <app-input-text placeholder="Informe o horário..." mask="00:00" name="chegadaHora" [form]="form">
+      <app-input-text
+        type="time"
+        step="60"
+        name="chegadaHora"
+        [form]="form">
       </app-input-text>
     </div>
 

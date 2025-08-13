@@ -22,13 +22,21 @@ $RBS-Angular-theme: mat.define-theme((
 @import './fonts';
 @import './typography';
 
-html {
+html,
+body {
   min-height: 100%;
-  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
 }
 
+// html {
+//   min-height: 100%;
+//   background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+// }
+
 body {
-  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c) fixed !important;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  // min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'DIN Pro', sans-serif;
