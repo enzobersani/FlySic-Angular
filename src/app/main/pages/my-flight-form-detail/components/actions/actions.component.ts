@@ -17,6 +17,7 @@ import { ToastErrorModel } from '../../../../../shared/components/feedback/toast
 import { ToastListComponent } from "../../../../../shared/components/feedback/toast-list/toast-list.component";
 import { SelectComponent } from "../../../../../shared/components/forms/select/select.component";
 import { CancelFlightFormModelRequest } from './models/cancel-flight-form.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ActionsComponent implements OnInit{
   constructor(
     private flightService: FlightService,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {
     this.evaluatorId = this.authService.getDecodedToken()!.sub;
   }
@@ -78,6 +80,7 @@ export class ActionsComponent implements OnInit{
     this.form.reset();
     this.selectedAction = null;
     this.rating = 5;
+    this.router.navigate(["/home"]);
   }
 
   closeModal() {

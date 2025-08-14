@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 import { CalendarSingleToggleService } from './services/toggle.service';
 import { RangeEnum } from './enum/range.enum';
 import { Source } from './enum/source.enum';
@@ -50,9 +52,9 @@ import { CalendarSingleToggleDirective } from './directives/toggle.directive';
   imports: [NgClass, NgIf, CalendarSingleToggleDirective, CalendarSingleSelectedDateComponent, CalendarSingleControlComponent],
   standalone: true,
 })
-export class CalendarSingleComponent extends BaseCalendarComponent implements OnInit {
+export class CalendarSingleComponent extends BaseCalendarComponent implements OnInit, OnDestroy {
   @Input() form?: FormGroup;
-  @Input() name: string = "";
+  @Input() name: string = '';
   @Input() placeHolder: string = '';
   @Input() limit: RangeDate = RangeDate.createCompleteInstace(null, null);
   @Input() textModel?: TextsModel | null;
@@ -62,11 +64,12 @@ export class CalendarSingleComponent extends BaseCalendarComponent implements On
   public range: RangeEnum | null = RangeEnum.custom;
   public hasValue: boolean = false;
 
+  private destroyed$ = new Subject<void>();
+  private _currentRangeDateModel?: RangeDateModel = new RangeDateModel();
+
   get getCurrentRangeDateModel() {
     return this._currentRangeDateModel;
   }
-
-  private _currentRangeDateModel?: RangeDateModel = new RangeDateModel();
 
   constructor(
     public idService: IdService,
@@ -78,21 +81,33 @@ export class CalendarSingleComponent extends BaseCalendarComponent implements On
     private store: Store<any>
   ) {
     super();
+    // Mantém listeners da store -> UI/inner form:
     this.listenToValueChanges();
   }
 
   ngOnInit(): void {
-    if (this.form?.get(this.name)?.value) {
-      const rangeDate = this.form?.get(this.name)?.value as RangeDate;
-
-      var rangeDateModel = RangeDateModel.createCompleteInstace(this.idService.get(), rangeDate);
-      rangeDateModel.source = Source.Confirm;
-
-      this.store.dispatch(calendarSingleAddOrUpdateRangeDate({ data: rangeDateModel }));
+    // 1) Garante que não sobrescrevemos um controle já existente no form pai
+    const existingCtrl = this.form?.get(this.name);
+    if (!existingCtrl) {
+      this.form?.addControl(this.name, this.internalFormService.getForm());
     }
 
-    this.form?.addControl(this.name, this.internalFormService.getForm());
+    // 2) Textos/botões
     this.setButtonsText();
+
+    // 3) Sincroniza estado da store a partir do valor do form pai (inicial + futuras mudanças)
+    this.syncFromMainForm(); // pega o valor atual, se já houver
+
+    this.form?.get(this.name)?.valueChanges
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => this.syncFromMainForm());
+  }
+
+  override ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+
+    super.ngOnDestroy();
   }
 
   setButtonsText() {
@@ -111,15 +126,18 @@ export class CalendarSingleComponent extends BaseCalendarComponent implements On
   }
 
   listenToValueChanges() {
-    this.toDestroy(this.store.select(calendarSingleSelectRangeDateById(this.idService.get()))
-      .pipe(filter(val => val !== undefined))
-      .subscribe(readOnlyRangeDateModel => {
-        this.fixDates(readOnlyRangeDateModel);
-        this.loadIfHasValue(readOnlyRangeDateModel);
-        this.patchRangeDateToInternalForm(readOnlyRangeDateModel);
-        this.resetMainFormIfSourceIsReset(readOnlyRangeDateModel);
-        this.setCurrentRangeDateModel(readOnlyRangeDateModel);
-      }));
+    this.toDestroy(
+      this.store
+        .select(calendarSingleSelectRangeDateById(this.idService.get()))
+        .pipe(filter(val => val !== undefined))
+        .subscribe(readOnlyRangeDateModel => {
+          this.fixDates(readOnlyRangeDateModel);
+          this.loadIfHasValue(readOnlyRangeDateModel);
+          this.patchRangeDateToInternalForm(readOnlyRangeDateModel);
+          this.resetMainFormIfSourceIsReset(readOnlyRangeDateModel);
+          this.setCurrentRangeDateModel(readOnlyRangeDateModel);
+        })
+    );
   }
 
   fixDates(readOnlyRangeDateModel?: RangeDateModel): void {
@@ -137,32 +155,38 @@ export class CalendarSingleComponent extends BaseCalendarComponent implements On
   }
 
   buttonConfirm() {
-    const currentDateModel = this._currentRangeDateModel?.getClone()!
-
-    currentDateModel.source = Source.Confirm
+    const currentDateModel = this._currentRangeDateModel?.getClone()!;
+    currentDateModel.source = Source.Confirm;
     this.store.dispatch(calendarSingleAddOrUpdateRangeDate({ data: currentDateModel }));
     this.submit.emit(this.form?.value);
     this.toggleService.close();
   }
 
   patchRangeDateToInternalForm(readOnlyRangeDateModel?: RangeDateModel): void {
-    if (readOnlyRangeDateModel?.source === Source.Confirm)
+    if (readOnlyRangeDateModel?.source === Source.Confirm) {
       this.internalFormService.patchRangeDate(readOnlyRangeDateModel?.dates);
+    }
   }
 
   changeDate(date: Date | null) {
-    this.setCurrentRangeDateModel(RangeDateModel.createCompleteInstace(this.idService.get(), RangeDate.createCompleteInstace(date, null)))
+    this.setCurrentRangeDateModel(
+      RangeDateModel.createCompleteInstace(
+        this.idService.get(),
+        RangeDate.createCompleteInstace(date, null)
+      )
+    );
     this.range = RangeEnum.custom;
   }
 
   setCurrentRangeDateModel(currentRangeDateModel?: RangeDateModel) {
     this._currentRangeDateModel = currentRangeDateModel;
-    this.form?.get(this.name)?.patchValue(this._currentRangeDateModel?.dates);
+    // Importante: não emitir evento para evitar loop com valueChanges do form pai
+    this.form?.get(this.name)?.patchValue(this._currentRangeDateModel?.dates, { emitEvent: false });
   }
 
   resetMainFormIfSourceIsReset(readOnlyRangeDateModel?: RangeDateModel): void {
     if (readOnlyRangeDateModel?.source === Source.Reset) {
-      this._currentRangeDateModel = readOnlyRangeDateModel
+      this._currentRangeDateModel = readOnlyRangeDateModel;
     }
   }
 
@@ -177,5 +201,35 @@ export class CalendarSingleComponent extends BaseCalendarComponent implements On
     const currentDateModel = this._currentRangeDateModel?.getClone()!;
     currentDateModel.source = Source.Confirm;
     this.store.dispatch(calendarSingleAddOrUpdateRangeDate({ data: currentDateModel }));
+  }
+
+  // ---- NOVO: sincroniza o valor vindo do form pai -> store do calendário ----
+  private syncFromMainForm() {
+    const v = this.form?.get(this.name)?.value;
+
+    if (!v) {
+      // Se o pai limpou, limpamos também
+      const model = RangeDateModel.createCompleteInstace(this.idService.get(), RangeDate.createCompleteInstace(null, null));
+      model.source = Source.Reset;
+      this.store.dispatch(calendarSingleAddOrUpdateRangeDate({ data: model }));
+      return;
+    }
+
+    // Aceita: Date puro, string data, ou { initialDate, finalDate }
+    let range: RangeDate;
+
+    if (v && typeof v === 'object' && 'initialDate' in v) {
+      const init = v.initialDate ? new Date(v.initialDate) : null;
+      const fin  = v.finalDate   ? new Date(v.finalDate)   : null;
+      range = RangeDate.createCompleteInstace(init, fin);
+    } else {
+      // Date/string única -> trata como single (initialDate = valor, finalDate = mesmo valor)
+      const d = new Date(v);
+      range = RangeDate.createCompleteInstace(isNaN(d.getTime()) ? null : d, isNaN(d.getTime()) ? null : d);
+    }
+
+    const model = RangeDateModel.createCompleteInstace(this.idService.get(), range);
+    model.source = Source.Confirm;
+    this.store.dispatch(calendarSingleAddOrUpdateRangeDate({ data: model }));
   }
 }

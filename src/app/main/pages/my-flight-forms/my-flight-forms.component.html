@@ -26,6 +26,15 @@
       <p><strong>Aeronave:</strong> {{ form.aircraftType }}</p>
       <p><strong>Pernoite:</strong> {{ form.hasOvernight ? 'Sim' : 'Não' }}</p>
     </div>
+
+    @if (form.quantityInterested !== undefined && form.quantityInterested > 0) {
+      <div
+        class="interest-badge"
+        [attr.aria-label]="'Interessados: ' + form.quantityInterested"
+        (click)="$event.stopPropagation()">
+        {{ form.quantityInterested }}
+      </div>
+    }
   </div>
 </div>
 @if (flightForms.length == 0) {

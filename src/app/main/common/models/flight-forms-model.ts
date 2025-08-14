@@ -13,4 +13,6 @@ export interface FlightFormsModel {
     aircraftType: string;
     flightComment?: string;
     hasOvernight: boolean;
+
+    quantityInterested?: number;
 }
