@@ -13,6 +13,14 @@
         <li *ngIf="isSeeker"
             routerLinkActive="is-active"
             [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/my-flights" (click)="closeMobileMenu()" ariaCurrentWhenActive="page">
+            Meus voos
+          </a>
+        </li>
+
+        <li *ngIf="isSeeker"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }">
           <a routerLink="/flights" (click)="closeMobileMenu()" ariaCurrentWhenActive="page">
             Lista de voos
           </a>
@@ -29,7 +37,7 @@
         <li *ngIf="isDonor"
             routerLinkActive="is-active"
             [routerLinkActiveOptions]="{ exact: true }">
-          <a routerLink="/my-flights" (click)="closeMobileMenu()" ariaCurrentWhenActive="page">
+          <a routerLink="/my-flight-forms" (click)="closeMobileMenu()" ariaCurrentWhenActive="page">
             Minhas fichas
           </a>
         </li>

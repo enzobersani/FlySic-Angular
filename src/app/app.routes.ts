@@ -33,7 +33,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard] 
     },
     {
-        path: 'my-flights',
+        path: 'my-flight-forms',
         loadComponent: () => import('./main/pages/my-flight-forms/my-flight-forms.component').then(m => m.MyFlightFormsComponent),
         canActivate: [AuthGuard]
     },
@@ -62,5 +62,10 @@ export const routes: Routes = [
         loadComponent: () => import('./main/pages/pending-users/pending-users.component').then(m => m.PendingUsersComponent),
         canActivate: [AuthGuard],
         data: { hideMenu: true }
+    },
+    {
+        path: 'my-flights', 
+        loadComponent: () => import('./main/pages/my-flights/my-flights.component').then(m => m.MyFlightsComponent),
+        canActivate: [AuthGuard]
     }
 ];

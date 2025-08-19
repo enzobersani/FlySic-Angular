@@ -1,0 +1,31 @@
+<div class="content">  
+    <div class="flight-forms-container">
+      <div
+        *ngFor="let form of myFlights"
+        class="flight-card"
+        (click)="goToDetails()"
+      >
+        <div class="card-header">
+          <strong>{{ form.departureAirport || form.departureManualLocation }}</strong>
+          <span>→</span>
+          <strong>{{ form.arrivalAirport || form.arrivalManualLocation }}</strong>
+        </div>
+    
+        <div class="card-body">
+          <p><strong>Data de partida:</strong> {{ form.departureDate | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Data de chegada:</strong> {{ form.arrivalDate | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Aeronave:</strong> {{ form.aircraftType }}</p>
+          <p><strong>Pernoite:</strong> {{ form.hasOvernight ? 'Sim' : 'Não' }}</p>
+          <p><strong>Piloto:</strong> {{ form.pilot.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  @if (myFlights.length === 0) {
+    <div class="no-flight-forms">
+      <h3>Nenhum formulário de voo encontrado.</h3>
+    </div>
+  }
+  
+  <app-toast-list></app-toast-list>
